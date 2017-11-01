@@ -6,7 +6,7 @@ I Initially created the script because I grew tired of the sub par graphics driv
 
 So far this script ahs the following capabilities:
 
-1. Fully install and setup EmulationStation and RetroPie from the latest builds (Or Stable Releases if chosen).
+1. Fully install and setup EmulationStation and RetroArch from the latest builds (Or Stable Releases if chosen).
 2. Generate a functional es_systems.cfg (Just needs ROM paths).
 3. Manage the es_systems.cfg file to add your ROM paths.
 4. Clean any and all files created by this script.
