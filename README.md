@@ -1,4 +1,4 @@
-# RetroPie on Windows
+# RetroCake
 
 I Initially created the script because I grew tired of the sub par graphics drivers and screen tearing issues on the debian based distros I was using to create a more powerful emulator box.
 
