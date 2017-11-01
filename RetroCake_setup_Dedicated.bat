@@ -1210,7 +1210,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoLogo
 goto menu
 
 :hostname
-WMIC computersystem where caption='%COMPUTERNAME%' rename RetroPieWin
+WMIC computersystem where caption='%COMPUTERNAME%' rename RetroCake
 goto menu
 
 ::===================================================================================================================================================================================================================================================================================================================
@@ -3670,7 +3670,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoLogo
 goto hostnamenew
 
 :hostnamenew
-WMIC computersystem where caption='%COMPUTERNAME%' rename RetroPieWin
+WMIC computersystem where caption='%COMPUTERNAME%' rename RetroCake
 goto menu
 
 ::===================================================================================================================================================================================================================================================================================================================
