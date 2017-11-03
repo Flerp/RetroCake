@@ -527,9 +527,10 @@ echo =    3.) Edit es_systems.cfg                                              =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
-IF ERRORLEVEL ==3 GOTO UpdateRA
+IF ERRORLEVEL ==3 GOTO editES
 IF ERRORLEVEL ==2 GOTO defaultES
 IF ERRORLEVEL ==1 GOTO blankES
+
 
 
 :blankES
