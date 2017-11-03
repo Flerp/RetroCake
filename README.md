@@ -18,7 +18,7 @@ So far this script ahs the following capabilities:
 The Script comes in two flavors
 
 The first is the desktop edition
-This one is used to isntall alongside a normal windows installation.
+This one is used to install alongside a normal windows installation.
 It can be launched at will and great if you're using your regular PC and would like EmulationStation and RetroArch.
 
 The second is meant for a dedicated Windows PC connected to a TV or other.
@@ -29,7 +29,7 @@ This one differs in several key ways.
 3. It sets the PC to automatically start EmulationStation on startup.
 4. It sets the PC to automatically login. (You will be prompted for your user password.
 5. It kills Windows Explorer on login to save resources.
-6. It changes with PC's name to RetroPieWin for easier access.
+6. It changes with PC's name to RetroCake for easier access.
 
 The dedicated machine script should not be run on your regular day to day PC as it will make
 
