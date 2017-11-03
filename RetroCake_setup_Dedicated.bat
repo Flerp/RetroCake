@@ -16,6 +16,19 @@ set dayte=%date:~4,10%
 set thyme=%time:~0,8%
 set gooddayte=%dayte:/=%
 set goodthyme=%thyme::=%
+goto check7z
+
+:check7z
+IF EXIST C:\7za\7za.exe goto menu
+goto install7z
+
+
+:install7z
+Echo Setting up 7-Zip environment.
+mkdir C:\7za
+powershell -command (New-Object Net.WebClient).DownloadFile('http://www.7-zip.org/a/7za920.zip','C:\7za\7za.zip');(new-object -com shell.application).namespace('C:\7za').CopyHere((new-object -com shell.application).namespace('C:\7za\7za.zip').Items(),16)
+ping 127.0.0.1 -n 2 >nul
+del C:\7za\7za.zip
 goto menu
 
 :menu
@@ -48,8 +61,8 @@ IF ERRORLEVEL ==1 GOTO BrandNew
 
 :updateES
 ::Backs up old installation
-cd "%ProgramFiles%\7-Zip"
-7z a "%USERPROFILE%\ES_Backup_%gooddayte%_%goodthyme%.zip" "%ProgramFiles%\EmulationStation\"
+
+C:\7za\7za.exe a "%USERPROFILE%\ES_Backup_%gooddayte%_%goodthyme%.zip" "%ProgramFiles%\EmulationStation\"
 
 
 ::Removes old Files
@@ -77,8 +90,8 @@ echo ====================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%USERPROFILE%\ES.zip""
 
 ::Extracts to the Program Files Directory.
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\ES.zip" -o"%ProgramFiles%\EmulationStation"
+
+C:\7za\7za.exe x "%USERPROFILE%\ES.zip" -o"%ProgramFiles%\EmulationStation"
 
 ::New Shortcut Maker
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%USERPROFILE%\CreateShortcut.vbs"
@@ -103,8 +116,8 @@ IF EXIST "%USERPROFILE%\.emulationstation\themes\carbon" (
 cls
 mkdir "%USERPROFILE%\.emulationstation\themes"
 powershell -command "Invoke-WebRequest -Uri https://blog.petrockblock.com/wp-content/uploads/2015/09/ES_theme_carbon.zip -OutFile "%USERPROFILE%\Carbon.zip""
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\Carbon.zip" -o"%USERPROFILE%\.emulationstation\themes"
+
+C:\7za\7za.exe x "%USERPROFILE%\Carbon.zip" -o"%USERPROFILE%\.emulationstation\themes"
 ping 127.0.0.1 -n 4 >nul
 del "%USERPROFILE%\Carbon.zip" /s /q
 goto menu
@@ -135,8 +148,8 @@ echo =                                                               =
 echo =================================================================
 mkdir C:\RetroArch
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x64.zip""
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
 ping 127.0.0.1 -n 4 >nul
 del "%USERPROFILE%\RetroArch_x64.zip" /q
 goto x64core
@@ -156,8 +169,8 @@ echo =                                                               =
 echo =================================================================
 mkdir C:\RetroArch
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x86.zip""
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\RetroArch_x86.zip" -o"C:\RetroArch" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\RetroArch_x86.zip" -o"C:\RetroArch" -aoa
 ping 127.0.0.1 -n 4 >nul
 del "%USERPROFILE%\RetroArch_x86.zip" /q
 goto x86core
@@ -285,8 +298,8 @@ powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly
 powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/xrick_libretro.dll.zip -OutFile "%USERPROFILE%\cores\107.zip"
 powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/yabause_libretro.dll.zip -OutFile "%USERPROFILE%\cores\108.zip"
 mkdir C:\RetroArch\Cores
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
 ping 127.0.0.1 -n 6 >nul
 rmdir "%USERPROFILE%\cores" /s /q
 goto menu
@@ -414,8 +427,8 @@ powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly
 powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/xrick_libretro.dll.zip -OutFile "%USERPROFILE%\cores\107.zip"
 powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/yabause_libretro.dll.zip -OutFile "%USERPROFILE%\cores\108.zip"
 mkdir C:\RetroArch\Cores
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
 ping 127.0.0.1 -n 6 >nul
 rmdir "%USERPROFILE%\cores" /s /q
 goto menu
@@ -521,8 +534,8 @@ IF ERRORLEVEL ==1 GOTO blankES
 
 :blankES
 ::Backs up current es_systems.cfg
-cd "%ProgramFiles%\7-Zip"
-7z a "%USERPROFILE%\es_systems_%gooddayte%_%goodthyme%.zip" "%USERPROFILE%\.emulationstation\es_systems.cfg"
+
+C:\7za\7za.exe a "%USERPROFILE%\es_systems_%gooddayte%_%goodthyme%.zip" "%USERPROFILE%\.emulationstation\es_systems.cfg"
 
 ::Deletes old es_systems.cfg
 del "%USERPROFILE%\.emulationstation\es_systems.cfg" /q
@@ -1218,8 +1231,8 @@ goto menu
 :BrandNew
 cls
 ::Backs up old installation
-cd "%ProgramFiles%\7-Zip"
-7z a "%USERPROFILE%\ES_Backup_%gooddayte%_%goodthyme%.zip" "%ProgramFiles%\EmulationStation\"
+
+C:\7za\7za.exe a "%USERPROFILE%\ES_Backup_%gooddayte%_%goodthyme%.zip" "%ProgramFiles%\EmulationStation\"
 
 
 ::Removes old Files
@@ -1247,8 +1260,8 @@ echo ====================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%USERPROFILE%\ES.zip""
 
 ::Extracts to the Program Files Directory.
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\ES.zip" -o"%ProgramFiles%\EmulationStation"
+
+C:\7za\7za.exe x "%USERPROFILE%\ES.zip" -o"%ProgramFiles%\EmulationStation"
 
 ::New Shortcut Maker
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%USERPROFILE%\CreateShortcut.vbs"
@@ -1262,8 +1275,8 @@ del "%USERPROFILE%\CreateShortcut.vbs"
 ::Install basic Carbon Theme
 mkdir "%USERPROFILE%\.emulationstation\themes"
 powershell -command "Invoke-WebRequest -Uri https://blog.petrockblock.com/wp-content/uploads/2015/09/ES_theme_carbon.zip -OutFile "%USERPROFILE%\Carbon.zip"
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\Carbon.zip" -o"%USERPROFILE%\.emulationstation\themes"
+
+C:\7za\7za.exe x "%USERPROFILE%\Carbon.zip" -o"%USERPROFILE%\.emulationstation\themes"
 
 ::Cleans up Downlaoded zip
 del "%USERPROFILE%\ES.zip"
@@ -1736,13 +1749,13 @@ powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly
 powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/yabause_libretro.dll.zip -OutFile "%USERPROFILE%\cores\108.zip"
 
 ::Install RetroArch
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
 
 :: Install cores
-cd "%ProgramFiles%\7-Zip"
+
 mkdir C:\RetroArch\Cores
-7z x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
+C:\7za\7za.exe x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
 
 ::Cleanup
 rmdir "%USERPROFILE%\cores /s /q
@@ -1879,14 +1892,14 @@ powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly
 
 
 ::Install downloaded Retroarch
-cd "%ProgramFiles%\7-Zip"
-7z x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
-7z x "%USERPROFILE%\RetroArch_x86.zip" -o"C:\RetroArch" -aoa
+
+C:\7za\7za.exe x "%USERPROFILE%\RetroArch_x64.zip" -o"C:\RetroArch" -aoa
+C:\7za\7za.exe x "%USERPROFILE%\RetroArch_x86.zip" -o"C:\RetroArch" -aoa
 
 :: Install downloaded cores
-cd "%ProgramFiles%\7-Zip"
+
 mkdir C:\RetroArch\Cores
-7z x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
+C:\7za\7za.exe x "%USERPROFILE%\cores\*.zip" -o"C:\RetroArch\Cores" -aoa
 
 ::Cleanup
 del "%USERPROFILE%\RetroArch_x86.zip" /q
