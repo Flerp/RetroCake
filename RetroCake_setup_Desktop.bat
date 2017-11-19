@@ -54,23 +54,23 @@ goto menu
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) Automated install of EmulationStation and RetroArch              =
+Echo =    1.) AUTOMATED INSTALL OF EMULATIONSTATION AND RETROARCH              =
 echo =                                                                         =
-echo =    2.) Update/Install EmulationStation with the latest Windows build    =
+echo =    2.) UPDATE/INSTALL EMULATIONSTATION WITH THE LATEST WINDOWS BUILD    =
 echo =                                                                         =
-echo =    3.) Generate new es_systems.cfg                                      =
+echo =    3.) GENERATE NEW ES_SYSTEMS.CFG                                      =
 echo =                                                                         =
-echo =    4.) Edit es_systems.cfg                                              =
+echo =    4.) EDIT ES_SYSTEMS.CFG                                              =
 echo =                                                                         =
-echo =    5.) Install RetroArch 1.6.7                                          =
+echo =    5.) INSTALL RETROARCH 1.6.7                                          =
 echo =                                                                         =
-echo =    6.) Update RetroArch cores to the latest version                     =
+echo =    6.) UPDATE RETROARCH CORES TO THE LATEST VERSION                     =
 echo =                                                                         =
-echo =    7.) Remove All EmulationStation and RetroArch Files                  =
+echo =    7.) REMOVE ALL EMULATIONSTATION AND RETROARCH FILES                  =
 echo =                                                                         =
-echo =    8.) Manage EmulationStation Themes                                   =
+echo =    8.) MANAGE EMULATIONSTATION THEMES                                   =
 echo =                                                                         =
-echo =    9.) Exit                                                             =
+echo =    9.) EXIT                                                             =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
