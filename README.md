@@ -12,6 +12,7 @@ So far this script ahs the following capabilities:
 4. Clean any and all files created by this script.
 5. Individually update RetroArch and EmulationStation.
 6. Update RetroArch cores to their latest compiled version.
+7. Install and manage EmulationStation themes.
 
 # Script Flavors
 
