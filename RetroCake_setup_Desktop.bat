@@ -47,7 +47,7 @@ echo =    5.) Install RetroArch 1.6.7                                          =
 echo =                                                                         =
 echo =    6.) Update RetroArch cores to the latest version                     =
 echo =                                                                         =
-echo =    7.) Remove All EmulationStation and RetroArch Files.                 =
+echo =    7.) Remove All EmulationStation and RetroArch Files                  =
 echo =                                                                         =
 echo =    8.) Launch EmulationStation                                          =
 echo =                                                                         =
@@ -3170,6 +3170,25 @@ echo bundle_assets_dst_path_subdir = "" >> C:\RetroArch\retroarch.cfg
 echo  >> C:\RetroArch\retroarch.cfg
 goto menu
 
+::=================================================================================================================================================================================================================================================================================================================
+:ThemeManager
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) Automated install of EmulationStation and RetroArch              =
+echo =                                                                         =
+echo =    2.) Update/Install EmulationStation with the latest Windows build    =
+echo =                                                                         =
+echo =    3.) Generate new es_systems.cfg                                      =
+echo =                                                                         =
+echo =    4.) Edit es_systems.cfg                                              =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+IF ERRORLEVEL ==4 GOTO editCFG
+IF ERRORLEVEL ==3 GOTO GenCFG
+IF ERRORLEVEL ==2 GOTO updateES
+IF ERRORLEVEL ==1 GOTO BrandNew
 
 :AdminFail
 echo =============================================

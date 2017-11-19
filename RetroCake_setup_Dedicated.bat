@@ -45,14 +45,11 @@ echo =    4.) Setup ROM directories and shares                                 =
 echo =                                                                         =
 echo =    5.) Manage es_systems.cfg                                            =
 echo =                                                                         =
-echo =    6.) Set Windows to Start EmulationStation on login                   =
-echo =                                                                         =
-echo =    7.) Set Windows Hostname to RetroPieWin                              =
+echo =    6.) Set Windows Hostname to RetroPieWin                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
-IF ERRORLEVEL ==7 GOTO hostname
-IF ERRORLEVEL ==6 GOTO startupES
+CHOICE /N /C:123456 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6)"%1
+IF ERRORLEVEL ==6 GOTO hostname
 IF ERRORLEVEL ==5 GOTO manageCFG
 IF ERRORLEVEL ==4 GOTO mkdirROMS
 IF ERRORLEVEL ==3 GOTO updateRA
@@ -473,45 +470,15 @@ goto setshares
 
 :setshares
 
-net share amiga=C:\ROMS\amiga /grant:everyone,full
-net share atari2600=C:\ROMS\atari2600 /grant:everyone,full
-net share atari5200=C:\ROMS\atari5200 /grant:everyone,full
-net share atari7800=C:\ROMS\atari7800 /grant:everyone,full
-net share atari800=C:\ROMS\atari800 /grant:everyone,full
-net share atarijaguar=C:\ROMS\atarijaguar /grant:everyone,full
-net share atarilynx=C:\ROMS\atarilynx /grant:everyone,full
-net share coleco=C:\ROMS\coleco /grant:everyone,full
-net share fba=C:\ROMS\fba /grant:everyone,full
-net share fds=C:\ROMS\fds /grant:everyone,full
-net share gamegear=C:\ROMS\gamegear /grant:everyone,full
-net share gb=C:\ROMS\gb /grant:everyone,full
-net share gba=C:\ROMS\gba /grant:everyone,full
-net share gbc=C:\ROMS\gbc /grant:everyone,full
-net share gc=C:\ROMS\gc /grant:everyone,full
-net share intellivision=C:\ROMS\intellivision /grant:everyone,full
-net share mame-libretro=C:\ROMS\mame-libretro /grant:everyone,full
-net share mastersystem=C:\ROMS\mastersystem /grant:everyone,full
-net share megadrive=C:\ROMS\megadrive /grant:everyone,full
-net share msx=C:\ROMS\msx /grant:everyone,full
-net share n64=C:\ROMS\n64 /grant:everyone,full
-net share neogeo=C:\ROMS\neogeo /grant:everyone,full
-net share nes=C:\ROMS\nes /grant:everyone,full
-net share nds=C:\ROMS\nds /grant:everyone,full
-net share ngp=C:\ROMS\ngp /grant:everyone,full
-net share ngpc=C:\ROMS\ngpc /grant:everyone,full
-net share pcengine=C:\ROMS\pcengine /grant:everyone,full
-net share psx=C:\ROMS\psx /grant:everyone,full
-net share ps2=C:\ROMS\ps2 /grant:everyone,full
-net share sega32x=C:\ROMS\sega32x /grant:everyone,full
-net share segacd=C:\ROMS\segacd /grant:everyone,full
-net share sg-1000=C:\ROMS\sg-1000 /grant:everyone,full
-net share snes=C:\ROMS\snes /grant:everyone,full
-net share vectrex=C:\ROMS\vectrex /grant:everyone,full
-net share zxspectrum=C:\ROMS\zxspectrum /grant:everyone,full
+net share ROMS=C:\ROMS /grant:everyone,full
+net share RetroArch=C:\RetroArch /grant:everyone,full
+net share .emulationstation="C:\%USERPROFILE%\.emulationstation" /grant:everyone,full
 goto setperms
 
 :setperms
 icacls "C:\ROMS" /grant everyone:(OI)(CI)F /T
+icacls "C:\%USERPROFILE%\.emulationstation" /grant everyone:(OI)(CI)F /T
+icacls "C:\RetroArch" /grant everyone:(OI)(CI)F /T
 goto menu
 
 
@@ -3618,69 +3585,15 @@ goto setsharesnew
 
 :setsharesnew
 
-net share amiga=C:\ROMS\amiga /grant:everyone,full
-net share atari2600=C:\ROMS\atari2600 /grant:everyone,full
-net share atari5200=C:\ROMS\atari5200 /grant:everyone,full
-net share atari7800=C:\ROMS\atari7800 /grant:everyone,full
-net share atari800=C:\ROMS\atari800 /grant:everyone,full
-net share atarijaguar=C:\ROMS\atarijaguar /grant:everyone,full
-net share atarilynx=C:\ROMS\atarilynx /grant:everyone,full
-net share coleco=C:\ROMS\coleco /grant:everyone,full
-net share fba=C:\ROMS\fba /grant:everyone,full
-net share fds=C:\ROMS\fds /grant:everyone,full
-net share gamegear=C:\ROMS\gamegear /grant:everyone,full
-net share gb=C:\ROMS\gb /grant:everyone,full
-net share gba=C:\ROMS\gba /grant:everyone,full
-net share gbc=C:\ROMS\gbc /grant:everyone,full
-net share gc=C:\ROMS\gc /grant:everyone,full
-net share intellivision=C:\ROMS\intellivision /grant:everyone,full
-net share mame-libretro=C:\ROMS\mame-libretro /grant:everyone,full
-net share mastersystem=C:\ROMS\mastersystem /grant:everyone,full
-net share megadrive=C:\ROMS\megadrive /grant:everyone,full
-net share msx=C:\ROMS\msx /grant:everyone,full
-net share n64=C:\ROMS\n64 /grant:everyone,full
-net share neogeo=C:\ROMS\neogeo /grant:everyone,full
-net share nes=C:\ROMS\nes /grant:everyone,full
-net share nds=C:\ROMS\nds /grant:everyone,full
-net share ngp=C:\ROMS\ngp /grant:everyone,full
-net share ngpc=C:\ROMS\ngpc /grant:everyone,full
-net share pcengine=C:\ROMS\pcengine /grant:everyone,full
-net share psx=C:\ROMS\psx /grant:everyone,full
-net share ps2=C:\ROMS\ps2 /grant:everyone,full
-net share sega32x=C:\ROMS\sega32x /grant:everyone,full
-net share segacd=C:\ROMS\segacd /grant:everyone,full
-net share sg-1000=C:\ROMS\sg-1000 /grant:everyone,full
-net share snes=C:\ROMS\snes /grant:everyone,full
-net share vectrex=C:\ROMS\vectrex /grant:everyone,full
-net share zxspectrum=C:\ROMS\zxspectrum /grant:everyone,full
+net share ROMS=C:\ROMS /grant:everyone,full
+net share RetroArch=C:\RetroArch /grant:everyone,full
+net share .emulationstation="C:\%USERPROFILE%\.emulationstation" /grant:everyone,full
 goto setpermsnew
 
 :setpermsnew
 icacls "C:\ROMS" /grant everyone:(OI)(CI)F /T
-goto startupESnew
-
-:startupESnew
-cd "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-echo taskkill /im explorer.exe /f > "%USERPROFILE%\startES.bat"
-echo "%ProgramFiles%\EmulationStation\emulationstation.exe" >> "%USERPROFILE%\startES.bat"
-
-del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk"
-echo Set oWS = WScript.CreateObject("WScript.Shell") > "%USERPROFILE%\CreateShortcut2.vbs"
-echo sLinkFile = "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk" >> "%USERPROFILE%\CreateShortcut2.vbs"
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "%USERPROFILE%\CreateShortcut2.vbs"
-echo oLink.TargetPath = "%USERPROFILE%\startES.bat" >> "%USERPROFILE%\CreateShortcut2.vbs"
-echo oLink.Save >> "%USERPROFILE%\CreateShortcut2.vbs"
-cscript "%USERPROFILE%\CreateShortcut2.vbs"
-del "%USERPROFILE%\CreateShortcut2.vbs"
-goto autologinnew
-
-:autologinnew
-cls
-set /p ESpassword="Enter Windows Password: "
-REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
-REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d %username% /f
-REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d %ESpassword% /f
-reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoLogonCount /t REG_DWORD /d 0
+icacls "C:\%USERPROFILE%\.emulationstation" /grant everyone:(OI)(CI)F /T
+icacls "C:\RetroArch" /grant everyone:(OI)(CI)F /T
 goto hostnamenew
 
 :hostnamenew
