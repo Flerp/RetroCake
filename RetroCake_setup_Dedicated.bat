@@ -47,8 +47,11 @@ echo =    5.) Manage es_systems.cfg                                            =
 echo =                                                                         =
 echo =    6.) Set Windows Hostname to RetroPieWin                              =
 echo =                                                                         =
+echo =    7.) Manage EmulationStation Themes                                   =
+echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6)"%1
+CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
+IF ERRORLEVEL ==7 GOTO ThemeManagerSetup
 IF ERRORLEVEL ==6 GOTO hostname
 IF ERRORLEVEL ==5 GOTO manageCFG
 IF ERRORLEVEL ==4 GOTO mkdirROMS
@@ -3600,7 +3603,1078 @@ goto hostnamenew
 WMIC computersystem where caption='%COMPUTERNAME%' rename RetroCake
 goto menu
 
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+
+:ThemeManagerSetup
+IF EXIST C:\git\bin\git.exe goto ThemeManager
+goto GitArchCheck
+
+:GitArchCheck
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+		goto git64
+	)
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+		goto git32
+	)
+
+:git32
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      Setting up git...                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-32-bit.7z.exe -OutFile "%USERPROFILE%\git.zip"
+mkdir C:\git
+C:\7za\7za.exe x "%USERPROFILE%\git.zip" -o"C:\git" -aoa
+ping 127.0.0.1 -n 4 > nul
+del "%USERPROFILE%\git.zip"
+goto ThemeManager
+
+:git64
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      Setting up git...                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-64-bit.7z.exe -OutFile "%USERPROFILE%\git.zip"
+mkdir C:\git
+C:\7za\7za.exe x "%USERPROFILE%\git.zip" -o"C:\git" -aoa
+ping 127.0.0.1 -n 4 > nul
+del "%USERPROFILE%\git.zip"
+goto ThemeManager
+
 ::===================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+
+:ThemeManager
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) Install/Update All EmulationStation Themes                       =
+echo =                                                                         =
+echo =    2.) Install/Update Individual Themes                                 =
+echo =                                                                         =
+echo =    3.) Theme Gallery/Previews                                           =
+echo =                                                                         =
+echo =    4.) Exit Theme Manager                                               =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+IF ERRORLEVEL ==4 GOTO menu
+IF ERRORLEVEL ==3 GOTO ThemeGallerySetupCheck
+IF ERRORLEVEL ==2 GOTO IndThemes
+IF ERRORLEVEL ==1 GOTO AllThemes
+
+:ThemeGallerySetupCheck
+IF EXIST "%USERPROFILE%\.emulationstation\es-theme-gallery\carbon.png" goto ThemeGallery
+goto ThemeGallerySetup
+
+:ThemeGallerySetup
+cd "%USERPROFILE%\.emulationstation"
+git clone --recursive https://github.com/wetriner/es-theme-gallery.git
+goto ThemeGallery
+
+:ThemeGallery
+cd "%USERPROFILE%\.emulationstation\es-theme-gallery"
+for %%i in (*.png) do echo ^<img src="%%i" title="%%~ni" height="400" width="600" /^> >> Gallery.html
+start Gallery.html
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =       HOVER OVER ANY IMAGE TO SEE WHICH THEME IT BELONGS TO             =
+echo =            PRESS ANY KEY WHEN DONE BROWSING THE GALLERY                 =
+echo =                                                                         =
+echo ===========================================================================
+pause > nul
+del Gallery.html
+goto ThemeManager
+
+:AllThemes
+
+cd "%USERPROFILE%\.emulationstation\themes"
+
+set repo=RetroPie
+set theme=carbon
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=carbon-centered
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=carbon-nometa
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=simple
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=simple-dark
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=clean-look
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=color-pi
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=nbba
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=simplified-static-canela
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=turtle-pi
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroPie
+set theme=zoid
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=pixel
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=pixel-metadata
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=pixel-tft
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=luminous
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=minilumi
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ehettervik
+set theme=workbench
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=AmadhiX
+set theme=eudora
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=AmadhiX
+set theme=eudora-bigshot
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=AmadhiX
+set theme=eudora-concise
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ChoccyHobNob
+set theme=eudora-updated
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=InsecureSpike
+set theme=retroplay-clean-canela
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=InsecureSpike
+set theme=retroplay-clean-detail-canela
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=Omnija
+set theme=simpler-turtlepi
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=Omnija
+set theme=simpler-turtlemini
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=Omnija
+set theme=metro
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=material
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=mattrixk
+set theme=io
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=mattrixk
+set theme=metapixel
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=mattrixk
+set theme=spare
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=robertybob
+set theme=space
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=robertybob
+set theme=simplebigart
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=robertybob
+set theme=tv
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=HerbFargus
+set theme=tronkyfran
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=flat
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=flat-dark
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=minimal
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=switch-light
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lilbud
+set theme=switch-dark
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=FlyingTomahawk
+set theme=futura-V
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=FlyingTomahawk
+set theme=futura-dark-V
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=G-rila
+set theme=fundamental
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ruckage
+set theme=nes-mini
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ruckage
+set theme=famicom-mini
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ruckage
+set theme=snes-mini
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=crt
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=crt-centered
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=art-book
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=art-book-4-3
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=art-book-pocket
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=anthonycaccese
+set theme=tft
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=TMNTturtleguy
+set theme=ComicBook
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=TMNTturtleguy
+set theme=ComicBook_4-3
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=TMNTturtleguy
+set theme=ComicBook_SE-Wheelart
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=TMNTturtleguy
+set theme=ComicBook_4-3_SE-Wheelart
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=ChoccyHobNob
+set theme=cygnus
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=dmmarti
+set theme=steampunk
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=dmmarti
+set theme=hurstyblue
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=dmmarti
+set theme=maximuspie
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=dmmarti
+set theme=showcase
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=dmmarti
+set theme=kidz
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lipebello
+set theme=Retrorama
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lipebello
+set theme=SpaceOddity
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=rxbrad
+set theme=gbz35
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=rxbrad
+set theme=gbz35-dark
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=garaine
+set theme=marioblue
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=garaine
+set theme=bigwood
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=MrTomixf
+set theme=Royal_Primicia
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=magazinemadness
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=stirling
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=lostless
+set theme=playstation
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=mrharias
+set theme=superdisplay
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=coinjunkie
+set theme=synthwave
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=boxalloyred
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=boxalloyblue
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=greenilicious
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=retroroid
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=RetroHursty69
+set theme=merryxmas
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+set repo=Saracade
+set theme=scv720
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+
+goto ThemeManager
+
+:IndThemes
+:page1
+cls
+echo ===========================================================================
+echo =                               Page 1                                    =
+Echo =    1.) Carbon                                                           =
+echo =    2.) Carbon-Centered                                                  =
+echo =    3.) Carbon-NoMeta                                                    =
+echo =    4.) Simple                                                           =
+echo =    5.) Simple-Dark                                                      =
+echo =    6.) Clean-Look                                                       =
+echo =    7.) Color-Pi                                                         =
+echo =    8.) nbba                                                             =
+echo =                                                                         =
+echo =    9.) Page 2                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page2
+IF ERRORLEVEL ==8 goto nbba 
+IF ERRORLEVEL ==7 goto color-pi 
+IF ERRORLEVEL ==6 goto clean-look 
+IF ERRORLEVEL ==5 goto simple-dark 
+IF ERRORLEVEL ==4 goto simple 
+IF ERRORLEVEL ==3 goto carbon-nometa 
+IF ERRORLEVEL ==2 goto carbon-centered 
+IF ERRORLEVEL ==1 goto carbon 
+
+:page2
+cls
+echo ===========================================================================
+echo =                               Page 2                                    =
+Echo =    1.) simplified-static-canela                                         =
+echo =    2.) turtle-pi                                                        =
+echo =    3.) zoid                                                             =
+echo =    4.) pixel                                                            =
+echo =    5.) pixel-metadata                                                   =
+echo =    6.) pixel-tft                                                        =
+echo =    7.) luminous                                                         =
+echo =    8.) minilumi                                                         =
+echo =                                                                         =
+echo =    9.) Page 3                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page3
+IF ERRORLEVEL ==8 goto minilumi
+IF ERRORLEVEL ==7 goto luminous
+IF ERRORLEVEL ==6 goto pixel-tft
+IF ERRORLEVEL ==5 goto pixel-metadata
+IF ERRORLEVEL ==4 goto pixel
+IF ERRORLEVEL ==3 goto zoid
+IF ERRORLEVEL ==2 goto turtle-pi 
+IF ERRORLEVEL ==1 goto simplified-static-canela
+
+:page3
+cls
+echo ===========================================================================
+echo =                               Page 3                                    =
+Echo =    1.) workbench                                                        =
+echo =    2.) eudora                                                           =
+echo =    3.) eudora-bigshot                                                   =
+echo =    4.) eudora-concise                                                   =
+echo =    5.) eudora-updated                                                   =
+echo =    6.) retroplay-clean-canela                                           =
+echo =    7.) retroplay-clean-detail-canela                                    =
+echo =    8.) simpler-turtlepi                                                 =
+echo =                                                                         =
+echo =    9.) Page 4                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page4
+IF ERRORLEVEL ==8 goto goto simpler-turtlepi
+IF ERRORLEVEL ==7 goto goto retroplay-clean-detail-canela
+IF ERRORLEVEL ==6 goto goto retroplay-clean-canela
+IF ERRORLEVEL ==5 goto goto eudora-updated
+IF ERRORLEVEL ==4 goto goto eudora-concise
+IF ERRORLEVEL ==3 goto goto eudora-bigshot
+IF ERRORLEVEL ==2 goto goto eudora
+IF ERRORLEVEL ==1 goto goto workbench
+
+:page4
+cls
+echo ===========================================================================
+echo =                               Page 4                                    =
+Echo =    1.) simpler-turtlemini                                               =
+echo =    2.) metro                                                            =
+echo =    3.) material                                                         =
+echo =    4.) io                                                               =
+echo =    5.) metapixel                                                        =
+echo =    6.) spare                                                            =
+echo =    7.) space                                                            =
+echo =    8.) simplebigart                                                     =
+echo =                                                                         =
+echo =    9.) Page 5                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page5
+IF ERRORLEVEL ==8 goto goto simplebigart
+IF ERRORLEVEL ==7 goto goto space
+IF ERRORLEVEL ==6 goto goto spare
+IF ERRORLEVEL ==5 goto goto metapixel
+IF ERRORLEVEL ==4 goto goto io
+IF ERRORLEVEL ==3 goto goto material
+IF ERRORLEVEL ==2 goto goto metro
+IF ERRORLEVEL ==1 goto goto simpler-turtlemini
+
+:page5
+cls
+echo ===========================================================================
+echo =                               Page 5                                    =
+Echo =    1.) tv                                                               =
+echo =    2.) tronkyfran                                                       =
+echo =    3.) flat                                                             =
+echo =    4.) flat-dark                                                        =
+echo =    5.) minimal                                                          =
+echo =    6.) switch-light                                                     =
+echo =    7.) switch-dark                                                      =
+echo =    8.) futura-V                                                         =
+echo =                                                                         =
+echo =    9.) Page 6                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page6
+IF ERRORLEVEL ==8 goto goto futura-V
+IF ERRORLEVEL ==7 goto goto switch-dark
+IF ERRORLEVEL ==6 goto goto switch-light
+IF ERRORLEVEL ==5 goto goto minimal
+IF ERRORLEVEL ==4 goto goto flat-dark
+IF ERRORLEVEL ==3 goto goto flat
+IF ERRORLEVEL ==2 goto goto tronkyfran
+IF ERRORLEVEL ==1 goto goto tv
+
+:page6
+cls
+echo ===========================================================================
+echo =                               Page 6                                    =
+Echo =    1.) futura-dark-V                                                    =
+echo =    2.) fundamental                                                      =
+echo =    3.) nes-mini                                                         =
+echo =    4.) famicom-mini                                                     =
+echo =    5.) snes-mini                                                        =
+echo =    6.) crt                                                              =
+echo =    7.) crt-centered                                                     =
+echo =    8.) art-book                                                         =
+echo =                                                                         =
+echo =    9.) Page 7                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page7
+IF ERRORLEVEL ==8 goto goto art-book
+IF ERRORLEVEL ==7 goto goto crt-centered
+IF ERRORLEVEL ==6 goto goto crt
+IF ERRORLEVEL ==5 goto goto snes-mini
+IF ERRORLEVEL ==4 goto goto famicom-mini
+IF ERRORLEVEL ==3 goto goto nes-mini
+IF ERRORLEVEL ==2 goto goto fundamental
+IF ERRORLEVEL ==1 goto goto futura-dark-V
+
+:page7
+cls
+echo ===========================================================================
+echo =                               Page 7                                    =
+Echo =    1.) art-book-4-3                                                     =
+echo =    2.) art-book-pocket                                                  =
+echo =    3.) tft                                                              =
+echo =    4.) ComicBook                                                        =
+echo =    5.) ComicBook_4-3                                                    =
+echo =    6.) ComicBook_SE-Wheelart                                            =
+echo =    7.) ComicBook_4-3_SE-Wheelart                                        =
+echo =    8.) cygnus                                                           =
+echo =                                                                         =
+echo =    9.) Page 8                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page8
+IF ERRORLEVEL ==8 goto goto cygnus
+IF ERRORLEVEL ==7 goto goto ComicBook_4-3_SE-Wheelart
+IF ERRORLEVEL ==6 goto goto ComicBook_SE-Wheelart
+IF ERRORLEVEL ==5 goto goto ComicBook_4-3
+IF ERRORLEVEL ==4 goto goto ComicBook
+IF ERRORLEVEL ==3 goto goto tft
+IF ERRORLEVEL ==2 goto goto art-book-pocket
+IF ERRORLEVEL ==1 goto goto art-book-4-3
+
+:page8
+cls
+echo ===========================================================================
+echo =                               Page 8                                    =
+Echo =    1.) steampunk                                                        =
+echo =    2.) hurstyblue                                                       =
+echo =    3.) maximuspie                                                       =
+echo =    4.) showcase                                                         =
+echo =    5.) kidz                                                             =
+echo =    6.) Retrorama                                                        =
+echo =    7.) SpaceOddity                                                      =
+echo =    8.) gbz35                                                            =
+echo =                                                                         =
+echo =    9.) Page 9                                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page9
+IF ERRORLEVEL ==8 goto goto gbz35
+IF ERRORLEVEL ==7 goto goto SpaceOddity
+IF ERRORLEVEL ==6 goto goto Retrorama
+IF ERRORLEVEL ==5 goto goto kidz
+IF ERRORLEVEL ==4 goto goto showcase
+IF ERRORLEVEL ==3 goto goto maximuspie
+IF ERRORLEVEL ==2 goto goto hurstyblue
+IF ERRORLEVEL ==1 goto goto steampunk
+
+:page9
+cls
+echo ===========================================================================
+echo =                               Page 9                                    =
+Echo =    1.) gbz35-dark                                                       =
+echo =    2.) marioblue                                                        =
+echo =    3.) bigwood                                                          =
+echo =    4.) Royal_Primicia                                                   =
+echo =    5.) magazinemadness                                                  =
+echo =    6.) stirling                                                         =
+echo =    7.) playstation                                                      =
+echo =    8.) superdisplay                                                     =
+echo =                                                                         =
+echo =    9.) Page 10                                                          =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO page10
+IF ERRORLEVEL ==8 goto goto superdisplay
+IF ERRORLEVEL ==7 goto goto playstation
+IF ERRORLEVEL ==6 goto goto stirling
+IF ERRORLEVEL ==5 goto goto magazinemadness
+IF ERRORLEVEL ==4 goto goto Royal_Primicia
+IF ERRORLEVEL ==3 goto goto bigwood
+IF ERRORLEVEL ==2 goto goto marioblue
+IF ERRORLEVEL ==1 goto goto gbz35-dark
+
+:page10
+cls
+echo ===========================================================================
+echo =                              Page 10                                    =
+Echo =    1.) scv720                                                           =
+echo =    2.) merryxmas                                                        =
+echo =    3.) retroroid                                                        =
+echo =    4.) greenilicious                                                    =
+echo =    5.) boxalloyblue                                                     =
+echo =    6.) boxalloyred                                                      =
+echo =    7.) synthwave                                                        =
+echo =                                                                         =
+echo =    8.) Return to ThemeManager                                           =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:12345678 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8)"%1
+IF ERRORLEVEL ==8 goto ThemeManager
+IF ERRORLEVEL ==7 goto goto synthwave
+IF ERRORLEVEL ==6 goto goto boxalloyred
+IF ERRORLEVEL ==5 goto goto boxalloyblue
+IF ERRORLEVEL ==4 goto goto greenilicious
+IF ERRORLEVEL ==3 goto goto retroroid
+IF ERRORLEVEL ==2 goto goto merryxmas
+IF ERRORLEVEL ==1 goto goto scv720
+
+:carbon
+set repo=RetroPie
+set theme=carbon
+goto insttheme
+:carbon-centered
+set repo=RetroPie
+set theme=carbon-centered
+goto insttheme
+:carbon-nometa
+set repo=RetroPie
+set theme=carbon-nometa
+goto insttheme
+:simple
+set repo=RetroPie
+set theme=simple
+goto insttheme
+:simple-dark
+set repo=RetroPie
+set theme=simple-dark
+goto insttheme
+:clean-look
+set repo=RetroPie
+set theme=clean-look
+goto insttheme
+:color-pi
+set repo=RetroPie
+set theme=color-pi
+goto insttheme
+:nbba
+set repo=RetroPie
+set theme=nbba
+goto insttheme
+:simplified-static-canela
+set repo=RetroPie
+set theme=simplified-static-canela
+goto insttheme
+:turtle-pi
+set repo=RetroPie
+set theme=turtle-pi
+goto insttheme
+:zoid
+set repo=RetroPie
+set theme=zoid
+goto insttheme
+:pixel
+set repo=ehettervik
+set theme=pixel
+goto insttheme
+:pixel-metadata
+set repo=ehettervik
+set theme=pixel-metadata
+goto insttheme
+:pixel-tft
+set repo=ehettervik
+set theme=pixel-tft
+goto insttheme
+:luminous
+set repo=ehettervik
+set theme=luminous
+goto insttheme
+:minilumi
+set repo=ehettervik
+set theme=minilumi
+goto insttheme
+:workbench
+set repo=ehettervik
+set theme=workbench
+goto insttheme
+:eudora
+set repo=AmadhiX
+set theme=eudora
+goto insttheme
+:eudora-bigshot
+set repo=AmadhiX
+set theme=eudora-bigshot
+goto insttheme
+:eudora-concise
+set repo=AmadhiX
+set theme=eudora-concise
+goto insttheme
+:eudora-updated
+set repo=ChoccyHobNob
+set theme=eudora-updated
+goto insttheme
+:retroplay-clean-canela
+set repo=InsecureSpike
+set theme=retroplay-clean-canela
+goto insttheme
+:retroplay-clean-detail-canela
+set repo=InsecureSpike
+set theme=retroplay-clean-detail-canela
+goto insttheme
+:simpler-turtlepi
+set repo=Omnija
+set theme=simpler-turtlepi
+goto insttheme
+:simpler-turtlemini
+set repo=Omnija
+set theme=simpler-turtlemini
+goto insttheme
+:metro
+set repo=Omnija
+set theme=metro
+goto insttheme
+:material
+set repo=lilbud
+set theme=material
+goto insttheme
+:io
+set repo=mattrixk
+set theme=io
+goto insttheme
+:metapixel
+set repo=mattrixk
+set theme=metapixel
+goto insttheme
+:spare
+set repo=mattrixk
+set theme=spare
+goto insttheme
+:space
+set repo=robertybob
+set theme=space
+goto insttheme
+:simplebigart
+set repo=robertybob
+set theme=simplebigart
+goto insttheme
+:tv
+set repo=robertybob
+set theme=tv
+goto insttheme
+:tronkyfran
+set repo=HerbFargus
+set theme=tronkyfran
+goto insttheme
+:flat
+set repo=lilbud
+set theme=flat
+goto insttheme
+:flat-dark
+set repo=lilbud
+set theme=flat-dark
+goto insttheme
+:minimal
+set repo=lilbud
+set theme=minimal
+goto insttheme
+:switch-light
+set repo=lilbud
+set theme=switch-light
+goto insttheme
+:switch-dark
+set repo=lilbud
+set theme=switch-dark
+goto insttheme
+:futura-V
+set repo=FlyingTomahawk
+set theme=futura-V
+goto insttheme
+:futura-dark-V
+set repo=FlyingTomahawk
+set theme=futura-dark-V
+goto insttheme
+:fundamental
+set repo=G-rila
+set theme=fundamental
+goto insttheme
+:nes-mini
+set repo=ruckage
+set theme=nes-mini
+goto insttheme
+:famicom-mini
+set repo=ruckage
+set theme=famicom-mini
+goto insttheme
+:snes-mini
+set repo=ruckage
+set theme=snes-mini
+goto insttheme
+:crt
+set repo=anthonycaccese
+set theme=crt
+goto insttheme
+:crt-centered
+set repo=anthonycaccese
+set theme=crt-centered
+goto insttheme
+:art-book
+set repo=anthonycaccese
+set theme=art-book
+goto insttheme
+:art-book-4-3
+set repo=anthonycaccese
+set theme=art-book-4-3
+goto insttheme
+:art-book-pocket
+set repo=anthonycaccese
+set theme=art-book-pocket
+goto insttheme
+:tft
+set repo=anthonycaccese
+set theme=tft
+goto insttheme
+:ComicBook
+set repo=TMNTturtleguy
+set theme=ComicBook
+goto insttheme
+:ComicBook_4-3
+set repo=TMNTturtleguy
+set theme=ComicBook_4-3
+goto insttheme
+:ComicBook_SE-Wheelart
+set repo=TMNTturtleguy
+set theme=ComicBook_SE-Wheelart
+goto insttheme
+:ComicBook_4-3_SE-Wheelart
+set repo=TMNTturtleguy
+set theme=ComicBook_4-3_SE-Wheelart
+goto insttheme
+:cygnus
+set repo=ChoccyHobNob
+set theme=cygnus
+goto insttheme
+:steampunk
+set repo=dmmarti
+set theme=steampunk
+goto insttheme
+:hurstyblue
+set repo=dmmarti
+set theme=hurstyblue
+goto insttheme
+:maximuspie
+set repo=dmmarti
+set theme=maximuspie
+goto insttheme
+:showcase
+set repo=dmmarti
+set theme=showcase
+goto insttheme
+:kidz
+set repo=dmmarti
+set theme=kidz
+goto insttheme
+:Retrorama
+set repo=lipebello
+set theme=Retrorama
+goto insttheme
+:SpaceOddity
+set repo=lipebello
+set theme=SpaceOddity
+goto insttheme
+:gbz35
+set repo=rxbrad
+set theme=gbz35
+goto insttheme
+:gbz35-dark
+set repo=rxbrad
+set theme=gbz35-dark
+goto insttheme
+:marioblue
+set repo=garaine
+set theme=marioblue
+goto insttheme
+:bigwood
+set repo=garaine
+set theme=bigwood
+goto insttheme
+:Royal_Primicia
+set repo=MrTomixf
+set theme=Royal_Primicia
+goto insttheme
+:magazinemadness
+set repo=RetroHursty69
+set theme=magazinemadness
+goto insttheme
+:stirling
+set repo=RetroHursty69
+set theme=stirling
+goto insttheme
+:playstation
+set repo=lostless
+set theme=playstation
+goto insttheme
+:superdisplay
+set repo=mrharias
+set theme=superdisplay
+goto insttheme
+:synthwave
+set repo=coinjunkie
+set theme=synthwave
+goto insttheme
+:boxalloyred
+set repo=RetroHursty69
+set theme=boxalloyred
+goto insttheme
+:boxalloyblue
+set repo=RetroHursty69
+set theme=boxalloyblue
+goto insttheme
+:greenilicious
+set repo=RetroHursty69
+set theme=greenilicious
+goto insttheme
+:retroroid
+set repo=RetroHursty69
+set theme=retroroid
+goto insttheme
+:merryxmas
+set repo=RetroHursty69
+set theme=merryxmas
+goto insttheme
+:scv720
+set repo=Saracade
+set theme=scv720
+goto insttheme
+
+:insttheme
+cd %USERPROFILE%\.emulationstation\themes
+rmdir %theme% /S /Q
+C:\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+goto ThemeManager
+
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
 
 :AdminFail
 echo =============================================
