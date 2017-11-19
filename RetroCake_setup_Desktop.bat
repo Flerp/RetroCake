@@ -3390,17 +3390,44 @@ Echo =    1.) Install/Update All EmulationStation Themes                       =
 echo =                                                                         =
 echo =    2.) Install/Update Individual Themes                                 =
 echo =                                                                         =
-echo =    3.) Exit Theme Manager                                               =
+echo =    3.) Theme Gallery/Previews                                           =
+echo =                                                                         =
+echo =    4.) Exit Theme Manager                                               =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
-IF ERRORLEVEL ==3 GOTO menu
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+IF ERRORLEVEL ==4 GOTO menu
+IF ERRORLEVEL ==3 GOTO ThemeGallerySetupCheck
 IF ERRORLEVEL ==2 GOTO IndThemes
 IF ERRORLEVEL ==1 GOTO AllThemes
 
+:ThemeGallerySetupCheck
+IF EXIST "%USERPROFILE%\.emulationstation\es-theme-gallery\carbon.png" goto ThemeGallery
+goto ThemeGallerySetup
+
+:ThemeGallerySetup
+cd "%USERPROFILE%\.emulationstation"
+git clone --recursive https://github.com/wetriner/es-theme-gallery.git
+goto ThemeGallery
+
+:ThemeGallery
+cd "%USERPROFILE%\.emulationstation\es-theme-gallery"
+for %%i in (*.png) do echo ^<img src="%%i" title="%%~ni" height="400" width="600" /^> >> Gallery.html
+start Gallery.html
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =       HOVER OVER ANY IMAGE TO SEE WHICH THEME IT BELONGS TO             =
+echo =            PRESS ANY KEY WHEN DONE BROWSING THE GALLERY                 =
+echo =                                                                         =
+echo ===========================================================================
+pause > nul
+del Gallery.html
+goto ThemeManager
+
 :AllThemes
 
-cd %USERPROFILE%\.emulationstation\themes
+cd "%USERPROFILE%\.emulationstation\themes"
 
 set repo=RetroPie
 set theme=carbon
@@ -3735,7 +3762,7 @@ echo =    6.) Clean-Look                                                       =
 echo =    7.) Color-Pi                                                         =
 echo =    8.) nbba                                                             =
 echo =                                                                         =
-echo =    9.) Goto Page 2                                                      =
+echo =    9.) Page 2                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3762,7 +3789,7 @@ echo =    6.) pixel-tft                                                        =
 echo =    7.) luminous                                                         =
 echo =    8.) minilumi                                                         =
 echo =                                                                         =
-echo =    9.) Goto Page 3                                                      =
+echo =    9.) Page 3                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3780,16 +3807,16 @@ IF ERRORLEVEL ==1 goto simplified-static-canela
 cls
 echo ===========================================================================
 echo =                               Page 3                                    =
-Echo =    1.) goto workbench                                                   =
-echo =    2.) goto eudora                                                      =
-echo =    3.) goto eudora-bigshot                                              =
-echo =    4.) goto eudora-concise                                              =
-echo =    5.) goto eudora-updated                                              =
-echo =    6.) goto retroplay-clean-canela                                      =
-echo =    7.) goto retroplay-clean-detail-canela                               =
-echo =    8.) goto simpler-turtlepi                                            =
+Echo =    1.) workbench                                                        =
+echo =    2.) eudora                                                           =
+echo =    3.) eudora-bigshot                                                   =
+echo =    4.) eudora-concise                                                   =
+echo =    5.) eudora-updated                                                   =
+echo =    6.) retroplay-clean-canela                                           =
+echo =    7.) retroplay-clean-detail-canela                                    =
+echo =    8.) simpler-turtlepi                                                 =
 echo =                                                                         =
-echo =    9.) Goto Page 4                                                      =
+echo =    9.) Page 4                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3807,16 +3834,16 @@ IF ERRORLEVEL ==1 goto goto workbench
 cls
 echo ===========================================================================
 echo =                               Page 4                                    =
-Echo =    1.) goto simpler-turtlemini                                          =
-echo =    2.) goto metro                                                       =
-echo =    3.) goto material                                                    =
-echo =    4.) goto io                                                          =
-echo =    5.) goto metapixel                                                   =
-echo =    6.) goto spare                                                       =
-echo =    7.) goto space                                                       =
-echo =    8.) goto simplebigart                                                =
+Echo =    1.) simpler-turtlemini                                               =
+echo =    2.) metro                                                            =
+echo =    3.) material                                                         =
+echo =    4.) io                                                               =
+echo =    5.) metapixel                                                        =
+echo =    6.) spare                                                            =
+echo =    7.) space                                                            =
+echo =    8.) simplebigart                                                     =
 echo =                                                                         =
-echo =    9.) Goto Page 5                                                      =
+echo =    9.) Page 5                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3834,16 +3861,16 @@ IF ERRORLEVEL ==1 goto goto simpler-turtlemini
 cls
 echo ===========================================================================
 echo =                               Page 5                                    =
-Echo =    1.) goto tv                                                          =
-echo =    2.) goto tronkyfran                                                  =
-echo =    3.) goto flat                                                        =
-echo =    4.) goto flat-dark                                                   =
-echo =    5.) goto minimal                                                     =
-echo =    6.) goto switch-light                                                =
-echo =    7.) goto switch-dark                                                 =
-echo =    8.) goto futura-V                                                    =
+Echo =    1.) tv                                                               =
+echo =    2.) tronkyfran                                                       =
+echo =    3.) flat                                                             =
+echo =    4.) flat-dark                                                        =
+echo =    5.) minimal                                                          =
+echo =    6.) switch-light                                                     =
+echo =    7.) switch-dark                                                      =
+echo =    8.) futura-V                                                         =
 echo =                                                                         =
-echo =    9.) Goto Page 6                                                      =
+echo =    9.) Page 6                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3861,16 +3888,16 @@ IF ERRORLEVEL ==1 goto goto tv
 cls
 echo ===========================================================================
 echo =                               Page 6                                    =
-Echo =    1.) goto futura-dark-V                                               =
-echo =    2.) goto fundamental                                                 =
-echo =    3.) goto nes-mini                                                    =
-echo =    4.) goto famicom-mini                                                =
-echo =    5.) goto snes-mini                                                   =
-echo =    6.) goto crt                                                         =
-echo =    7.) goto crt-centered                                                =
-echo =    8.) goto art-book                                                    =
+Echo =    1.) futura-dark-V                                                    =
+echo =    2.) fundamental                                                      =
+echo =    3.) nes-mini                                                         =
+echo =    4.) famicom-mini                                                     =
+echo =    5.) snes-mini                                                        =
+echo =    6.) crt                                                              =
+echo =    7.) crt-centered                                                     =
+echo =    8.) art-book                                                         =
 echo =                                                                         =
-echo =    9.) Goto Page 7                                                      =
+echo =    9.) Page 7                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3888,16 +3915,16 @@ IF ERRORLEVEL ==1 goto goto futura-dark-V
 cls
 echo ===========================================================================
 echo =                               Page 7                                    =
-Echo =    1.) goto art-book-4-3                                                =
-echo =    2.) goto art-book-pocket                                             =
-echo =    3.) goto tft                                                         =
-echo =    4.) goto ComicBook                                                   =
-echo =    5.) goto ComicBook_4-3                                               =
-echo =    6.) goto ComicBook_SE-Wheelart                                       =
-echo =    7.) goto ComicBook_4-3_SE-Wheelart                                   =
-echo =    8.) goto cygnus                                                      =
+Echo =    1.) art-book-4-3                                                     =
+echo =    2.) art-book-pocket                                                  =
+echo =    3.) tft                                                              =
+echo =    4.) ComicBook                                                        =
+echo =    5.) ComicBook_4-3                                                    =
+echo =    6.) ComicBook_SE-Wheelart                                            =
+echo =    7.) ComicBook_4-3_SE-Wheelart                                        =
+echo =    8.) cygnus                                                           =
 echo =                                                                         =
-echo =    9.) Goto Page 8                                                      =
+echo =    9.) Page 8                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3915,16 +3942,16 @@ IF ERRORLEVEL ==1 goto goto art-book-4-3
 cls
 echo ===========================================================================
 echo =                               Page 8                                    =
-Echo =    1.) goto steampunk                                                   =
-echo =    2.) goto hurstyblue                                                  =
-echo =    3.) goto maximuspie                                                  =
-echo =    4.) goto showcase                                                    =
-echo =    5.) goto kidz                                                        =
-echo =    6.) goto Retrorama                                                   =
-echo =    7.) goto SpaceOddity                                                 =
-echo =    8.) goto gbz35                                                       =
+Echo =    1.) steampunk                                                        =
+echo =    2.) hurstyblue                                                       =
+echo =    3.) maximuspie                                                       =
+echo =    4.) showcase                                                         =
+echo =    5.) kidz                                                             =
+echo =    6.) Retrorama                                                        =
+echo =    7.) SpaceOddity                                                      =
+echo =    8.) gbz35                                                            =
 echo =                                                                         =
-echo =    9.) Goto Page 9                                                      =
+echo =    9.) Page 9                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
@@ -3942,16 +3969,16 @@ IF ERRORLEVEL ==1 goto goto steampunk
 cls
 echo ===========================================================================
 echo =                               Page 9                                    =
-Echo =    1.) goto gbz35-dark                                                  =
-echo =    2.) goto marioblue                                                   =
-echo =    3.) goto bigwood                                                     =
-echo =    4.) goto Royal_Primicia                                              =
-echo =    5.) goto magazinemadness                                             =
-echo =    6.) goto stirling                                                    =
-echo =    7.) goto playstation                                                 =
-echo =    8.) goto superdisplay                                                =
+Echo =    1.) gbz35-dark                                                       =
+echo =    2.) marioblue                                                        =
+echo =    3.) bigwood                                                          =
+echo =    4.) Royal_Primicia                                                   =
+echo =    5.) magazinemadness                                                  =
+echo =    6.) stirling                                                         =
+echo =    7.) playstation                                                      =
+echo =    8.) superdisplay                                                     =
 echo =                                                                         =
-echo =    9.) Goto Page 10                                                     =
+echo =    9.) Page 10                                                          =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
