@@ -4,34 +4,90 @@ I Initially created the script because I grew tired of the sub par graphics driv
 
 # What can this do?
 
-So far this script ahs the following capabilities:
+So far this script hass the following capabilities:
 
-1. Fully install and setup EmulationStation and RetroArch from the latest builds (Or Stable Releases if chosen).
-2. Generate a functional es_systems.cfg (Just needs ROM paths).
-3. Manage the es_systems.cfg file to add your ROM paths.
-4. Clean any and all files created by this script.
-5. Individually update RetroArch and EmulationStation.
-6. Update RetroArch cores to their latest compiled version.
-7. Install and manage EmulationStation themes.
+# Automated Installers
 
-# Script Flavors
+There are 3 options for automated installation.
 
-The Script comes in two flavors
+1. No ROM Dirs
 
-The first is the desktop edition
-This one is used to install alongside a normal windows installation.
-It can be launched at will and great if you're using your regular PC and would like EmulationStation and RetroArch.
+This option is if you do not wish to use the default ROM directories (C:\RetroCake\ROMS)
+Once the setup is completed you will need to edit the es_systems.cfg to change the ROM directories to your liking. 
+This option is great for people who have ROMS on another drive (like me), or just do not wish to use the default folder.
 
-The second is meant for a dedicated Windows PC connected to a TV or other.
-This one differs in several key ways.
+2. Default Installer.
 
-1. This sets up rom directories to C:\ROMS\systemname.
-2. It shares all ROM folders for easy ROM transfer.
-3. It sets the PC to automatically start EmulationStation on startup.
-4. It sets the PC to automatically login. (You will be prompted for your user password.
-5. It kills Windows Explorer on login to save resources.
-6. It changes with PC's name to RetroCake for easier access.
+This option handles the ROM directories for you.
+It creates a system folder for most supported ROMS.
+Once installation completes the ROMS folder is opened and you can transfer ROMs into the system folders.
+This option is great for people who do not have gigantic (1TB+) collections and can easily fit their ROMs on the C: drive.
 
-The dedicated machine script should not be run on your regular day to day PC as it will make
+3. Custom Installer
 
-# Dedicated version is currently untested
+This option is to setup ROM directories like option 2, but in a place of your choosing.
+This feature is currently not fully implemented.
+
+#Manage EmulationStation
+
+1. Update/Install EmulationStation
+
+This is for updating EmulationStation
+It also backs up your current EmulationStation to C:\RetroCake\Backups with a timestamped Zip file.
+The backup is in case something breaks with a newer build when updating.
+
+2. Manage es_systems.cfg
+
+This is for generating and editing es_systems.cfg
+
+3. Manage EmulationStation Themes.
+
+This tool has several features, and will setup GIT to C:\RetroCake\Tools\Git 
+
+	a. Install/update all themes.
+		Relatively Self explanatory. This installs every avaiable theme for EmulationStation.
+		
+	b. Install/Update Individual Themes
+		This option lets you select the theme you want by name and install 1 by one. 
+		Userful if you do like wish to install 80 themes and just want a specific one.
+		
+	c. Theme Gallery/Previews.
+		This downloads previews for all available themes and writes them to a HTML file.
+		The HTML file is them launched with your default browser.
+		Hover over the image to see which theme it belongs to.
+		This is to help with the Individual theme downloader so you can see what you're getting.
+		
+# Manage RetroArch
+
+1. Install RetroArch 1.6.7
+
+This installes the latest Stable Build of RetroArch. In case you wanted to revert from a nightly build.
+
+2. Update RetroArch to the latest nightly
+
+Updates RetroArch, self explanatory.
+
+3. Generate Clean Retroarch.cfg
+
+This generates a RetroArch.cfg with nearly default settings
+Changes made are as follows:
+
+	a. All Games Start in Fullscreen.
+	
+	b. You can bring up the RetroArch menu with Start and Select
+	
+4 Update REtroArch Cores to the latest Nightly Build.
+
+Self Explanatory.
+This updates all RetroArch Cores (108 total)
+
+# System Cleanup
+
+This options deletes ALL RetroCake Files.
+Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
+
+# Manage ROM Directories.
+
+This creates the default ROM directories in C:\RetroCake\ROMS
+You can also Share the ROM Directories from here if using a dedicated Emulator Box.
+WIP - Will be adding a custom ROM directory structure in the next few updates.
