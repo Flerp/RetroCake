@@ -28,7 +28,7 @@ This option is great for people who do not have gigantic (1TB+) collections and 
 This option is to setup ROM directories like option 2, but in a place of your choosing.
 This feature is currently not fully implemented.
 
-#Manage EmulationStation
+# Manage EmulationStation
 
 1. Update/Install EmulationStation
 
