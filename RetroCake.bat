@@ -94,18 +94,18 @@ IF ERRORLEVEL ==1 GOTO automated
 
 :automated
 cls
-echo ===========================================================================
-echo =                                                                         =
-Echo =    1.) FULL SETUP WITHOUT ROM DIRECTORIES (NEED TO EDIT ES_SYSTEMS.CFG) =
-echo =                                                                         =
-echo =    2.) FULL SETUP WITH DEFAULT ROM DIRECTORIES (C:\RetroCake\ROMS\SYSTEMNAME)     =
-echo =                                                                         =
-echo =    3.) FULL SETUP WITH CUSTOM ROM DIRECTORIES (NOT FUNCTIONAL YET)      =
-echo =                                                                         =
-echo =                                                                         =
-echo =    4.) RETURN TO MAIN MENU                                              =
-echo =                                                                         =
-echo ===========================================================================
+echo =================================================================================
+echo =                                                                               =
+Echo =    1.) FULL SETUP WITHOUT ROM DIRECTORIES (NEED TO EDIT ES_SYSTEMS.CFG)       =
+echo =                                                                               =
+echo =    2.) FULL SETUP WITH DEFAULT ROM DIRECTORIES (C:\RetroCake\ROMS\SYSTEMNAME) =
+echo =                                                                               =
+echo =    3.) FULL SETUP WITH CUSTOM ROM DIRECTORIES (NOT FUNCTIONAL YET)            =
+echo =                                                                               =
+echo =                                                                               =
+echo =    4.) RETURN TO MAIN MENU                                                    =
+echo =                                                                               =
+echo =================================================================================
 CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO NoFeat
@@ -159,7 +159,7 @@ IF ERRORLEVEL ==1 GOTO UpdateRA
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) CREATE DEFAULT ROM DIRECTORIES (C:\RetroCake\ROMS\SYSTEMNAME)              =
+Echo =    1.) CREATE DEFAULT ROM DIRECTORIES (C:\RetroCake\ROMS\SYSTEMNAME)    =
 echo =                                                                         =
 echo =    2.) SHARE ROM DIRECTORIES                                            =
 echo =                                                                         =
@@ -377,18 +377,18 @@ goto completed
 
 :ManESCFG
 cls
-echo ===========================================================================
-echo =                                                                         =
-Echo =    1.) CREATE NEW ES_SYSTEMS.CFG WITHOUT ROM PATHS                      =
-echo =                                                                         =
-echo =    2.) CREATE NEW ES_SYSTEMS.CFG WITH DEFAULT ROM PATH C:\RetroCake\ROMS\SYSTEM   =
-echo =                                                                         =
-echo =    3.) EDIT ES_SYSTEMS.CFG                                              =
-echo =                                                                         =
-echo =                                                                         =
-echo =    4.) RETURN TO EMULATIONSTATION MANAGER                               =
-echo =                                                                         =
-echo ===========================================================================
+echo ===================================================================================
+echo =                                                                                 =
+Echo =    1.) CREATE NEW ES_SYSTEMS.CFG WITHOUT ROM PATHS                              =
+echo =                                                                                 =
+echo =    2.) CREATE NEW ES_SYSTEMS.CFG WITH DEFAULT ROM PATH C:\RetroCake\ROMS\SYSTEM =
+echo =                                                                                 =
+echo =    3.) EDIT ES_SYSTEMS.CFG                                                      =
+echo =                                                                                 =
+echo =                                                                                 =
+echo =    4.) RETURN TO EMULATIONSTATION MANAGER                                       =
+echo =                                                                                 =
+echo ===================================================================================
 CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
 IF ERRORLEVEL ==4 GOTO esmenu
 IF ERRORLEVEL ==3 GOTO editES
