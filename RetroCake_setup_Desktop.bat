@@ -1499,7 +1499,7 @@ if /I "%c%" EQU "N" goto menu
 cls
 echo =====================================================
 echo =                                                   =
-Echo = Deleting All RetroArch and EmulationStation Files =
+Echo = DELETING ALL RETROARCH AND EMULATIONSTATION FILES =
 echo =                                                   =
 echo =====================================================
 del "%USERPROFILE%\Desktop\EmulationStation.lnk
@@ -1553,7 +1553,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo =                      Setting up git...                        =
+echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-32-bit.7z.exe -OutFile "%USERPROFILE%\git.zip"
@@ -1574,7 +1574,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo =                      Setting up git...                        =
+echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-64-bit.7z.exe -OutFile "%USERPROFILE%\git.zip"
@@ -1608,13 +1608,13 @@ goto ThemeManager
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) Install/Update All EmulationStation Themes                       =
+Echo =    1.) INSTALL/UPDATE ALL EMULATIONSTATION THEMES                       =
 echo =                                                                         =
-echo =    2.) Install/Update Individual Themes                                 =
+echo =    2.) INSTALL/UPDATE INDIVIDUAL THEMES                                 =
 echo =                                                                         =
-echo =    3.) Theme Gallery/Previews                                           =
+echo =    3.) THEME GALLERY/PREVIEWS                                           =
 echo =                                                                         =
-echo =    4.) Exit Theme Manager                                               =
+echo =    4.) EXIT THEME MANAGER                                               =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
@@ -1975,14 +1975,14 @@ goto ThemeManager
 cls
 echo ===========================================================================
 echo =                               Page 1                                    =
-Echo =    1.) Carbon                                                           =
-echo =    2.) Carbon-Centered                                                  =
-echo =    3.) Carbon-NoMeta                                                    =
-echo =    4.) Simple                                                           =
-echo =    5.) Simple-Dark                                                      =
-echo =    6.) Clean-Look                                                       =
-echo =    7.) Color-Pi                                                         =
-echo =    8.) nbba                                                             =
+Echo =    1.) CARBON                                                           =
+echo =    2.) CARBON-CENTERED                                                  =
+echo =    3.) CARBON-NOMETA                                                    =
+echo =    4.) SIMPLE                                                           =
+echo =    5.) SIMPLE-DARK                                                      =
+echo =    6.) CLEAN-LOOK                                                       =
+echo =    7.) COLOR-PI                                                         =
+echo =    8.) NBBA                                                             =
 echo =                                                                         =
 echo =    9.) Page 2                                                           =
 echo =                                                                         =
@@ -2002,14 +2002,14 @@ IF ERRORLEVEL ==1 goto carbon
 cls
 echo ===========================================================================
 echo =                               Page 2                                    =
-Echo =    1.) simplified-static-canela                                         =
-echo =    2.) turtle-pi                                                        =
-echo =    3.) zoid                                                             =
-echo =    4.) pixel                                                            =
-echo =    5.) pixel-metadata                                                   =
-echo =    6.) pixel-tft                                                        =
-echo =    7.) luminous                                                         =
-echo =    8.) minilumi                                                         =
+Echo =    1.) SIMPLIFIED-STATIC-CANELA                                         =
+echo =    2.) TURTLE-PI                                                        =
+echo =    3.) ZOID                                                             =
+echo =    4.) PIXEL                                                            =
+echo =    5.) PIXEL-METADATA                                                   =
+echo =    6.) PIXEL-TFT                                                        =
+echo =    7.) LUMINOUS                                                         =
+echo =    8.) MINILUMI                                                         =
 echo =                                                                         =
 echo =    9.) Page 3                                                           =
 echo =                                                                         =
@@ -2029,14 +2029,14 @@ IF ERRORLEVEL ==1 goto simplified-static-canela
 cls
 echo ===========================================================================
 echo =                               Page 3                                    =
-Echo =    1.) workbench                                                        =
-echo =    2.) eudora                                                           =
-echo =    3.) eudora-bigshot                                                   =
-echo =    4.) eudora-concise                                                   =
-echo =    5.) eudora-updated                                                   =
-echo =    6.) retroplay-clean-canela                                           =
-echo =    7.) retroplay-clean-detail-canela                                    =
-echo =    8.) simpler-turtlepi                                                 =
+Echo =    1.) WORKBENCH                                                        =
+echo =    2.) EUDORA                                                           =
+echo =    3.) EUDORA-BIGSHOT                                                   =
+echo =    4.) EUDORA-CONCISE                                                   =
+echo =    5.) EUDORA-UPDATED                                                   =
+echo =    6.) RETROPLAY-CLEAN-CANELA                                           =
+echo =    7.) RETROPLAY-CLEAN-DETAIL-CANELA                                    =
+echo =    8.) SIMPLER-TURTLEPI                                                 =
 echo =                                                                         =
 echo =    9.) Page 4                                                           =
 echo =                                                                         =
@@ -2056,14 +2056,14 @@ IF ERRORLEVEL ==1 goto goto workbench
 cls
 echo ===========================================================================
 echo =                               Page 4                                    =
-Echo =    1.) simpler-turtlemini                                               =
-echo =    2.) metro                                                            =
-echo =    3.) material                                                         =
-echo =    4.) io                                                               =
-echo =    5.) metapixel                                                        =
-echo =    6.) spare                                                            =
-echo =    7.) space                                                            =
-echo =    8.) simplebigart                                                     =
+Echo =    1.) SIMPLER-TURTLEMINI                                               =
+echo =    2.) METRO                                                            =
+echo =    3.) MATERIAL                                                         =
+echo =    4.) IO                                                               =
+echo =    5.) METAPIXEL                                                        =
+echo =    6.) SPARE                                                            =
+echo =    7.) SPACE                                                            =
+echo =    8.) SIMPLEBIGART                                                     =
 echo =                                                                         =
 echo =    9.) Page 5                                                           =
 echo =                                                                         =
@@ -2083,14 +2083,14 @@ IF ERRORLEVEL ==1 goto goto simpler-turtlemini
 cls
 echo ===========================================================================
 echo =                               Page 5                                    =
-Echo =    1.) tv                                                               =
-echo =    2.) tronkyfran                                                       =
-echo =    3.) flat                                                             =
-echo =    4.) flat-dark                                                        =
-echo =    5.) minimal                                                          =
-echo =    6.) switch-light                                                     =
-echo =    7.) switch-dark                                                      =
-echo =    8.) futura-V                                                         =
+Echo =    1.) TV                                                               =
+echo =    2.) TRONKYFRAN                                                       =
+echo =    3.) FLAT                                                             =
+echo =    4.) FLAT-DARK                                                        =
+echo =    5.) MINIMAL                                                          =
+echo =    6.) SWITCH-LIGHT                                                     =
+echo =    7.) SWITCH-DARK                                                      =
+echo =    8.) FUTURA-V                                                         =
 echo =                                                                         =
 echo =    9.) Page 6                                                           =
 echo =                                                                         =
@@ -2110,14 +2110,14 @@ IF ERRORLEVEL ==1 goto goto tv
 cls
 echo ===========================================================================
 echo =                               Page 6                                    =
-Echo =    1.) futura-dark-V                                                    =
-echo =    2.) fundamental                                                      =
-echo =    3.) nes-mini                                                         =
-echo =    4.) famicom-mini                                                     =
-echo =    5.) snes-mini                                                        =
-echo =    6.) crt                                                              =
-echo =    7.) crt-centered                                                     =
-echo =    8.) art-book                                                         =
+Echo =    1.) FUTURA-DARK-V                                                    =
+echo =    2.) FUNDAMENTAL                                                      =
+echo =    3.) NES-MINI                                                         =
+echo =    4.) FAMICOM-MINI                                                     =
+echo =    5.) SNES-MINI                                                        =
+echo =    6.) CRT                                                              =
+echo =    7.) CRT-CENTERED                                                     =
+echo =    8.) ART-BOOK                                                         =
 echo =                                                                         =
 echo =    9.) Page 7                                                           =
 echo =                                                                         =
@@ -2137,14 +2137,14 @@ IF ERRORLEVEL ==1 goto goto futura-dark-V
 cls
 echo ===========================================================================
 echo =                               Page 7                                    =
-Echo =    1.) art-book-4-3                                                     =
-echo =    2.) art-book-pocket                                                  =
-echo =    3.) tft                                                              =
-echo =    4.) ComicBook                                                        =
-echo =    5.) ComicBook_4-3                                                    =
-echo =    6.) ComicBook_SE-Wheelart                                            =
-echo =    7.) ComicBook_4-3_SE-Wheelart                                        =
-echo =    8.) cygnus                                                           =
+Echo =    1.) ART-BOOK-4-3                                                     =
+echo =    2.) ART-BOOK-POCKET                                                  =
+echo =    3.) TFT                                                              =
+echo =    4.) COMICBOOK                                                        =
+echo =    5.) COMICBOOK_4-3                                                    =
+echo =    6.) COMICBOOK_SE-WHEELART                                            =
+echo =    7.) COMICBOOK_4-3_SE-WHEELART                                        =
+echo =    8.) CYGNUS                                                           =
 echo =                                                                         =
 echo =    9.) Page 8                                                           =
 echo =                                                                         =
@@ -2164,14 +2164,14 @@ IF ERRORLEVEL ==1 goto goto art-book-4-3
 cls
 echo ===========================================================================
 echo =                               Page 8                                    =
-Echo =    1.) steampunk                                                        =
-echo =    2.) hurstyblue                                                       =
-echo =    3.) maximuspie                                                       =
-echo =    4.) showcase                                                         =
-echo =    5.) kidz                                                             =
-echo =    6.) Retrorama                                                        =
-echo =    7.) SpaceOddity                                                      =
-echo =    8.) gbz35                                                            =
+Echo =    1.) STEAMPUNK                                                        =
+echo =    2.) HURSTYBLUE                                                       =
+echo =    3.) MAXIMUSPIE                                                       =
+echo =    4.) SHOWCASE                                                         =
+echo =    5.) KIDZ                                                             =
+echo =    6.) RETRORAMA                                                        =
+echo =    7.) SPACEODDITY                                                      =
+echo =    8.) GBZ35                                                            =
 echo =                                                                         =
 echo =    9.) Page 9                                                           =
 echo =                                                                         =
@@ -2191,14 +2191,14 @@ IF ERRORLEVEL ==1 goto goto steampunk
 cls
 echo ===========================================================================
 echo =                               Page 9                                    =
-Echo =    1.) gbz35-dark                                                       =
-echo =    2.) marioblue                                                        =
-echo =    3.) bigwood                                                          =
-echo =    4.) Royal_Primicia                                                   =
-echo =    5.) magazinemadness                                                  =
-echo =    6.) stirling                                                         =
-echo =    7.) playstation                                                      =
-echo =    8.) superdisplay                                                     =
+Echo =    1.) GBZ35-DARK                                                       =
+echo =    2.) MARIOBLUE                                                        =
+echo =    3.) BIGWOOD                                                          =
+echo =    4.) ROYAL_PRIMICIA                                                   =
+echo =    5.) MAGAZINEMADNESS                                                  =
+echo =    6.) STIRLING                                                         =
+echo =    7.) PLAYSTATION                                                      =
+echo =    8.) SUPERDISPLAY                                                     =
 echo =                                                                         =
 echo =    9.) Page 10                                                          =
 echo =                                                                         =
@@ -2218,13 +2218,13 @@ IF ERRORLEVEL ==1 goto goto gbz35-dark
 cls
 echo ===========================================================================
 echo =                              Page 10                                    =
-Echo =    1.) scv720                                                           =
-echo =    2.) merryxmas                                                        =
-echo =    3.) retroroid                                                        =
-echo =    4.) greenilicious                                                    =
-echo =    5.) boxalloyblue                                                     =
-echo =    6.) boxalloyred                                                      =
-echo =    7.) synthwave                                                        =
+Echo =    1.) SCV720                                                           =
+echo =    2.) MERRYXMAS                                                        =
+echo =    3.) RETROROID                                                        =
+echo =    4.) GREENILICIOUS                                                    =
+echo =    5.) BOXALLOYBLUE                                                     =
+echo =    6.) BOXALLOYRED                                                      =
+echo =    7.) SYNTHWAVE                                                        =
 echo =                                                                         =
 echo =    8.) Return to ThemeManager                                           =
 echo =                                                                         =
@@ -2607,7 +2607,7 @@ echo(
 echo(
 echo ====================================================
 echo =                                                  =
-echo = Downloading the latest build of EmulationStation =
+echo = DOWNLOADING THE LATEST BUILD OF EMULATIONSTATION =
 echo =                                                  =
 echo ====================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%USERPROFILE%\ES.zip""
@@ -2979,7 +2979,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo = Downloading RetroArch and All Cores. This will take some time =
+echo = DOWNLOADING RETROARCH AND ALL CORES. THIS WILL TAKE SOME TIME =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x64.zip""
@@ -3121,7 +3121,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo = Downloading RetroArch and All Cores. This will take some time =
+echo = DOWNLOADING RETROARCH AND ALL CORES. THIS WILL TAKE SOME TIME =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x86.zip""
@@ -4979,7 +4979,7 @@ echo(
 echo(
 echo ====================================================
 echo =                                                  =
-echo = Downloading the latest build of EmulationStation =
+echo = DOWNLOADING THE LATEST BUILD OF EMULATIONSTATION =
 echo =                                                  =
 echo ====================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%USERPROFILE%\ES.zip""
@@ -5360,7 +5360,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo = Downloading RetroArch and All Cores. This will take some time =
+echo = DOWNLOADING RETROARCH AND ALL CORES. THIS WILL TAKE SOME TIME =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x64.zip""
@@ -5502,7 +5502,7 @@ echo(
 echo(
 echo =================================================================
 echo =                                                               =
-echo = Downloading RetroArch and All Cores. This will take some time =
+echo = DOWNLOADING RETROARCH AND ALL CORES. THIS WILL TAKE SOME TIME =
 echo =                                                               =
 echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -OutFile "%USERPROFILE%\RetroArch_x86.zip""
