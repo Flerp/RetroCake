@@ -180,7 +180,7 @@ IF ERRORLEVEL ==1 GOTO mkdirroms
 cls
 echo ====================================================
 echo =                                                  =
-echo =             Launching Emulationstation           =
+echo =             LAUNCHING EMULATIONSTATION           =
 echo =                                                  =
 echo ====================================================
 ping 127.0.0.1 -n 3 >nul
@@ -231,7 +231,7 @@ echo(
 echo(
 echo ====================================================
 echo =                                                  =
-echo = Downloading the latest build of EmulationStation =
+echo = DOWNLOADING THE LATEST BUILD OF EMULATIONSTATION =
 echo =                                                  =
 echo ====================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%USERPROFILE%\ES.zip""
@@ -363,17 +363,17 @@ goto completed
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) Create new es_systems.cfg without ROM paths                      =
+Echo =    1.) CREATE NEW ES_SYSTEMS.CFG WITHOUT ROM PATHS                      =
 echo =                                                                         =
-echo =    2.) Create new es_systems.cfg with default ROM path C:\ROMS\system   =
+echo =    2.) CREATE NEW ES_SYSTEMS.CFG WITH DEFAULT ROM PATH C:\ROMS\SYSTEM   =
 echo =                                                                         =
-echo =    3.) Edit es_systems.cfg                                              =
+echo =    3.) EDIT ES_SYSTEMS.CFG                                              =
 echo =                                                                         =
 echo =                                                                         =
 echo =    4.) RETURN TO EMULATIONSTATION MANAGER                               =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
 IF ERRORLEVEL ==4 GOTO esmenu
 IF ERRORLEVEL ==3 GOTO editES
 IF ERRORLEVEL ==2 GOTO defaultES
