@@ -125,13 +125,25 @@ Changes made are as follows:
 Self Explanatory.
 This updates all RetroArch Cores (108 total)
 
-# System Cleanup
+# Manage Additional Emulators.
 
-This options deletes ALL RetroCake Files.
-Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
+This option installs emulators for systems that RetroArch cannot emulate.
+Current emulators are:
+	AppleWin
+	Hatari
+	BeebEm
+	XRoar
+	Daphne
+	jzIntv
+	PCSX2
 
 # Manage ROM Directories.
 
 This creates the default ROM directories in C:\RetroCake\ROMS
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
 WIP - Will be adding a custom ROM directory structure in the next few updates.
+
+# System Cleanup
+
+This options deletes ALL RetroCake Files.
+Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
