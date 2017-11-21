@@ -129,6 +129,7 @@ This updates all RetroArch Cores (108 total)
 
 This option installs emulators for systems that RetroArch cannot emulate.
 Current emulators are:
+
 	AppleWin
 	Hatari
 	BeebEm
