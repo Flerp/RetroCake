@@ -26,7 +26,51 @@ This option is great for people who do not have gigantic (1TB+) collections and 
 3. Custom Installer
 
 This option is to setup ROM directories like option 2, but in a place of your choosing.
-This feature is currently not fully implemented.
+You will be prompted for the main folder you'd like to use.
+
+	Syntax: E:\ROMS, D:\Games, F:\Retro, etc.
+	No trailing \
+	All system subdirectories will be added to the folder specified.
+	EX:
+	If E:\ROMS is specified the following folders will be created
+	E:\ROMS\amiga
+	E:\ROMS\atari2600
+	E:\ROMS\atari5200
+	E:\ROMS\atari7800
+	E:\ROMS\atari800
+	E:\ROMS\atarijaguar
+	E:\ROMS\atarilynx
+	E:\ROMS\coleco
+	E:\ROMS\fba
+	E:\ROMS\fds
+	E:\ROMS\gamegear
+	E:\ROMS\gb
+	E:\ROMS\gba
+	E:\ROMS\gbc
+	E:\ROMS\gc
+	E:\ROMS\intellivision
+	E:\ROMS\mame-libretro
+	E:\ROMS\mastersystem
+	E:\ROMS\megadrive
+	E:\ROMS\msx
+	E:\ROMS\n64
+	E:\ROMS\neogeo
+	E:\ROMS\nes
+	E:\ROMS\nds
+	E:\ROMS\ngp
+	E:\ROMS\ngpc
+	E:\ROMS\pcengine
+	E:\ROMS\psx
+	E:\ROMS\ps2
+	E:\ROMS\sega32x
+	E:\ROMS\segacd
+	E:\ROMS\sg-1000
+	E:\ROMS\snes
+	E:\ROMS\vectrex
+	E:\ROMS\zxspectrum
+
+And a config file for EmulationStation will be generated to make adding ROMS drag and drop
+
 
 # Manage EmulationStation
 
