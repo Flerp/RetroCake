@@ -120,7 +120,7 @@ Changes made are as follows:
 	
 	b. You can bring up the RetroArch menu with Start and Select
 	
-4 Update REtroArch Cores to the latest Nightly Build.
+4 Update RetroArch Cores to the latest Nightly Build.
 
 Self Explanatory.
 This updates all RetroArch Cores (108 total)
@@ -141,8 +141,11 @@ Current emulators are:
 # Manage ROM Directories.
 
 This creates the default ROM directories in C:\RetroCake\ROMS
+
+You can also create custom ROM directories E:\ROMS etc
+
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
-WIP - Will be adding a custom ROM directory structure in the next few updates.
+
 
 # System Cleanup
 
