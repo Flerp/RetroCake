@@ -98,7 +98,7 @@ echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
 IF ERRORLEVEL ==7 exit
-IF ERRORLEVEL ==6 GOTO CleanAll
+IF ERRORLEVEL ==6 GOTO SysClean
 IF ERRORLEVEL ==5 GOTO RomMenu
 IF ERRORLEVEL ==4 GOTO EmuFolderCheck
 IF ERRORLEVEL ==3 GOTO RAMenu
@@ -202,7 +202,7 @@ echo =    2.) INSTALL ATARI ST EMULATOR (Hatari)                               =
 echo =                                                                         =
 echo =    3.) INSTALL BBC MICRO EMULATOR (BeebEm)                              =
 echo =                                                                         =
-echo =    4.) INSTALL COC\DRAGON32 EMULATOR (XRoar)                            =
+echo =    4.) INSTALL COCO\DRAGON32 EMULATOR (XRoar)                           =
 echo =                                                                         =
 echo =    5.) INSTALL LASERDISK GAME EMULATOR (Daphne)                         =
 echo =                                                                         =
@@ -2485,10 +2485,37 @@ goto completed
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 
+:SysClean
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) REMOVE ALL RETROCAKE FILES                                       =
+echo =                                                                         =
+echo =    2.) REMOVE EMULATIONSTATION AND PREFERENCES                          =
+echo =                                                                         =
+echo =    3.) REMOVE RETROARCH AND PREFERENCES                                 =
+echo =                                                                         =
+echo =    4.) REMOVE ADDITIONAL EMULATORS AND PREFERENCES                      =
+echo =                                                                         =
+echo =    5.) REMOVE RETROCAKE TOOLS (GIT AND 7ZA)                             =
+echo =                                                                         =
+echo =                                                                         =
+echo =    6.) EXIT                                                             =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
+IF ERRORLEVEL ==6 GOTO menu
+IF ERRORLEVEL ==5 GOTO CleanTools
+IF ERRORLEVEL ==4 GOTO CleanEmu
+IF ERRORLEVEL ==3 GOTO CleanRA
+IF ERRORLEVEL ==2 GOTO CleanES
+IF ERRORLEVEL ==1 GOTO CleanAll
+
+
 :CleanAll
 cls
 echo(
-set /P c=Are you sure you want to delete ALL Emulationstation and RetroArch Files (Includes Settings)[Y/N]?
+set /P c=Are you sure you want to delete ALL RetroCake Files (Includes Settings)[Y/N]?
 if /I "%c%" EQU "Y" goto delall
 if /I "%c%" EQU "N" goto menu
 
@@ -2499,13 +2526,83 @@ echo =                                                   =
 Echo = DELETING ALL RETROARCH AND EMULATIONSTATION FILES =
 echo =                                                   =
 echo =====================================================
-del "%USERPROFILE%\Desktop\EmulationStation.lnk
-del "%USERPROFILE%\Desktop\RetroArch.lnk
+del "%USERPROFILE%\Desktop\EmulationStation.lnk"
+del "%USERPROFILE%\Desktop\RetroArch.lnk"
 rmdir "C:\RetroCake" /s /q
-rmdir "C:\RetroCake\Tools\7za" /s /q
-rmdir "C:\RetroCake\Tools\git" /s /q
 rmdir "%USERPROFILE%\.emulationstation" /s /q
 goto CleanAllExit
+
+:CleanES
+cls
+echo(
+set /P c=Are you sure you want to delete ALL RetroCake Files (Includes Settings)[Y/N]?
+if /I "%c%" EQU "Y" goto delES
+if /I "%c%" EQU "N" goto menu
+
+:delES
+cls
+echo =====================================================
+echo =                                                   =
+Echo =          DELETING EMULATIONSTATION FILES          =
+echo =                                                   =
+echo =====================================================
+del "%USERPROFILE%\Desktop\EmulationStation.lnk"
+rmdir C:\RetroCake\EmulationStation /s /q
+rmdir "%USERPROFILE%\.emulationstation" /s /q
+goto CleanAllExit
+
+:CleanRA
+cls
+echo(
+set /P c=Are you sure you want to delete ALL RetroArch Files (Includes Settings)[Y/N]?
+if /I "%c%" EQU "Y" goto delRA
+if /I "%c%" EQU "N" goto menu
+
+:delRA
+cls
+echo =====================================================
+echo =                                                   =
+Echo =             DELETING RETROARCH FILES              =
+echo =                                                   =
+echo =====================================================
+del "%USERPROFILE%\Desktop\RetroArch.lnk"
+rmdir C:\RetroCake\RetroArch /s /q
+goto CleanAllExit
+
+:CleanEmu
+cls
+echo(
+set /P c=Are you sure you want to delete ALL Additional Emulators (Includes Settings)[Y/N]?
+if /I "%c%" EQU "Y" goto delEmu
+if /I "%c%" EQU "N" goto menu
+
+:delEmu
+cls
+echo =====================================================
+echo =                                                   =
+Echo =        DELETING ADDITIONAL EMULATORS FILES        =
+echo =                                                   =
+echo =====================================================
+rmdir C:\RetroCake\Emulators /s /q
+goto CleanAllExit
+
+:CleanTools
+cls
+echo(
+set /P c=Are you sure you want to delete ALL RetroCake tools (Includes Settings)[Y/N]?
+if /I "%c%" EQU "Y" goto delTools
+if /I "%c%" EQU "N" goto menu
+
+:delTools
+cls
+echo =====================================================
+echo =                                                   =
+Echo =             DELETING RETROCAKE TOOLS              =
+echo =                                                   =
+echo =====================================================
+rmdir C:\RetroCake\Tools /s /q
+goto CleanAllExit
+
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11508,6 +11605,18 @@ goto completed
 
 :AppleWin
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                     DOWNLOADING APPLEWIN                      =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri https://github.com/AppleWin/AppleWin/releases/download/v1.26.3.4/AppleWin1.26.3.4.zip -OutFile "C:\RetroCake\Temp\AppleWin.zip""
 mkdir C:\RetroCake\Emulators\AppleWin
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\AppleWin.zip" -o"C:\RetroCake\Emulators\AppleWin" -aoa
@@ -11531,6 +11640,18 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :hatari32
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      DOWNLOADING HATARI                       =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows.zip -OutFile "C:\RetroCake\Temp\Hatari32.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\Hatari32.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11544,6 +11665,18 @@ goto completed
 	
 :hatari64
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      DOWNLOADING HATARI                       =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows64.zip -OutFile "C:\RetroCake\Temp\Hatari64.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\Hatari64.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11561,6 +11694,18 @@ goto completed
 
 :BeebEm
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                       DOWNLOADING BEEBEM                      =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://www.mkw.me.uk/beebem/BeebEm414.zip -OutFile "C:\RetroCake\Temp\BeebEm.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\BeebEm.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11583,6 +11728,18 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :xroar32
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                        DOWNLOADING XROAR                      =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w32.zip -OutFile "C:\RetroCake\Temp\XRoar32.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\XRoar32.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11598,6 +11755,18 @@ goto completed
 
 :xroar64
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                        DOWNLOADING XROAR                      =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w64.zip -OutFile "C:\RetroCake\Temp\XRoar64.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\XRoar64.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11615,6 +11784,18 @@ goto completed
 
 :Daphne
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      DOWNLOADING DAPHNE                       =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://www.daphne-emu.com/download/daphne-1.0v-win32.zip -OutFile "C:\RetroCake\Temp\Daphne.zip""
 mkdir C:\RetroCake\Emulators\Daphne
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\Daphne.zip" -o"C:\RetroCake\Emulators\Daphne" -aoa
@@ -11630,6 +11811,18 @@ goto completed
 
 :jzIntv
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                       DOWNLOADING JZINTV                      =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://spatula-city.org/~im14u2c/intv/dl/jzintv-20171120-win32.zip -OutFile "C:\RetroCake\Temp\jzintv.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\jzintv.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
@@ -11647,6 +11840,18 @@ goto completed
 
 :PCSX2
 cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                       DOWNLOADING PCSX2                       =
+echo =                                                               =
+echo =================================================================
 powershell -command "Invoke-WebRequest -Uri http://www.emulator-zone.com/download.php/emulators/ps2/pcsx2/pcsx2-1.4.0-binaries.7z -OutFile "C:\RetroCake\Temp\PCSX2.zip""
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\PCSX2.zip" -o"C:\RetroCake\Emulators" -aoa
 cls
