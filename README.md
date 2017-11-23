@@ -1,11 +1,3 @@
-# RetroCake
-
-I Initially created the script because I grew tired of the sub par graphics drivers and screen tearing issues on the debian based distros I was using to create a more powerful emulator box.
-
-# What can this do?
-
-So far this script hass the following capabilities:
-
 # Automated Installers
 
 There are 3 options for automated installation.
@@ -220,5 +212,5 @@ This is to make it easier to access the shares on the computer.
 
 # System Cleanup
 
-This options deletes ALL RetroCake Files.\
+This option is for cleaning up parts of RetroCake or removing REtroCake entirely.\
 Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
