@@ -146,6 +146,8 @@ echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
 echo =                                                                         =
+echo ===========================================================================
+echo =                                                                         =
 echo =    2.) MANAGE EMULATIONSTATION                                          =
 echo =                                                                         =
 echo =    3.) MANAGE RETROARCH                                                 =
@@ -154,15 +156,19 @@ echo =    4.) MANAGE ADDITIONAL EMULATORS                                      =
 echo =                                                                         =
 echo =    5.) MANAGE ROM DIRECTORIES                                           =
 echo =                                                                         =
-echo =    6.) SYSTEM CLEANUP                                                   =
+echo =    6.) MANAGE DEDICATED EMUBOX SETTINGS                                 =
 echo =                                                                         =
-echo =                                                                         =
-echo =    7.) EXIT                                                             =
+echo =    7.) SYSTEM CLEANUP                                                   =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
-IF ERRORLEVEL ==7 exit
-IF ERRORLEVEL ==6 GOTO SysClean
+echo =                                                                         =
+echo =    8.) EXIT                                                             =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:12345678 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8)"%1
+IF ERRORLEVEL ==8 exit
+IF ERRORLEVEL ==7 GOTO SysClean
+IF ERRORLEVEL ==6 GOTO DediMenu
 IF ERRORLEVEL ==5 GOTO RomMenu
 IF ERRORLEVEL ==4 GOTO EmuFolderCheck
 IF ERRORLEVEL ==3 GOTO RAMenu
@@ -334,16 +340,221 @@ goto AppleWin
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 
-:launchES
+::Dedicated EmuBox Options
+:DediMenu
 cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) SETUP ALL DEDICATED EMUBOX SETTINGS                              =
+echo =    (Auto Start, Auto Login, Folder Shares, System Name to RetroCake)    =
+echo =                                                                         =
+Echo =    2.) RETROCAKE AUTO START OPTIONS                                     =
+echo =                                                                         =
+echo =    3.) SETUP AUTOLOGIN                                                  =
+echo =                                                                         =
+echo =    4.) SETUP RETROCAKE FOLDER SHARES                                    =
+echo =                                                                         =
+echo =    5.) SETUP SYSTEM NAME                                                =
+echo =                                                                         =
+echo =                                                                         =
+echo =    6.) RETURN TO MAIN MENU                                              =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6)"%1
+IF ERRORLEVEL ==6 GOTO menu
+IF ERRORLEVEL ==5 GOTO DediHostnameMenu
+IF ERRORLEVEL ==4 GOTO DediShareMenu
+IF ERRORLEVEL ==3 GOTO AutoLogin
+IF ERRORLEVEL ==2 GOTO AutoStartMenu
+IF ERRORLEVEL ==1 GOTO FullDedi
+
+:DediAsk
+cls
+echo(
+set /P c=Is this system a dedicated Emulator Box [Y/N]?
+if /I "%c%" EQU "Y" goto FullDedi
+if /I "%c%" EQU "N" goto completed
+
+:FullDedi
+cls
+echo This file is temporary, you should never see it > C:\RetroCake\Temp\FullDedi.txt
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto DediAutoStartSetup
+goto erroorr
+::=================================================================================================================================================================================================================================================================================================================
+
+:AutoStartMenu
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) SETUP AUTOMATIC RETROCAKE LAUNCH ON LOGIN                        =
+echo =                                                                         =
+Echo =    2.) REMOVE AUTOMATIC RETROCAKE LAUNCH ON LOGIN                       =
+echo =                                                                         =
+echo =                                                                         =
+echo =    3.) RETURN TO DEDICATED EMUBOX MENU                                  =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+IF ERRORLEVEL ==3 GOTO DediMenu
+IF ERRORLEVEL ==2 GOTO DediAutoStartRemove
+IF ERRORLEVEL ==1 GOTO DediAutoStartSetup
+
+:DediAutoStartSetup
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
 echo ====================================================
 echo =                                                  =
-echo =             LAUNCHING EMULATIONSTATION           =
+echo =      ADDING RETROCAKE TO AUTOSTART ON LOGIN      =
 echo =                                                  =
 echo ====================================================
-ping 127.0.0.1 -n 3 >nul
-"C:\RetroCake\EmulationStation\emulationstation.exe"
-goto menu
+cd "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+echo taskkill /im explorer.exe /f > "C:\RetroCake\Tools\startES.bat"
+echo "C:\RestroCake\EmulationStation\emulationstation.exe" >> "C:\RetroCake\Tools\startES.bat"
+
+del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk"
+echo Set oWS = WScript.CreateObject("WScript.Shell") > "%USERPROFILE%\CreateShortcut2.vbs"
+echo sLinkFile = "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk" >> "%USERPROFILE%\CreateShortcut2.vbs"
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "%USERPROFILE%\CreateShortcut2.vbs"
+echo oLink.TargetPath = "C:\RetroCake\Tools\startES.bat" >> "%USERPROFILE%\CreateShortcut2.vbs"
+echo oLink.Save >> "%USERPROFILE%\CreateShortcut2.vbs"
+cscript "%USERPROFILE%\CreateShortcut2.vbs"
+del "%USERPROFILE%\CreateShortcut2.vbs"
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto AutoLogin
+goto completed
+
+:DediAutoStartRemove
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo ====================================================
+echo =                                                  =
+echo =      REMOVING RETROCAKE AUTOSTART ON LOGIN       =
+echo =                                                  =
+echo ====================================================
+del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk" /s /q
+del C:\RetroCake\Tools\startES.bat /a /q
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:AutoLogin
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo ==================================================================
+echo =                                                                =
+echo =                 PLEASE UNCHECK THE BOX LABELLED                =
+echo = Users must enter a user name and password to use this computer =
+echo =                      THEN PRESS OK OR APPLY                    =
+echo =                                                                =
+echo =                  PRESS ANY KEY WHEN FINISHED                   =
+echo =                                                                =
+echo ==================================================================
+start netplwiz
+pause > nul
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto DediShare
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:DediShareMenu
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) SETUP RETROCAKE SHARES WITH DEFAULT ROM DIRECTORY                =
+echo =                                                                         =
+Echo =    2.) SETUP RETROCAKE SHARES WITH CUSTOM ROM DIRECTORY                 =
+echo =                                                                         =
+Echo =    3.) REMOVE RETROCAKE SHARES                                          =
+echo =                                                                         =
+echo =                                                                         =
+echo =    4.) RETURN TO DEDICATED EMUBOX MENU                                  =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+IF ERRORLEVEL ==4 GOTO DediMenu
+IF ERRORLEVEL ==3 GOTO DediRemoveShares
+IF ERRORLEVEL ==2 GOTO DediShare
+IF ERRORLEVEL ==1 GOTO DediShare
+
+:DediShare
+cls
+net share BIOS=C:\RetroCake\RetroArch\system /grant:everyone,full
+net share Emulationstation="%USERPROFILE%\.emulationstation" /grant:everyone,full
+net share Emulators=C:\RetroCake\RetroArch\Emulators /grant:everyone,full
+IF EXIST C:\RetroCake\ROMS\ goto RomShareDef
+goto RomShareCus
+
+:RomShareDef
+net share ROMS=C:\RetroCake\ROMS /grant:everyone,full
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto DediHostnameDef
+goto completed
+
+:RomShareCus
+echo(
+set /p dedicusrom="Enter Path for ROM Folder (default C:\RetroCake\ROMS): "
+net share ROMS=%dedicusrom% /grant:everyone,full
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto DediHostnameDef
+goto completed
+
+:DediRemoveShares
+cls
+net share BIOS /delete
+net share EmulationStation /delete
+net share ROMS /delete
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:DediHostnameMenu
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) CHANGE PC NAME TO RetroCake                                      =
+echo =                                                                         =
+Echo =    2.) CREATE CUSTOM PC NAME                                            =
+echo =                                                                         =
+echo =                                                                         =
+echo =    3.) RETURN TO DEDICATED EMUBOX MENU                                  =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+IF ERRORLEVEL ==3 GOTO DediMenu
+IF ERRORLEVEL ==2 GOTO DediAutoStartRemove
+IF ERRORLEVEL ==1 GOTO DediAutoStartSetup
+
+:DediHostnameDef
+cls
+WMIC computersystem where caption='%COMPUTERNAME%' rename RetroCake
+IF EXIST C:\RetroCake\Temp\FullDedi.txt goto FullDediClean
+goto completed
+
+:DediHostnameCus
+cls
+set /p cushostname="Enter custom PC name: "
+WMIC computersystem where caption='%COMPUTERNAME%' rename %cushostname%
+goto completed
+
+:FullDediClean
+cls
+del C:\RetroCake\Temp\FullDedi.txt /s /q
+goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11998,7 +12209,7 @@ goto completed
 
 :tmpClean
 del C:\RetroCake\Emulators\tmp.txt /s /q
-goto completed
+goto DediAsk
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -12021,6 +12232,17 @@ goto completed
 ::=================================================================================================================================================================================================================================================================================================================
 
 ::Informational Echoes
+:erroorr
+cls
+echo =============================================
+echo =                                           =
+echo =          SOMETHING WENT WRONG D:          =
+echo =                                           =
+echo =============================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
 :completed
 cls
 echo =============================================

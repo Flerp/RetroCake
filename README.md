@@ -146,6 +146,63 @@ You can also create custom ROM directories E:\ROMS etc
 
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
 
+# Manage dedicated emubox settings (Not fully tested yet)
+
+1. Setup all dedicated emubox settings
+
+This option will do a full setup and turn your RetroCake Installation into a DEdicate Emu Box.
+This option inclused installation of all of the options below.
+The only user requires input is during the Auto Login setup.
+This is due to how Windows handles Auto login.
+
+2. RetroCake auto start options  
+
+From here you can select if you'd like to Automatically start RetroCake (EmulationStation) upon login.
+This goes hand in hand with Auto Login.
+You can also remove the Auto Start settings if you no longer with to have Auto Start.
+
+3. Setup Auto Login
+Self Explanatory.
+Opens the netplwiz menu.
+Guides you through setting up Auto Login.
+
+4. Setup RetroCake folder shares 
+
+	a. Setup RetroCake shares with default rom directory 
+
+	Sets up the following shares
+
+	ROMS
+	BIOS
+	EMULATORS
+	EMULATIONSTATION
+	
+	The ROMS folder uses the default C:\RetroCake\ROMS
+
+
+	b. Setup RetroCake shares with custom rom directory
+
+	Sets up the following shares
+
+	ROMS
+	BIOS
+	EMULATORS
+	EMULATIONSTATION
+	
+	You will be asked to enter the ROMS directory.
+	This option is if you installed using a custom ROMS directory.
+
+
+	c. Remove RetroCake shares
+
+	Self Explanatory.
+	Removes all shares created by this script.
+
+5. Setup system name
+
+From here you can set your PC's hostname to the default RetroCake, or to any custom hostname you'd like.
+This is to make it easier to access the shares on the computer.
+
 
 # System Cleanup
 
