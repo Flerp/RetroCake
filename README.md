@@ -33,40 +33,60 @@ You will be prompted for the main folder you'd like to use.
 	All system subdirectories will be added to the folder specified.
 	EX:
 	If E:\ROMS is specified the following folders will be created
+	E:\ROMS\3do
+	E:\ROMS\ags
 	E:\ROMS\amiga
+	E:\ROMS\amstradcpc
+	E:\ROMS\apple2
 	E:\ROMS\atari2600
 	E:\ROMS\atari5200
 	E:\ROMS\atari7800
 	E:\ROMS\atari800
 	E:\ROMS\atarijaguar
 	E:\ROMS\atarilynx
-	E:\ROMS\coleco
+	E:\ROMS\atarist
+	E:\ROMS\bbcmicro
+	E:\ROMS\c64
+	E:\ROMS\coco
+	E:\ROMS\colecovision
+	E:\ROMS\daphne
+	E:\ROMS\dragon32
+	E:\ROMS\dreamcast
 	E:\ROMS\fba
 	E:\ROMS\fds
+	E:\ROMS\gameandwatch
 	E:\ROMS\gamegear
 	E:\ROMS\gb
 	E:\ROMS\gba
 	E:\ROMS\gbc
 	E:\ROMS\gc
 	E:\ROMS\intellivision
-	E:\ROMS\mame-libretro
+	E:\ROMS\mame
 	E:\ROMS\mastersystem
+	E:\ROMS\mega32x
+	E:\ROMS\mega-cd
 	E:\ROMS\megadrive
 	E:\ROMS\msx
+	E:\ROMS\mvs
 	E:\ROMS\n64
+	E:\ROMS\nds
 	E:\ROMS\neogeo
 	E:\ROMS\nes
-	E:\ROMS\nds
 	E:\ROMS\ngp
 	E:\ROMS\ngpc
 	E:\ROMS\pcengine
-	E:\ROMS\psx
 	E:\ROMS\ps2
+	E:\ROMS\psp
+	E:\ROMS\psx
+	E:\ROMS\saturn
 	E:\ROMS\sega32x
 	E:\ROMS\segacd
+	E:\ROMS\sfc
 	E:\ROMS\sg-1000
 	E:\ROMS\snes
 	E:\ROMS\vectrex
+	E:\ROMS\virtualboy
+	E:\ROMS\wii
 	E:\ROMS\zxspectrum
 
 And a config file for EmulationStation will be generated to make adding ROMS drag and drop
@@ -168,16 +188,18 @@ Guides you through setting up Auto Login.
 
 4. Setup RetroCake folder shares 
 
-	a. Setup RetroCake shares with default rom directory 
-	Sets up the following shares
+a. Setup RetroCake shares with default rom directory 
+Sets up the following shares
+
 	ROMS
 	BIOS
 	EMULATORS
 	EMULATIONSTATION
 	The ROMS folder uses the default C:\RetroCake\ROMS
 
-	b. Setup RetroCake shares with custom rom directory
-	Sets up the following shares
+b. Setup RetroCake shares with custom rom directory
+Sets up the following shares
+
 	ROMS
 	BIOS
 	EMULATORS
@@ -185,9 +207,9 @@ Guides you through setting up Auto Login.
 	You will be asked to enter the ROMS directory.
 	This option is if you installed using a custom ROMS directory.
 
-	c. Remove RetroCake shares
-	Self Explanatory.
-	Removes all shares created by this script.
+c. Remove RetroCake shares
+Self Explanatory.
+Removes all shares created by this script.
 
 5. Setup system name
 
