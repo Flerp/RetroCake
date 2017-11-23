@@ -16,17 +16,6 @@ set dayte=%date:~4,10%
 set thyme=%time:~0,8%
 set gooddayte=%dayte:/=%
 set goodthyme=%thyme::=%
-goto check7z
-
-:check7z
-IF EXIST C:\RetroCake\Tools\7za\7za.exe goto CheckRetroCake
-goto install7z
-
-:install7z
-mkdir C:\RetroCake\Tools\7za
-powershell -command (New-Object Net.WebClient).DownloadFile('http://www.7-zip.org/a/7za920.zip','C:\RetroCake\Tools\7za\7za.zip');(new-object -com shell.application).namespace('C:\RetroCake\Tools\7za').CopyHere((new-object -com shell.application).namespace('C:\RetroCake\Tools\7za\7za.zip').Items(),16)
-ping 127.0.0.1 -n 2 >nul
-del C:\RetroCake\Tools\7za\7za.zip
 goto CheckRetroCake
 
 :CheckRetroCake
@@ -41,15 +30,94 @@ mkdir C:\RetroCake\Temp
 mkdir C:\RetroCake\Tools
 icacls "C:\RetroCake" /grant everyone:(OI)(CI)F /T
 echo pls no delete > C:\RetroCake\RetroCake
-goto menu
+goto check7z
 
 :permcheck
-IF EXIST C:\RetroCake\RetroCake goto menu
+IF EXIST C:\RetroCake\RetroCake goto check7z
 goto permss
 
 :permss
 icacls "C:\RetroCake" /grant everyone:(OI)(CI)F /T
 echo pls no delete > C:\RetroCake\RetroCake
+goto check7z
+
+:check7z
+IF EXIST C:\RetroCake\Tools\7za\7za.exe goto SGitCheck
+goto install7z
+
+:install7z
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      SETTING UP 7ZA...                        =
+echo =                                                               =
+echo =================================================================
+mkdir C:\RetroCake\Tools\7za
+powershell -command (New-Object Net.WebClient).DownloadFile('http://www.7-zip.org/a/7za920.zip','C:\RetroCake\Tools\7za\7za.zip');(new-object -com shell.application).namespace('C:\RetroCake\Tools\7za').CopyHere((new-object -com shell.application).namespace('C:\RetroCake\Tools\7za\7za.zip').Items(),16)
+ping 127.0.0.1 -n 2 >nul
+del C:\RetroCake\Tools\7za\7za.zip
+goto SGitCheck
+
+:SGitCheck
+ThemeManagerSetup
+IF EXIST C:\RetroCake\Tools\git\bin\git.exe goto menu
+goto sGitArchCheck
+
+:sGitArchCheck
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+		goto sgit64
+	)
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+		goto sgit32
+	)
+
+:sgit32
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      SETTING UP GIT...                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-32-bit.7z.exe -OutFile "C:\RetroCake\Temp\git.zip"
+mkdir C:\RetroCake\Tools\git
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\git.zip" -o"C:\RetroCake\Tools\git" -aoa
+ping 127.0.0.1 -n 4 > nul
+del "C:\RetroCake\Temp\git.zip"
+goto menu
+
+:sgit64
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                      SETTING UP GIT...                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-64-bit.7z.exe -OutFile "C:\RetroCake\Temp\git.zip"
+mkdir C:\RetroCake\Tools\git
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\git.zip" -o"C:\RetroCake\Tools\git" -aoa
+ping 127.0.0.1 -n 4 > nul
+del "C:\RetroCake\Temp\git.zip"
 goto menu
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -238,6 +306,11 @@ IF ERRORLEVEL ==2 GOTO menu
 IF ERRORLEVEL ==1 GOTO AppleWin 
 
 :InstallAllEmu
+IF EXIST C:\RetroCake\Emulators\ goto StartAllEmu
+mkdir C:\RetroCake\Emulators
+goto StartAllEmu
+
+:StartAllEmu
 Echo This file is temporary. You should never see it > C:\RetroCake\Emulators\tmp.txt
 goto AppleWin
 
@@ -4412,7 +4485,7 @@ mkdir C:\RetroCake\RetroArch\cores
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake\RetroArch\cores" -aoa
 
 ::Cleanup
-del "C:\RetroCake\Temp\cores\*.zip" /s /q
+rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
 goto RAShortcut
@@ -6274,7 +6347,7 @@ echo bundle_assets_src_path = "">> C:\RetroCake\RetroArch\retroarch.cfg
 echo bundle_assets_dst_path = "">> C:\RetroCake\RetroArch\retroarch.cfg
 echo bundle_assets_dst_path_subdir = "">> C:\RetroCake\RetroArch\retroarch.cfg
 echo >> C:\RetroCake\RetroArch\retroarch.cfg
-goto completed
+goto InstallAllEmu
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -7013,7 +7086,7 @@ mkdir C:\RetroCake\RetroArch\cores
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake\RetroArch\cores" -aoa
 
 ::Cleanup
-del "C:\RetroCake\Temp\cores\*.zip" /s /q
+rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
 goto RAShortcutdef
@@ -7160,7 +7233,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 ping 127.0.0.1 -n 6 >nul
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
 ping 127.0.0.1 -n 6 >nul
-del "C:\RetroCake\Temp\cores\*.zip" /s /q
+rmdir "C:\RetroCake\Temp\cores" /s /q
 goto RAShortcutdef
 
 :RAShortcutdef
@@ -8935,7 +9008,7 @@ mkdir C:\RetroCake\ROMS\virtualboy
 mkdir C:\RetroCake\ROMS\wii
 mkdir C:\RetroCake\ROMS\zxspectrum
 start C:\RetroCake\ROMS
-goto completed
+goto InstallAllEmu
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -9677,7 +9750,7 @@ mkdir C:\RetroCake\RetroArch\cores
 C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake\RetroArch\cores" -aoa
 
 ::Cleanup
-del "C:\RetroCake\Temp\cores\*.zip" /s /q
+rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
 goto RAShortcutcus
@@ -9824,7 +9897,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 ping 127.0.0.1 -n 6 >nul
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
 ping 127.0.0.1 -n 6 >nul
-del "C:\RetroCake\Temp\cores\*.zip" /s /q
+rmdir "C:\RetroCake\Temp\cores" /s /q
 goto RAShortcutcus
 
 :RAShortcutcus
@@ -11599,7 +11672,7 @@ mkdir %cusromdir%\virtualboy
 mkdir %cusromdir%\wii
 mkdir %cusromdir%\zxspectrum
 start %cusromdir%
-goto completed
+goto InstallAllEmu
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
