@@ -22,7 +22,6 @@ goto check7z
 IF EXIST C:\RetroCake\Tools\7za\7za.exe goto CheckRetroCake
 goto install7z
 
-
 :install7z
 mkdir C:\RetroCake\Tools\7za
 powershell -command (New-Object Net.WebClient).DownloadFile('http://www.7-zip.org/a/7za920.zip','C:\RetroCake\Tools\7za\7za.zip');(new-object -com shell.application).namespace('C:\RetroCake\Tools\7za').CopyHere((new-object -com shell.application).namespace('C:\RetroCake\Tools\7za\7za.zip').Items(),16)
@@ -31,29 +30,26 @@ del C:\RetroCake\Tools\7za\7za.zip
 goto CheckRetroCake
 
 :CheckRetroCake
-IF EXIST C:\RetroCake\RetroCake.txt goto permcheck
+IF EXIST C:\RetroCake\ goto permcheck
 goto SetRCDir
 
 :SetRCDir
 mkdir C:\RetroCake
 mkdir C:\RetroCake\EmulationStation
 mkdir C:\RetroCake\RetroArch
-mkdir C:\RetroCake\RetroArch\cores
 mkdir C:\RetroCake\Temp
-mkdir C:\RetroCake\Temp\cores
 mkdir C:\RetroCake\Tools
 icacls "C:\RetroCake" /grant everyone:(OI)(CI)F /T
-echo This text file is used for the script for several IF/THEN statements > C:\RetroCake\RetroCake.txt
-echo This text file is used for the script for several IF/THEN statements > C:\RetroCake\Perms.txt
+echo pls no delete > C:\RetroCake\RetroCake
 goto menu
 
 :permcheck
-IF EXIST C:\RetroCake\Perms.txt goto menu
+IF EXIST C:\RetroCake\RetroCake goto menu
 goto permss
 
 :permss
 icacls "C:\RetroCake" /grant everyone:(OI)(CI)F /T
-echo This text file is used for the script for several IF/THEN statements > C:\RetroCake\Perms.txt
+echo pls no delete > C:\RetroCake\RetroCake
 goto menu
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -187,16 +183,15 @@ IF ERRORLEVEL ==1 GOTO mkdirroms
 
 :EmuFolderCheck
 cls 
-IF EXIST C:\RetroCake\Emulators\NOTOUCHY.txt goto AdditionalEmu
+IF EXIST C:\RetroCake\Emulators\ goto AdditionalEmu
 mkdir C:\RetroCake\Emulators
-echo This text file is used for the script for several IF/THEN statements > C:\RetroCake\Emulators\NOTOUCHY.txt
 goto AdditionalEmu
 
 :AdditionalEmu
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) INSTALL APPLE II EMULATOR (AppleWin)                             =
+Echo =    1.) INSTALL ALL ADDITIONAL EMULATORS                                 =
 echo =                                                                         =
 echo =    2.) INSTALL ATARI ST EMULATOR (Hatari)                               =
 echo =                                                                         =
@@ -213,11 +208,11 @@ echo =                                                                         =
 echo =    8.) INSTALL GAMECUBE EMULATOR (Dolphin 5.0)                          =
 echo =                                                                         =
 echo =                                                                         =
-echo =    9.) RETURN TO MAIN MENU                                              =
+echo =    9.) Page 2                                                           =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
-IF ERRORLEVEL ==9 GOTO menu
+IF ERRORLEVEL ==9 GOTO EmuPage2
 IF ERRORLEVEL ==8 GOTO DolphinEmu
 IF ERRORLEVEL ==7 GOTO PCSX2
 IF ERRORLEVEL ==6 GOTO jzIntv
@@ -225,7 +220,27 @@ IF ERRORLEVEL ==5 GOTO Daphne
 IF ERRORLEVEL ==4 GOTO XRoar
 IF ERRORLEVEL ==3 GOTO BeebEm
 IF ERRORLEVEL ==2 GOTO Hatari
-IF ERRORLEVEL ==1 GOTO AppleWin
+IF ERRORLEVEL ==1 GOTO InstallAllEmu
+
+:EmuPage2
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) INSTALL APPLE II EMULATOR (AppleWin)                             =
+echo =                                                                         =
+echo =                                                                         =
+echo =    2.) RETURN TO MAIN MENU                                              =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:12 /M "Enter Corresponding Menu choice (1, 2)"%1
+
+IF ERRORLEVEL ==2 GOTO menu
+IF ERRORLEVEL ==1 GOTO AppleWin 
+
+:InstallAllEmu
+Echo This file is temporary. You should never see it > C:\RetroCake\Emulators\tmp.txt
+goto AppleWin
+
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11629,6 +11644,7 @@ echo =         Cleaning up downloaded files         =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del C:\RetroCake\Temp\AppleWin.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto Hatari
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11664,6 +11680,7 @@ echo ================================================
 ren hatari-2.0.0_windows Hatari
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\Hatari32.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto BeebEm
 goto completed
 	
 :hatari64
@@ -11691,6 +11708,7 @@ cd C:\RetroCake\Emulators
 ren hatari-2.0.0_windows64 Hatari
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\Hatari64.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto BeebEm
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11717,6 +11735,7 @@ echo =         Cleaning up downloaded files         =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\BeebEm.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto XRoar
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11754,6 +11773,7 @@ cd C:\RetroCake\Emulators
 ren xroar-0.34.8-w32 XRoar
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\XRoar32.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto Daphne
 goto completed
 
 :xroar64
@@ -11781,6 +11801,7 @@ cd C:\RetroCake\Emulators
 ren xroar-0.34.8-w64 XRoar
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\XRoar64.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto Daphne
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11808,6 +11829,7 @@ echo =         Cleaning up downloaded files         =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\Daphne.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto jzIntv
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11837,6 +11859,7 @@ cd C:\RetroCake\Emulators
 ren jzintv-20171120-win32 jzIntv
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\jzIntv.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto PCSX2
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -11866,6 +11889,7 @@ cd C:\RetroCake\Emulators
 ren "PCSX2 1.4.0" PCSX2
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\PCSX2.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto DolphinEmu
 goto completed
 
 :DolphinEmu
@@ -11894,8 +11918,13 @@ ping 127.0.0.1 -n 2 > nul
 cd C:\RetroCake\Emulators
 ren Dolphin-x64 Dolphin
 ping 127.0.0.1 -n 2 > nul
-del C:\RetroCake\Temp\Dolphin.exe
+del C:\RetroCake\Temp\Dolphin.7z
 del C:\RetroCake\Temp\VC_Redist_2017.exe
+if EXIST C:\RetroCake\Emulators\tmp.txt goto tmpClean
+goto completed
+
+:tmpClean
+del C:\RetroCake\Emulators\tmp.txt /s /q
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
