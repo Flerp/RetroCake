@@ -10,29 +10,31 @@ So far this script hass the following capabilities:
 
 There are 3 options for automated installation.
 
-1. No ROM Dirs
+## No ROM Dirs
 
-This option is if you do not wish to use the default ROM directories (C:\RetroCake\ROMS)
-Once the setup is completed you will need to edit the es_systems.cfg to change the ROM directories to your liking. 
+This option is if you do not wish to use the default ROM directories (C:\RetroCake\ROMS)\
+Once the setup is completed you will need to edit the es_systems.cfg to change the ROM directories to your liking.\
 This option is great for people who have ROMS on another drive (like me), or just do not wish to use the default folder.
 
-2. Default Installer.
+## Default Installer.
 
-This option handles the ROM directories for you.
-It creates a system folder for most supported ROMS.
-Once installation completes the ROMS folder is opened and you can transfer ROMs into the system folders.
+This option handles the ROM directories for you.\
+It creates a system folder for most supported ROMS.\
+Once installation completes the ROMS folder is opened and you can transfer ROMs into the system folders.\
 This option is great for people who do not have gigantic (1TB+) collections and can easily fit their ROMs on the C: drive.
 
-3. Custom Installer
+## Custom Installer
 
-This option is to setup ROM directories like option 2, but in a place of your choosing.
+This option is to setup ROM directories like option 2, but in a place of your choosing.\
 You will be prompted for the main folder you'd like to use.
 
-	Syntax: E:\ROMS, D:\Games, F:\Retro, etc.
-	No trailing \
-	All system subdirectories will be added to the folder specified.
-	EX:
-	If E:\ROMS is specified the following folders will be created
+Syntax: E:\ROMS, D:\Games, F:\Retro, etc.\
+No trailing \\
+
+All system subdirectories will be added to the folder specified.\
+EX:\
+If E:\ROMS is specified the following folders will be created
+
 	E:\ROMS\3do
 	E:\ROMS\ags
 	E:\ROMS\amiga
@@ -94,53 +96,51 @@ And a config file for EmulationStation will be generated to make adding ROMS dra
 
 # Manage EmulationStation
 
-1. Update/Install EmulationStation
+## Update/Install EmulationStation
 
-This is for updating EmulationStation
-It also backs up your current EmulationStation to C:\RetroCake\Backups with a timestamped Zip file.
+This is for updating EmulationStation.\
+It also backs up your current EmulationStation to C:\RetroCake\Backups with a timestamped Zip file.\
 The backup is in case something breaks with a newer build when updating.
 
-2. Manage es_systems.cfg
-
+## Manage es_systems.cfg
 This is for generating and editing es_systems.cfg
 
-3. Manage EmulationStation Themes.
+## Manage EmulationStation Themes.
 
 This tool has several features, and will setup GIT to C:\RetroCake\Tools\Git 
 
-	a. Install/update all themes.
-		Relatively Self explanatory. This installs every avaiable theme for EmulationStation.
+### Install/update all themes.
+Relatively Self explanatory. This installs every avaiable theme for EmulationStation.
 		
-	b. Install/Update Individual Themes
-		This option lets you select the theme you want by name and install 1 by one. 
-		Userful if you do like wish to install 80 themes and just want a specific one.
+### Install/Update Individual Themes
+This option lets you select the theme you want by name and install 1 by one. \
+Userful if you do like wish to install 80 themes and just want a specific one.
 		
-	c. Theme Gallery/Previews.
-		This downloads previews for all available themes and writes them to a HTML file.
-		The HTML file is them launched with your default browser.
-		Hover over the image to see which theme it belongs to.
-		This is to help with the Individual theme downloader so you can see what you're getting.
+### Theme Gallery/Previews.
+This downloads previews for all available themes and writes them to a HTML file.\
+The HTML file is them launched with your default browser.\
+Hover over the image to see which theme it belongs to.\
+This is to help with the Individual theme downloader so you can see what you're getting.
 		
 # Manage RetroArch
 
-1. Install RetroArch 1.6.7
+## Install RetroArch 1.6.7
 
 This installes the latest Stable Build of RetroArch. In case you wanted to revert from a nightly build.
 
-2. Update RetroArch to the latest nightly
+## Update RetroArch to the latest nightly
 
 Updates RetroArch, self explanatory.
 
-3. Generate Clean Retroarch.cfg
+## Generate Clean Retroarch.cfg
 
-This generates a RetroArch.cfg with nearly default settings
+This generates a RetroArch.cfg with nearly default settings\
 Changes made are as follows:
 
-	a. All Games Start in Fullscreen.
+	All Games Start in Fullscreen.
+	You can bring up the RetroArch menu with Start and Select
 	
-	b. You can bring up the RetroArch menu with Start and Select
-	
-4 Update RetroArch Cores to the latest Nightly Build.
+## Update RetroArch Cores to the latest Nightly Build.
 
 Self Explanatory.
 This updates all RetroArch Cores (108 total)
@@ -160,64 +160,65 @@ Current emulators are:
 
 # Manage ROM Directories.
 
-This creates the default ROM directories in C:\RetroCake\ROMS
-
-You can also create custom ROM directories E:\ROMS etc
-
+This creates the default ROM directories in C:\RetroCake\ROMS\
+You can also create custom ROM directories like E:\ROMS\
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
 
 # Manage Dedicated EmuBox Settings (Not fully tested yet)
 
-1. Setup all dedicated emubox settings
+## Setup all dedicated emubox settings
 
-This option will do a full setup and turn your RetroCake Installation into a DEdicate Emu Box.
-This option inclused installation of all of the options below.
-The only user requires input is during the Auto Login setup.
+This option will do a full setup and turn your RetroCake Installation into a Dedicate Emu Box.\
+This option inclused installation of all of the options below.\
+The only user requires input is during the Auto Login setup.\
 This is due to how Windows handles Auto login.
 
-2. RetroCake auto start options  
+## RetroCake auto start options  
 
-From here you can select if you'd like to Automatically start RetroCake (EmulationStation) upon login.
-This goes hand in hand with Auto Login.
+From here you can select if you'd like to Automatically start RetroCake (EmulationStation) upon login.\
+This goes hand in hand with Auto Login.\
 You can also remove the Auto Start settings if you no longer with to have Auto Start.
 
-3. Setup Auto Login
-Self Explanatory.
-Opens the netplwiz menu.
+## Setup Auto Login
+
+Self Explanatory.\
+Opens the netplwiz menu.\
 Guides you through setting up Auto Login.
 
-4. Setup RetroCake folder shares 
+## Setup RetroCake folder shares 
 
-a. Setup RetroCake shares with default rom directory 
+### Setup RetroCake shares with default rom directory 
 Sets up the following shares
 
 	ROMS
 	BIOS
 	EMULATORS
 	EMULATIONSTATION
-	The ROMS folder uses the default C:\RetroCake\ROMS
+    
+The ROMS folder uses the default C:\RetroCake\ROMS
 
-b. Setup RetroCake shares with custom rom directory
+### Setup RetroCake shares with custom rom directory
 Sets up the following shares
 
 	ROMS
 	BIOS
 	EMULATORS
 	EMULATIONSTATION
-	You will be asked to enter the ROMS directory.
-	This option is if you installed using a custom ROMS directory.
 
-c. Remove RetroCake shares
-Self Explanatory.
+You will be asked to enter the ROMS directory.\
+This option is if you installed using a custom ROMS directory.
+
+### Remove RetroCake shares
+Self Explanatory.\
 Removes all shares created by this script.
 
-5. Setup system name
+## Setup system name
 
-From here you can set your PC's hostname to the default RetroCake, or to any custom hostname you'd like.
+From here you can set your PC's hostname to the default RetroCake, or to any custom hostname you'd like.\
 This is to make it easier to access the shares on the computer.
 
 
 # System Cleanup
 
-This options deletes ALL RetroCake Files.
+This options deletes ALL RetroCake Files.\
 Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
