@@ -208,14 +208,17 @@ echo =    5.) INSTALL LASERDISK GAME EMULATOR (Daphne)                         =
 echo =                                                                         =
 echo =    6.) INSTALL INTELLIVISION EMULATOR (jzIntv)                          =
 echo =                                                                         =
-echo =    7.) INSTALL PS2 EMULATOR (PCSX2)                                     =
+echo =    7.) INSTALL PS2 EMULATOR (PCSX2 1.4.0)                               =
+echo =                                                                         =
+echo =    8.) INSTALL GAMECUBE EMULATOR (Dolphin 5.0)                          =
 echo =                                                                         =
 echo =                                                                         =
-echo =    8.) RETURN TO MAIN MENU                                              =
+echo =    9.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:12345678 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8)"%1
-IF ERRORLEVEL ==8 GOTO menu
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+IF ERRORLEVEL ==9 GOTO menu
+IF ERRORLEVEL ==8 GOTO DolphinEmu
 IF ERRORLEVEL ==7 GOTO PCSX2
 IF ERRORLEVEL ==6 GOTO jzIntv
 IF ERRORLEVEL ==5 GOTO Daphne
@@ -531,7 +534,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\PATH\TO\ROM\FOLDER\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -541,7 +544,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\PATH\TO\ROM\FOLDER\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1049,7 +1052,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\RetroCake\ROMS\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1059,7 +1062,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\RetroCake\ROMS\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1570,7 +1573,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>%cusromdir%\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1580,7 +1583,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>%cusromdir%\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -3782,7 +3785,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\PATH\TO\ROM\FOLDER\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -3792,7 +3795,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\PATH\TO\ROM\FOLDER\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -6383,7 +6386,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\RetroCake\ROMS\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -6393,7 +6396,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>C:\RetroCake\ROMS\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -9047,7 +9050,7 @@ echo 	^<name^>gc^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Gamecube^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>%cusromdir%\gc^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .gcz .gcn .ISO .GCZ .GCN^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>gc^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>gc^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -9057,7 +9060,7 @@ echo 	^<name^>wii^</name^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>%cusromdir%\wii^</path^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<extension^>.iso .ISO^</extension^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\dolphin_libretro.dll "%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>C:\RetroCake\Emulators\Dolphin\Dolphin.exe --config=Dolphin.[Display].Fullscreen=True --batch --exec="%%ROM_RAW%%"^</command^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -11865,6 +11868,35 @@ ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\PCSX2.zip
 goto completed
 
+:DolphinEmu
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                     DOWNLOADING DOLPHIN                       =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -OutFile "C:\RetroCake\Temp\VC_Redist_2017.exe""
+powershell -command "Invoke-WebRequest -Uri https://dl.dolphin-emu.org/builds/dolphin-master-5.0-5938-x64.7z -OutFile "C:\RetroCake\Temp\Dolphin.7z""
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\Dolphin.7z" -o"C:\RetroCake\Emulators" -aoa
+cls
+echo ================================================
+echo =         Cleaning up downloaded files         =
+echo ================================================
+C:\RetroCake\Temp\VC_Redist_2017.exe /install /quiet
+ping 127.0.0.1 -n 2 > nul
+cd C:\RetroCake\Emulators
+ren Dolphin-x64 Dolphin
+ping 127.0.0.1 -n 2 > nul
+del C:\RetroCake\Temp\Dolphin.exe
+del C:\RetroCake\Temp\VC_Redist_2017.exe
+goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
