@@ -146,7 +146,7 @@ You can also create custom ROM directories E:\ROMS etc
 
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
 
-# Manage dedicated emubox settings (Not fully tested yet)
+# Manage Dedicated EmuBox Settings (Not fully tested yet)
 
 1. Setup all dedicated emubox settings
 
@@ -169,32 +169,23 @@ Guides you through setting up Auto Login.
 4. Setup RetroCake folder shares 
 
 	a. Setup RetroCake shares with default rom directory 
-
 	Sets up the following shares
-
 	ROMS
 	BIOS
 	EMULATORS
 	EMULATIONSTATION
-	
 	The ROMS folder uses the default C:\RetroCake\ROMS
 
-
 	b. Setup RetroCake shares with custom rom directory
-
 	Sets up the following shares
-
 	ROMS
 	BIOS
 	EMULATORS
 	EMULATIONSTATION
-	
 	You will be asked to enter the ROMS directory.
 	This option is if you installed using a custom ROMS directory.
 
-
 	c. Remove RetroCake shares
-
 	Self Explanatory.
 	Removes all shares created by this script.
 
