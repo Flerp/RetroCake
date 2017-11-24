@@ -3,70 +3,71 @@
 RetroCake is a tool used to setup a RetroPie-like environment on Windows Operating Systems.\
 You can use EmulationStation as a desktop application, or you can setup a Windows machine to be a dedicated Emulator Machine.\
 I developed this script initially due to XServer on debian based linux distros having screen tearing issues.\
-After initial developement I really grew to like having EmulationStation as a desktop app, and I figured others may like it, too.\
+After initial developement I really grew to like having EmulationStation as a desktop app, and I figured others may like it, too.
 
 This tool does not include ROM or BIOS files, they need to be supplied.
 
 All RetroCake files are contained in C:\RetroCake\
-If you find a bug, or have a feature request please use the github issue tracker.\
+If you find a bug, or have a feature request please use the github issue tracker.
 
 Supported Systems include:
-3do
-ags
-amiga
-amstradcpc
-apple2
-atari2600
-atari5200
-atari7800
-atari800
-atarijaguar
-atarilynx
-atarist
-bbcmicro
-c64
-coco
-colecovision
-daphne
-dragon32
-dreamcast
-fba
-fds
-gameandwatch
-gamegear
-gb
-gba
-gbc
-gc
-intellivision
-mame
-mastersystem
-mega-cd
-mega32x
-megadrive
-msx
-mvs
-n64
-nds
-neogeo
-nes
-ngp
-ngpc
-pcengine
-ps2
-psp
-psx
-saturn
-scraper.exe
-sega32x
-segacd
-sfc
-sg-1000
-snes
-vectrex
-virtualboy
-wii
-zxspectrum
+
+	3do
+	ags
+	amiga
+	amstradcpc
+	apple2
+	atari2600
+	atari5200
+	atari7800
+	atari800
+	atarijaguar
+	atarilynx
+	atarist
+	bbcmicro
+	c64
+	coco
+	colecovision
+	daphne
+	dragon32
+	dreamcast
+	fba
+	fds
+	gameandwatch
+	gamegear
+	gb
+	gba
+	gbc
+	gc
+	intellivision
+	mame
+	mastersystem
+	mega-cd
+	mega32x
+	megadrive
+	msx
+	mvs
+	n64
+	nds
+	neogeo
+	nes
+	ngp
+	ngpc
+	pcengine
+	ps2
+	psp
+	psx
+	saturn
+	scraper.exe
+	sega32x
+	segacd
+	sfc
+	sg-1000
+	snes
+	vectrex
+	virtualboy
+	wii
+	zxspectrum
 
 
 
