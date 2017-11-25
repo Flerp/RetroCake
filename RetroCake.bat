@@ -767,8 +767,8 @@ echo ===========================================================================
 CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"%1
 IF ERRORLEVEL ==5 GOTO esmenu
 IF ERRORLEVEL ==4 GOTO editES
-IF ERRORLEVEL ==2 GOTO customES
-IF ERRORLEVEL ==2 GOTO defaultES
+IF ERRORLEVEL ==3 GOTO customES
+IF ERRORLEVEL ==2 GOTO defaultESCFG
 IF ERRORLEVEL ==1 GOTO blankES
 
 
@@ -1301,7 +1301,17 @@ echo   ^</system^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 echo ^</systemList^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 goto completed
 
-:defaultES
+:defaultESCFG
+::Backs up current es_systems.cfg
+
+C:\RetroCake\Tools\7za\7za.exe a "%USERPROFILE%\es_systems_%gooddayte%_%goodthyme%.zip" "%USERPROFILE%\.emulationstation\es_systems.cfg"
+
+::Deletes old es_systems.cfg
+del "%USERPROFILE%\.emulationstation\es_systems.cfg" /q
+
+::Creates a new es_systems.cfg
+cls
+mkdir "%USERPROFILE%\.emulationstation"
 echo ^<?xml version="1.0"?^> > "%USERPROFILE%\.emulationstation\es_systems.cfg"
 
 echo ^<systemList^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1820,6 +1830,7 @@ echo ^</systemList^> >> %USERPROFILE%\.emulationstation\es_systems.cfg"
 goto completed
 
 :customES
+cls
 echo(
 set /p cusromdir="Enter Path for ROM Folder (default C:\RetroCake\ROMS): "
 
