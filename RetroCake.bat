@@ -142,6 +142,8 @@ goto menu
 
 :menu
 cls
+echo(
+echo RetroCake v1.1.1
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
