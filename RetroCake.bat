@@ -309,14 +309,16 @@ echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) INSTALL APPLE II EMULATOR (AppleWin)                             =
 echo =                                                                         =
+Echo =    2.) INSTALL COMMODORE 64 EMULATOR (WinVICE)                          =
 echo =                                                                         =
-echo =    2.) RETURN TO MAIN MENU                                              =
+echo =                                                                         =
+echo =    3.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:12 /M "Enter Corresponding Menu choice (1, 2)"%1
-
-IF ERRORLEVEL ==2 GOTO menu
-IF ERRORLEVEL ==1 GOTO AppleWin 
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+IF ERRORLEVEL ==3 GOTO menu
+IF ERRORLEVEL ==2 GOTO VICE
+IF ERRORLEVEL ==1 GOTO AppleWin
 
 :InstallAllEmu
 IF EXIST C:\RetroCake\Emulators\ goto StartAllEmu
@@ -1291,7 +1293,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>C:\PATH\TO\ROM\FOLDER\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1819,7 +1821,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>C:\RetroCake\ROMS\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -2341,7 +2343,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>%cusromdir%\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -4553,7 +4555,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>C:\PATH\TO\ROM\FOLDER\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -7154,7 +7156,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>C:\RetroCake\ROMS\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -9818,7 +9820,7 @@ echo     ^<name^>c64^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg
 echo     ^<fullname^>Commodore 64^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>%cusromdir%\c64^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<extension^>.crt .d64 .g64 .t64 .tap .x64 .zip .prg .CRT .D64 .G64 .T64 .TAP .X64 .ZIP .PRG^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo     ^<command^>C:\RetroCake\RetroArch\retroarch.exe -L C:\RetroCake\RetroArch\cores\vice_x64_libretro.dll "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo     ^<command^>C:\RetroCake\Emulators\WinVICE\x64.exe -fullscreen "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<platform^>c64^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<theme^>c64^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo   ^</system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -12305,8 +12307,76 @@ ren Dolphin-x64 Dolphin
 ping 127.0.0.1 -n 2 > nul
 del C:\RetroCake\Temp\Dolphin.7z
 del C:\RetroCake\Temp\VC_Redist_2017.exe
+if EXIST C:\RetroCake\Emulators\tmp.txt goto VICE
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:VICE
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+		goto VICE64
+	)
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+		goto VICE32
+	)
+
+:VICE32
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                       DOWNLOADING VICE                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://superb-sea2.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x86.7z -OutFile "C:\RetroCake\Temp\VICE32.zip""
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\VICE32.zip" -o"C:\RetroCake\Emulators" -aoa
+cls
+echo ================================================
+echo =         Cleaning up downloaded files         =
+echo ================================================
+ping 127.0.0.1 -n 2 > nul
+cd C:\RetroCake\Emulators
+ren WinVICE-3.1-x86 WinVICE
+ping 127.0.0.1 -n 2 > nul
+del C:\RetroCake\Temp\VICE32.zip
 if EXIST C:\RetroCake\Emulators\tmp.txt goto tmpClean
 goto completed
+
+:VICE64
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo =================================================================
+echo =                                                               =
+echo =                       DOWNLOADING VICE                        =
+echo =                                                               =
+echo =================================================================
+powershell -command "Invoke-WebRequest -Uri https://iweb.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x64.7z -OutFile "C:\RetroCake\Temp\VICE64.zip""
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\VICE64.zip" -o"C:\RetroCake\Emulators" -aoa
+cls
+echo ================================================
+echo =         Cleaning up downloaded files         =
+echo ================================================
+ping 127.0.0.1 -n 2 > nul
+cd C:\RetroCake\Emulators
+ren WinVICE-3.1-x64 WinVICE
+ping 127.0.0.1 -n 2 > nul
+del C:\RetroCake\Temp\VICE64.zip
+if EXIST C:\RetroCake\Emulators\tmp.txt goto tmpClean
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
 
 :tmpClean
 del C:\RetroCake\Emulators\tmp.txt /s /q
