@@ -172,7 +172,7 @@ echo =    9.) UPDATE RETROCAKE SCRIPT                                          =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
-IF ERRORLEVEL ==8 GOTO :RetroCakeUpdate
+IF ERRORLEVEL ==9 GOTO :RetroCakeUpdate
 IF ERRORLEVEL ==8 exit
 IF ERRORLEVEL ==7 GOTO SysClean
 IF ERRORLEVEL ==6 GOTO DediMenu
