@@ -1,4 +1,4 @@
-If you like my project and would like to donate click the button below.
+If you like my project and would like to donate click the button below.\
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R477DPAUW89PU)
 
 
