@@ -143,7 +143,7 @@ goto menu
 :menu
 cls
 echo(
-echo RetroCake v1.1.1
+echo RetroCake v1.1.2
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -348,7 +348,7 @@ goto AppleWin
 ::=================================================================================================================================================================================================================================================================================================================
 
 :RetroCakeUpdate
-
+rmdir C:\RetroCake\Tools\Script /S /Q
 cd C:\RetroCake\Tools
 C:\RetroCake\Tools\git\bin\git.exe clone --depth=1 https://github.com/Flerp/RetroCake.git
 rmdir C:\RetroCake\Tools\RetroCake\.git /S /Q
