@@ -14,7 +14,7 @@ This tool does not include ROM or BIOS files, they need to be supplied.
 All RetroCake files are contained in C:\RetroCake\
 If you find a bug, or have a feature request please use the github issue tracker.
 
-Supported Systems include:
+## Supported Systems include:
 
 	3do
 	ags
@@ -73,6 +73,24 @@ Supported Systems include:
 	wii
 	zxspectrum
 
+## Some Systems Require BIOS files.
+They are listed below
+
+	Amiga         C:\RetroCake\RetroArch\system\kick13.rom OR C:\RetroCake\RetroArch\system\kick20.rom OR C:\RetroCake\RetroArch\system\kick31.rom
+	Atari800      C:\RetroCake\RetroArch\system\ATARIXL.ROM (BIOS for Atari XL/XE OS) OR C:\RetroCake\RetroArch\system\ATARIBAS.ROM (BIOS for the BASIC interpreter) OR C:\RetroCake\RetroArch\system\ATARIOSA.ROM (BIOS for Atari 400/800 PAL) OR C:\RetroCake\RetroArch\system\ATARIOSB.ROM (BIOS for Atari 400/800 NTSC) OR C:\RetroCake\RetroArch\system\5200.ROM (BIOS for the Atari 5200)
+	Atari 7800    C:\RetroCake\RetroArch\system\7800 BIOS (U).rom
+	CoCo          C:\RetroCake\RetroArch\system\bas13.rom
+	Dragon32      C:\RetroCake\RetroArch\system\d32.rom
+	Dreamcast     C:\RetroCake\RetroArch\system\dc_boot.bin AND C:\RetroCake\RetroArch\system\dc_flash.bin
+	FDS           C:\RetroCake\RetroArch\system\disksys.rom
+	gba           C:\RetroCake\RetroArch\system\gba_bios.bin
+	psx           C:\RetroCake\RetroArch\system\SCPH1001.BIN
+	PS2           C:\RetroCake\Emulators\PCSX2\bios\ANYPS2BIOS.bin
+	neo geo       C:\PATH\TO\ROMS\neogeo\neogeo.zip
+	sega cd       C:\RetroCake\RetroArch\system\us_scd1_9210.bin (or rename to bios_CD_U.bin) OR eu_mcd1_9210.bin (or rename to bios_CD_E.bin) OR jp_mcd1_9112.bin (or rename to bios_CD_J.bin) for Europe and Japan respectively
+	Sega Saturn   C:\RetroCake\RetroArch\system\saturn_bios.bin
+
+	
 ### Once the Automated installer is done simply double click EmuLationStation on your desktop.
 
 #### The list of features is as follows:
