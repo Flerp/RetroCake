@@ -348,13 +348,19 @@ goto AppleWin
 ::=================================================================================================================================================================================================================================================================================================================
 
 :RetroCakeUpdate
-rmdir C:\RetroCake\Tools\Script /S /Q
-cd C:\RetroCake\Tools
-C:\RetroCake\Tools\git\bin\git.exe clone --depth=1 https://github.com/Flerp/RetroCake.git
-rmdir C:\RetroCake\Tools\RetroCake\.git /S /Q
-del C:\RetroCake\Tools\RetroCake\.gitattributes /S /Q
-Ren RetroCake Script
-start C:\RetroCake\Tools\Script\RetroCake.bat
+cls
+ping 127.0.0.1 -n 2 >nul
+echo @echo off > C:\RetroCake\Tools\Updater.bat
+echo rmdir C:\RetroCake\Tools\Script /S /Q >> C:\RetroCake\Tools\Updater.bat
+echo rmdir C:\RetroCake\Tools\RetroCake /S /Q >> C:\RetroCake\Tools\Updater.bat
+echo cd C:\RetroCake\Tools >> C:\RetroCake\Tools\Updater.bat
+echo C:\RetroCake\Tools\git\bin\git.exe clone --depth=1 https://github.com/Flerp/RetroCake.git >> C:\RetroCake\Tools\Updater.bat
+echo rmdir C:\RetroCake\Tools\RetroCake\.git /S /Q >> C:\RetroCake\Tools\Updater.bat
+echo del C:\RetroCake\Tools\RetroCake\.gitattributes /S /Q >> C:\RetroCake\Tools\Updater.bat
+echo Ren RetroCake Script >> C:\RetroCake\Tools\Updater.bat
+echo start C:\RetroCake\Tools\Script\RetroCake.bat >> C:\RetroCake\Tools\Updater.bat
+echo exit >> C:\RetroCake\Tools\Updater.bat
+start C:\RetroCake\Tools\Updater.bat
 exit
 
 ::=================================================================================================================================================================================================================================================================================================================
