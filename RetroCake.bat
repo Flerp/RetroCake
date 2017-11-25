@@ -417,7 +417,7 @@ echo =                                                  =
 echo ====================================================
 cd "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 echo taskkill /im explorer.exe /f > "C:\RetroCake\Tools\startES.bat"
-echo "C:\RestroCake\EmulationStation\emulationstation.exe" >> "C:\RetroCake\Tools\startES.bat"
+echo "C:\RetroCake\EmulationStation\emulationstation.exe" >> "C:\RetroCake\Tools\startES.bat"
 
 del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\startES.lnk"
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%USERPROFILE%\CreateShortcut2.vbs"

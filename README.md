@@ -276,7 +276,8 @@ Guides you through setting up Auto Login.
 
 ## Setup RetroCake folder shares 
 
-### Setup RetroCake shares with default rom directory 
+### Setup RetroCake shares with default rom directory
+ 
 Sets up the following shares
 
 	ROMS
@@ -287,6 +288,7 @@ Sets up the following shares
 The ROMS folder uses the default C:\RetroCake\ROMS
 
 ### Setup RetroCake shares with custom rom directory
+
 Sets up the following shares
 
 	ROMS
@@ -298,6 +300,7 @@ You will be asked to enter the ROMS directory.\
 This option is if you installed using a custom ROMS directory.
 
 ### Remove RetroCake shares
+
 Self Explanatory.\
 Removes all shares created by this script.
 
