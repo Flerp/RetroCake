@@ -206,7 +206,7 @@ IF ERRORLEVEL ==1 GOTO BrandNew
 cls
 echo ===========================================================================
 echo =                                                                         =
-echo =    1.) UPDATE/INSTALL EMULATIONSTATION WITH THE LATEST WINDOWS BUILD    =
+echo =    1.) CHECK EMULATIONSTATION FOR UPDATES                               =
 echo =                                                                         =
 echo =    2.) MANAGE ES_SYSTEMS.CFG                                            =
 echo =                                                                         =
@@ -220,7 +220,7 @@ CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"%1
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO ThemeManagerSetup
 IF ERRORLEVEL ==2 GOTO ManESCFG
-IF ERRORLEVEL ==1 GOTO updateES
+IF ERRORLEVEL ==1 GOTO StartESVerCheck
 
 :RAMenu
 cls
@@ -617,6 +617,51 @@ goto completed
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
+::=================================================================================================================================================================================================================================================================================================================
+
+:StartESVerCheck
+cls
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo(
+echo ====================================================
+echo =                                                  =
+echo =               CHECKING FOR UPDATES               =
+echo =                                                  =
+echo ====================================================
+IF EXIST C:\RetroCake\Temp\ESCheck\ goto CleanESCheck
+goto ESCheck
+
+:CleanESCheck
+rmdir C:\RetroCake\Temp\ESCheck /S /Q
+goto ESCheck
+
+:ESCheck
+mkdir C:\RetroCake\Temp\ESCheck
+powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32-no-deps.zip -OutFile "C:\RetroCake\Temp\ESCheck\tempES.zip"
+cls
+C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\ESCheck\tempES.zip" -o"C:\RetroCake\Temp\ESCheck" -aoa
+::wmic datafile where name="C:\\RetroCake\\EmulationStation\\emulationstation.exe" get Version /value > C:\RetroCake\Temp\ESCheck\currentES.txt
+::wmic datafile where name="C:\\RetroCake\\Temp\\ESCheck\\emulationstation.exe" get Version /value > C:\RetroCake\Temp\ESCheck\newES.txt
+for %%I in (C:\RetroCake\EmulationStation\emulationstation.exe) do echo %%~zI > C:\RetroCake\Temp\ESCheck\currentES.txt
+for %%I in (C:\\RetroCake\Temp\ESCheck\emulationstation.exe) do echo %%~zI > C:\RetroCake\Temp\ESCheck\newES.txt
+cd C:\RetroCake\Temp\ESCheck
+set /p currentES=<currentES.txt
+set /p newES=<newES.txt
+ping 127.0.0.1 -n 2 >nul
+IF %currentES%==%newES% goto UpToDate
+goto UpdateESVerify
+
+:UpdateESVerify
+cls
+set /P c=An update is available. Would you like to update [Y/N]?
+if /I "%c%" EQU "Y" goto UpdateES
+if /I "%c%" EQU "N" goto cancelled
+
 ::=================================================================================================================================================================================================================================================================================================================
 
 :updateES
@@ -12230,6 +12275,8 @@ del C:\RetroCake\Temp\PCSX2.zip
 if EXIST C:\RetroCake\Emulators\tmp.txt goto DolphinEmu
 goto completed
 
+::=================================================================================================================================================================================================================================================================================================================
+
 :DolphinEmu
 cls
 echo(
@@ -12297,6 +12344,8 @@ echo      Press any key to return to main menu
 pause >nul
 goto menu
 
+::=================================================================================================================================================================================================================================================================================================================
+
 :completed
 cls
 echo =============================================
@@ -12310,11 +12359,37 @@ goto menu
 
 ::=================================================================================================================================================================================================================================================================================================================
 
+:cancelled
+cls
+echo =============================================
+echo =                                           =
+echo =            OPERATION CANCELLED            =
+echo =                                           =
+echo =============================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
+::=================================================================================================================================================================================================================================================================================================================
+
 :NoFeat
 cls
 echo =============================================
 echo =                                           =
 echo =    THIS FEATURE IS NOT YET IMPLEMENTED    =
+echo =                                           =
+echo =============================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:UpToDate
+cls
+echo =============================================
+echo =                                           =
+echo =            YOU ARE UP TO DATE!            =
 echo =                                           =
 echo =============================================
 echo      Press any key to return to main menu
