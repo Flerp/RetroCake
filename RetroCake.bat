@@ -2497,7 +2497,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\RetroArch_x64.zip" -o"C:\Ret
 
 ping 127.0.0.1 -n 4 >nul
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
-goto RAShortcut
+goto RACFG
 
 :x86RA
 echo(
@@ -2519,7 +2519,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\RetroArch_x86.zip" -o"C:\Ret
 
 ping 127.0.0.1 -n 4 >nul
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
-goto RAShortcut
+goto RACFG
 
 ::=================================================================================================================================================================================================================================================================================================================
 
@@ -4593,7 +4593,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
-goto RAShortcut
+goto RACFG
 
 :x86
 ::Download all files
@@ -4666,18 +4666,6 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
 ping 127.0.0.1 -n 6 >nul
 rmdir "C:\RetroCake\Temp\cores" /s /q
-goto RAShortcut
-
-:RAShortcut
-::Creates a new Shortcut for RetroArch
-del "%USERPROFILE%\Desktop\RetroArch.lnk
-echo Set oWS = WScript.CreateObject("WScript.Shell") > "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo sLinkFile = "%USERPROFILE%\Desktop\RetroArch.lnk" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.TargetPath = "C:\RetroCake\RetroArch\retroarch.exe" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.Save >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-cscript "C:\RetroCake\Temp\CreateShortcut2.vbs"
-del "C:\RetroCake\Temp\CreateShortcut2.vbs"
 goto RACFG
 
 :RACFG
@@ -7054,7 +7042,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
-goto RAShortcutdef
+goto RACFGdef
 
 :x86def
 ::Download all files
@@ -7128,18 +7116,6 @@ ping 127.0.0.1 -n 6 >nul
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
 ping 127.0.0.1 -n 6 >nul
 rmdir "C:\RetroCake\Temp\cores" /s /q
-goto RAShortcutdef
-
-:RAShortcutdef
-::Creates a new Shortcut for RetroArch
-del "%USERPROFILE%\Desktop\RetroArch.lnk
-echo Set oWS = WScript.CreateObject("WScript.Shell") > "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo sLinkFile = "%USERPROFILE%\Desktop\RetroArch.lnk" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.TargetPath = "C:\RetroCake\RetroArch\retroarch.exe" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.Save >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-cscript "C:\RetroCake\Temp\CreateShortcut2.vbs"
-del "C:\RetroCake\Temp\CreateShortcut2.vbs"
 goto RACFGdef
 
 :RACFGdef
@@ -9578,7 +9554,7 @@ C:\RetroCake\Tools\7za\7za.exe x "C:\RetroCake\Temp\cores\*.zip" -o"C:\RetroCake
 rmdir "C:\RetroCake\Temp\cores" /s /q
 del "C:\RetroCake\Temp\RetroArch_x64.zip" /q
 
-goto RAShortcutcus
+goto RACFGcus
 
 :x86cus
 ::Download all files
@@ -9652,19 +9628,8 @@ ping 127.0.0.1 -n 6 >nul
 del "C:\RetroCake\Temp\RetroArch_x86.zip" /q
 ping 127.0.0.1 -n 6 >nul
 rmdir "C:\RetroCake\Temp\cores" /s /q
-goto RAShortcutcus
-
-:RAShortcutcus
-::Creates a new Shortcut for RetroArch
-del "%USERPROFILE%\Desktop\RetroArch.lnk
-echo Set oWS = WScript.CreateObject("WScript.Shell") > "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo sLinkFile = "%USERPROFILE%\Desktop\RetroArch.lnk" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.TargetPath = "C:\RetroCake\RetroArch\retroarch.exe" >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-echo oLink.Save >> "C:\RetroCake\Temp\CreateShortcut2.vbs"
-cscript "C:\RetroCake\Temp\CreateShortcut2.vbs"
-del "C:\RetroCake\Temp\CreateShortcut2.vbs"
 goto RACFGcus
+
 
 :RACFGcus
 echo config_save_on_exit = "true"> C:\RetroCake\RetroArch\retroarch.cfg
