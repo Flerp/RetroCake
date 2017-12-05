@@ -705,7 +705,7 @@ echo =         Cleaning up downloaded files         =
 echo ================================================
 ::New Shortcut Maker
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "C:\RetroCake\Temp\CreateShortcut.vbs"
-echo sLinkFile = "%USERPROFILE%\Desktop\EmulationStation.lnk" >> "C:\RetroCake\Temp\CreateShortcut.vbs"
+echo sLinkFile = "%USERPROFILE%\Desktop\RetroCake.lnk" >> "C:\RetroCake\Temp\CreateShortcut.vbs"
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "C:\RetroCake\Temp\CreateShortcut.vbs"
 echo oLink.TargetPath = "C:\RetroCake\EmulationStation\emulationstation.exe" >> "C:\RetroCake\Temp\CreateShortcut.vbs"
 echo oLink.Save >> "C:\RetroCake\Temp\CreateShortcut.vbs"
@@ -4494,7 +4494,7 @@ echo =                                                   =
 echo =====================================================
 cd C:\
 IF EXIST C:\RetroCake\ROMS\ move C:\RetroCake\ROMS C:\ROMS
-del "%USERPROFILE%\Desktop\EmulationStation.lnk"
+del "%USERPROFILE%\Desktop\RetroCake.lnk"
 rmdir "C:\RetroCake" /s /q
 rmdir "%USERPROFILE%\.emulationstation" /s /q
 goto CleanAllExit
@@ -4513,7 +4513,7 @@ echo =                                                   =
 Echo =          DELETING EMULATIONSTATION FILES          =
 echo =                                                   =
 echo =====================================================
-del "%USERPROFILE%\Desktop\EmulationStation.lnk"
+del "%USERPROFILE%\Desktop\RetroCake"
 rmdir C:\RetroCake\EmulationStation /s /q
 rmdir "%USERPROFILE%\.emulationstation" /s /q
 goto CleanAllExit
