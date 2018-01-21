@@ -618,8 +618,8 @@ echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
 IF ERRORLEVEL ==3 GOTO DediMenu
-IF ERRORLEVEL ==2 GOTO DediAutoStartRemove
-IF ERRORLEVEL ==1 GOTO DediAutoStartSetup
+IF ERRORLEVEL ==2 GOTO DediHostnameCus
+IF ERRORLEVEL ==1 GOTO DediHostnameDef
 
 :DediHostnameDef
 cls
