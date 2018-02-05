@@ -2,19 +2,17 @@ If you like my project and would like to donate click the button below.\
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R477DPAUW89PU)
 
 
-# What is this?
+# What Is This?
 
 RetroCake is a tool used to setup a RetroPie-like environment on Windows Operating Systems.\
 You can use EmulationStation as a desktop application, or you can setup a Windows machine to be a dedicated Emulator Machine.\
-I developed this script initially due to XServer on debian based linux distros having screen tearing issues.\
-After initial developement I really grew to like having EmulationStation as a desktop app, and I figured others may like it, too.
 
 This tool does not include ROM or BIOS files, they need to be supplied.
 
-All RetroCake files are contained in C:\RetroCake\
+All RetroCake files are contained in C:\RetroCake\ by default.
 If you find a bug, or have a feature request please use the github issue tracker.
 
-## Supported Systems include:
+## Supported Systems Include:
 
 	3do
 	ags
@@ -73,7 +71,7 @@ If you find a bug, or have a feature request please use the github issue tracker
 	wii
 	zxspectrum
 
-## Some Systems Require BIOS files.
+## Some Systems Require BIOS files
 They are listed below
 
 	Amiga         C:\RetroCake\RetroArch\system\kick13.rom OR C:\RetroCake\RetroArch\system\kick20.rom OR C:\RetroCake\RetroArch\system\kick31.rom
@@ -91,9 +89,9 @@ They are listed below
 	Sega Saturn   C:\RetroCake\RetroArch\system\saturn_bios.bin
 
 	
-### Once the Automated installer is done simply double click EmuLationStation on your desktop.
+### Once the automated installer is done simply double click EmulationStation on your desktop
 
-#### The list of features is as follows:
+#### The List Of Features Is As Follows:
 
 # Automated Installers
 
@@ -105,7 +103,7 @@ This option is if you do not wish to use the default ROM directories (C:\RetroCa
 Once the setup is completed you will need to edit the es_systems.cfg to change the ROM directories to your liking.\
 This option is great for people who have ROMS on another drive (like me), or just do not wish to use the default folder.
 
-## Default Installer.
+## Default Installer
 
 This option handles the ROM directories for you.\
 It creates a system folder for most supported ROMS.\
@@ -194,18 +192,18 @@ The backup is in case something breaks with a newer build when updating.
 ## Manage es_systems.cfg
 This is for generating and editing es_systems.cfg
 
-## Manage EmulationStation Themes.
+## Manage EmulationStation Themes
 
 This tool has several features, and will setup GIT to C:\RetroCake\Tools\Git 
 
-### Install/update all themes.
-Relatively Self explanatory. This installs every avaiable theme for EmulationStation.
+### Install/Update All Themes
+Relatively Self explanatory. This installs every available theme for EmulationStation.
 		
 ### Install/Update Individual Themes
 This option lets you select the theme you want by name and install 1 by one. \
-Userful if you do like wish to install 80 themes and just want a specific one.
+Useful if you do like wish to install 80 themes and just want a specific one.
 		
-### Theme Gallery/Previews.
+### Theme Gallery/Previews
 This downloads previews for all available themes and writes them to a HTML file.\
 The HTML file is them launched with your default browser.\
 Hover over the image to see which theme it belongs to.\
@@ -217,11 +215,11 @@ This is to help with the Individual theme downloader so you can see what you're 
 
 This installs the latest Stable Build of RetroArch. In case you wanted to revert from a nightly build.
 
-## Update RetroArch to the latest nightly
+## Update RetroArch to the Latest Nightly
 
 Updates RetroArch, self explanatory.
 
-## Generate Clean Retroarch.cfg
+## Generate Clean RetroArch.cfg
 
 This generates a RetroArch.cfg with nearly default settings\
 Changes made are as follows:
@@ -229,12 +227,12 @@ Changes made are as follows:
 	All Games Start in Fullscreen.
 	You can bring up the RetroArch menu with Start and Select
 	
-## Update RetroArch Cores to the latest Nightly Build.
+## Update RetroArch Cores to the Latest Nightly Build
 
-Self Explanatory.
+Self Explanatory
 This updates all RetroArch Cores (108 total)
 
-# Manage Additional Emulators.
+# Manage Additional Emulators
 
 This option installs emulators for systems that RetroArch cannot emulate.
 Current emulators are:
@@ -247,22 +245,22 @@ Current emulators are:
 	jzIntv
 	PCSX2
 
-# Manage ROM Directories.
+# Manage ROM Directories
 
 This creates the default ROM directories in C:\RetroCake\ROMS\
 You can also create custom ROM directories like E:\ROMS\
 You can also Share the ROM Directories from here if using a dedicated Emulator Box.
 
-# Manage Dedicated EmuBox Settings (Not fully tested yet)
+# Manage Dedicated EmuBox Settings
 
-## Setup all dedicated emubox settings
+## Setup All Dedicated Emubox Settings
 
 This option will do a full setup and turn your RetroCake Installation into a Dedicate Emu Box.\
-This option inclused installation of all of the options below.\
+This option includes installation of all of the options below.\
 The only user requires input is during the Auto Login setup.\
 This is due to how Windows handles Auto login.
 
-## RetroCake auto start options  
+## RetroCake Auto Start Options  
 
 From here you can select if you'd like to Automatically start RetroCake (EmulationStation) upon login.\
 This goes hand in hand with Auto Login.\
@@ -274,37 +272,37 @@ Self Explanatory.\
 Opens the netplwiz menu.\
 Guides you through setting up Auto Login.
 
-## Setup RetroCake folder shares 
+## Setup RetroCake Folder Shares 
 
-### Setup RetroCake shares with default rom directory
+### Setup RetroCake Shares With Default Rom Directory
  
 Sets up the following shares
 
 	ROMS
 	BIOS
 	EMULATORS
-	EMULATIONSTATION
+	EmulationStation
     
 The ROMS folder uses the default C:\RetroCake\ROMS
 
-### Setup RetroCake shares with custom rom directory
+### Setup RetroCake Shares With Custom Rom Directory
 
 Sets up the following shares
 
 	ROMS
 	BIOS
 	EMULATORS
-	EMULATIONSTATION
+	EmulationStation
 
 You will be asked to enter the ROMS directory.\
 This option is if you installed using a custom ROMS directory.
 
-### Remove RetroCake shares
+### Remove RetroCake Shares
 
 Self Explanatory.\
 Removes all shares created by this script.
 
-## Setup system name
+## Setup System Name
 
 From here you can set your PC's hostname to the default RetroCake, or to any custom hostname you'd like.\
 This is to make it easier to access the shares on the computer.
@@ -312,5 +310,5 @@ This is to make it easier to access the shares on the computer.
 
 # System Cleanup
 
-This option is for cleaning up parts of RetroCake or removing REtroCake entirely.\
+This option is for cleaning up parts of RetroCake or removing RetroCake entirely.\
 Mostly used by me for Testing, but if anyone needs to clean up and remove files this is for you.
