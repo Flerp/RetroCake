@@ -144,7 +144,7 @@ echo =                                                               =
 echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-32-bit.7z.exe -OutFile "%rkdir%\Temp\git.zip"
+powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/PortableGit-2.16.2-32-bit.7z.exe -OutFile "%rkdir%\Temp\git.zip"
 mkdir %rkdir%\Tools\git
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa
 cls
