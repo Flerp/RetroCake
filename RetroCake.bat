@@ -35,7 +35,7 @@ goto CheckRetroCake
 :CusInstall
 ::Prompts to install in a custom directory or default C:\RetroCake.
 cls
-echo(
+
 set /P c=Install RetroCake in a custom directory (Default is C:\RetroCake)[Y/N]?
 if /I "%c%" EQU "Y" goto CusInstallY
 if /I "%c%" EQU "N" goto CusInstallN
@@ -43,7 +43,7 @@ if /I "%c%" EQU "N" goto CusInstallN
 :CusInstallY
 ::Pronpts to enter the custom installation directory.
 cls
-echo(
+
 set /p rkdir="Enter Custom RetroCake Install Path (default C:\RetroCake): "
 ::writes the directory to %APPDATA%\RetroCake\ for use when launching the bat file.
 mkdir %APPDATA%\RetroCake\
@@ -90,13 +90,13 @@ goto install7z
 :install7z
 ::Installs 7z with pretty information.
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
+
+
+
+
+
+
+
 echo =================================================================
 echo =                                                               =
 echo =                      SETTING UP 7ZA...                        =
@@ -113,6 +113,36 @@ echo ================================================
 ping 127.0.0.1 -n 2 >nul
 ::Deletes downloaded zip
 del %rkdir%\Tools\7za\7za.zip
+goto WGETSetup
+
+:WGETSetup
+::Installs wget binaries with pretty information.
+cls
+
+
+
+
+
+
+
+echo =================================================================
+echo =                                                               =
+echo =                     SETTING UP WGET...                        =
+echo =                                                               =
+echo =================================================================
+mkdir %rkdir%\Tools\Wget
+::Pulls wget binaries and unzips via powershell. (All future unzipping is done with 7za, as it is faster and cleaner.
+powershell -command "(New-Object Net.WebClient).DownloadFile('https://eternallybored.org/misc/wget/releases/wget-1.19.4-win32.zip','%rkdir%\Tools\Wget\Wget.zip')
+ping 127.0.0.1 -n 3 > nul
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Tools\Wget\Wget.zip" -o"%rkdir%\Tools\Wget" -aoa > nul
+cls
+echo ================================================
+echo =         Cleaning up downloaded files         =
+echo ================================================
+::Waits for the zip to be fully closed
+ping 127.0.0.1 -n 2 >nul
+::Deletes downloaded zip
+del %rkdir%\Tools\Wget\Wget.zip
 goto SGitCheck
 
 :SGitCheck
@@ -132,21 +162,21 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 :sgit32
 ::Installs git the same way as 7za
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
+
+
+
+
+
+
+
 echo =================================================================
 echo =                                                               =
 echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/PortableGit-2.16.2-32-bit.7z.exe -OutFile "%rkdir%\Temp\git.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/Flerp/RetroCake/releases/download/N%2FA/PortableGit-2.16.2-32-bit.7z.exe -O "%rkdir%\Temp\git.zip"
 mkdir %rkdir%\Tools\git
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -158,21 +188,14 @@ goto menu
 :sgit64
 ::Installs git the same way as 7za
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-64-bit.7z.exe -OutFile "%rkdir%\Temp\git.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/git-for-windows/git/releases/download/v2.15.0.windows.1/PortableGit-2.15.0-64-bit.7z.exe -O "%rkdir%\Temp\git.zip"
 mkdir %rkdir%\Tools\git
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -190,8 +213,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo(
-echo RetroCake v1.3.0
+echo RetroCake v1.4.0
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -491,7 +513,7 @@ IF ERRORLEVEL ==1 GOTO FullDedi
 :DediAsk
 ::Asks if this machine will be used as a dedicated emulator machine instead of installing as an application.
 cls
-echo(
+
 set /P c=Is this system a dedicated Emulator Box [Y/N]?
 if /I "%c%" EQU "Y" goto FullDedi
 if /I "%c%" EQU "N" goto BrandNewClean
@@ -525,13 +547,6 @@ IF ERRORLEVEL ==1 GOTO DediAutoStartSetup
 :DediAutoStartSetup
 ::Creates a batch file to launch Emulationstation. Creates a shortcut in the startup folder.
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo ====================================================
 echo =                                                  =
 echo =      ADDING RETROCAKE TO AUTOSTART ON LOGIN      =
@@ -555,13 +570,6 @@ goto completed
 :DediAutoStartRemove
 ::Removes the shortcut in the startup folder. Disabling launching emulationstation on login.
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo ====================================================
 echo =                                                  =
 echo =      REMOVING RETROCAKE AUTOSTART ON LOGIN       =
@@ -576,13 +584,6 @@ goto completed
 :AutoLogin
 ::Guides the user through setting up Auto login. Tried to do this via registry edits, but it never worked properly.
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo ==================================================================
 echo =                                                                =
 echo =                 PLEASE UNCHECK THE BOX LABELLED                =
@@ -637,7 +638,7 @@ goto completed
 
 :RomShareCus
 ::Shares Custom ROM dir.
-echo(
+
 set /p cusromdir="Enter Path for ROM Folder (default %rkdir%\ROMS): "
 net share ROMS=%cusromdir% /grant:everyone,full
 IF EXIST %rkdir%\Temp\FullDedi.txt goto DediHostnameDef
@@ -700,13 +701,6 @@ goto completed
 :StartESVerCheck
 ::Starts checking Emulationstation's version for update. Removes the ESCheck folder to ensure comparison results are good.
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo ====================================================
 echo =                                                  =
 echo =               CHECKING FOR UPDATES               =
@@ -725,9 +719,9 @@ goto ESCheck
 ::tried through WMIC checks, but version string is not included in the EXE :<
 IF NOT EXIST %rkdir%\EmulationStation\emulationstation.exe goto UpdateESQN
 mkdir %rkdir%\Temp\ESCheck
-powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32-no-deps.zip -OutFile "%rkdir%\Temp\ESCheck\tempES.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/jrassa/EmulationStation/releases/download/continuous-master/EmulationStation-Win32-no-deps.zip -O "%rkdir%\Temp\ESCheck\tempES.zip"
 cls
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ESCheck\tempES.zip" -o"%rkdir%\Temp\ESCheck" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ESCheck\tempES.zip" -o"%rkdir%\Temp\ESCheck" -aoa > nul
 ::wmic datafile where name="C:\\RetroCake\\EmulationStation\\emulationstation.exe" get Version /value > %rkdir%\Temp\ESCheck\currentES.txt
 ::wmic datafile where name="C:\\RetroCake\\Temp\\ESCheck\\emulationstation.exe" get Version /value > %rkdir%\Temp\ESCheck\newES.txt
 for %%I in (%rkdir%\EmulationStation\emulationstation.exe) do echo %%~zI > %rkdir%\Temp\ESCheck\currentES.txt
@@ -742,7 +736,7 @@ goto UpdateESQ
 :UpdateESQ
 ::Prompts to update. Sends to Emulationstation installation (Newest available version)
 cls
-echo(
+
 set /P c=An update is available. Would you like to update [Y/N]?
 if /I "%c%" EQU "Y" goto UpdateES
 if /I "%c%" EQU "N" goto cancelled
@@ -750,7 +744,7 @@ if /I "%c%" EQU "N" goto cancelled
 :UpdateESQN
 ::Lets the user know that emulationstation is not installed. Prompts for installation. (Newest available version)
 cls
-echo(
+
 set /P c=EmulationStation not found. Would you like to install [Y/N]?
 if /I "%c%" EQU "Y" goto UpdateES
 if /I "%c%" EQU "N" goto cancelled
@@ -770,22 +764,16 @@ del "%USERPROFILE%\Desktop\*statio*.lnk
 
 ::Downloads the latest build of EmulationStation
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
+
 echo ====================================================
 echo =                                                  =
 echo = DOWNLOADING THE LATEST BUILD OF EMULATIONSTATION =
 echo =                                                  =
 echo ====================================================
-powershell -command "Invoke-WebRequest -Uri https://github.com/jrassa/EmulationStation/releases/download/continuous/EmulationStation-Win32.zip -OutFile "%rkdir%\Temp\ES.zip""
-
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/jrassa/EmulationStation/releases/download/continuous-master/EmulationStation-Win32.zip -O "%rkdir%\Temp\ES.zip"
+ping 127.0.0.1 -n 3 > nul
 ::Extracts to the RetroCake\Emulationstation directory
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ES.zip" -o"%rkdir%\EmulationStation"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ES.zip" -o"%rkdir%\EmulationStation" > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -1908,7 +1896,7 @@ goto completed
 ::Creates es_systems.cfg using the custom ROM directory specified during automated installation or when managing ROM directories.
 
 cls
-echo(
+
 set /p cusromdir="Enter Path for ROM Folder (default %rkdir%\ROMS): "
 
 echo ^<?xml version="1.0"?^> > "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -2589,21 +2577,14 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :x64RA
 ::Installs RetroArch 1.6.7 to RetroCake\RetroArch. Cleans up all downloaded files when done. 64 bit
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -OutFile "%rkdir%\Temp\RetroArch_x64.zip""
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
 
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -2614,21 +2595,14 @@ goto RACFG
 
 :x86RA
 ::Installs RetroArch 1.6.7 to RetroCake\RetroArch. Cleans up all downloaded files when done. 32 bit
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -OutFile "%rkdir%\Temp\RetroArch_x86.zip""
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
 
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -2653,20 +2627,20 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :x64RAn
 ::Installs RetroArch to RetroCake\RetroArch. Cleans up all downloaded files when done. x64 version of latest nightly
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
+
+
+
+
+
+
+
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/nightly/windows/x86_64/RetroArch.7z -OutFile "%rkdir%\Temp\RetroArch_x64.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/nightly/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -2677,20 +2651,13 @@ goto completed
 
 :x86RAn
 ::Installs RetroArch to RetroCake\RetroArch. Cleans up all downloaded files when done. 32 bit version of the latest nightly
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://buildbot.libretro.com/nightly/windows/x86/RetroArch.7z -OutFile "%rkdir%\Temp\RetroArch_x86.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/nightly/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -4421,59 +4388,52 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 :x64core
 ::Installed all RetroArch cores needed by RetroCake. 64 bit
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =     Downloading RetroArch cores. This will take some time     =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/2048_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\1.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/4do_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\3.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/atari800_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\5.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/bluemsx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\6.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/bnes_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\7.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/cap32_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\15.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/fbalpha_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\31.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/fceumm_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\32.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/fuse_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\35.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/gambatte_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\36.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/genesis_plus_gx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\37.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/gpsp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\39.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/handy_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\41.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2003_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\47.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2010_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\48.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2014_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\49.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\50.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_gba_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\51.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_ngp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\53.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_pce_fast_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\54.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_psx_hw_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\56.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_psx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\57.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_saturn_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\58.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_supergrafx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\60.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/melonds_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\63.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/mupen64plus_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\68.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/nestopia_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\70.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/pcsx_rearmed_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\76.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/picodrive_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\77.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/ppsspp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\80.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/prosystem_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\82.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/puae_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\83.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/px68k_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\84.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/redream_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\86.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/reicast_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\87.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/snes9x2010_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\94.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/stella_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\96.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/vecx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\102.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86_64/latest/virtualjaguar_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\106.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/2048_libretro.dll.zip -O "%rkdir%\Temp\cores\1.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/4do_libretro.dll.zip -O "%rkdir%\Temp\cores\3.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/atari800_libretro.dll.zip -O "%rkdir%\Temp\cores\5.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/bluemsx_libretro.dll.zip -O "%rkdir%\Temp\cores\6.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/bnes_libretro.dll.zip -O "%rkdir%\Temp\cores\7.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/cap32_libretro.dll.zip -O "%rkdir%\Temp\cores\15.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/fbalpha_libretro.dll.zip -O "%rkdir%\Temp\cores\31.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/fceumm_libretro.dll.zip -O "%rkdir%\Temp\cores\32.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/fuse_libretro.dll.zip -O "%rkdir%\Temp\cores\35.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/gambatte_libretro.dll.zip -O "%rkdir%\Temp\cores\36.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/genesis_plus_gx_libretro.dll.zip -O "%rkdir%\Temp\cores\37.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/gpsp_libretro.dll.zip -O "%rkdir%\Temp\cores\39.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/handy_libretro.dll.zip -O "%rkdir%\Temp\cores\41.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2003_libretro.dll.zip -O "%rkdir%\Temp\cores\47.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2010_libretro.dll.zip -O "%rkdir%\Temp\cores\48.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame2014_libretro.dll.zip -O "%rkdir%\Temp\cores\49.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mame_libretro.dll.zip -O "%rkdir%\Temp\cores\50.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_gba_libretro.dll.zip -O "%rkdir%\Temp\cores\51.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_ngp_libretro.dll.zip -O "%rkdir%\Temp\cores\53.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_pce_fast_libretro.dll.zip -O "%rkdir%\Temp\cores\54.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_psx_hw_libretro.dll.zip -O "%rkdir%\Temp\cores\56.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_psx_libretro.dll.zip -O "%rkdir%\Temp\cores\57.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_saturn_libretro.dll.zip -O "%rkdir%\Temp\cores\58.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mednafen_supergrafx_libretro.dll.zip -O "%rkdir%\Temp\cores\60.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/melonds_libretro.dll.zip -O "%rkdir%\Temp\cores\63.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/mupen64plus_libretro.dll.zip -O "%rkdir%\Temp\cores\68.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/nestopia_libretro.dll.zip -O "%rkdir%\Temp\cores\70.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/pcsx_rearmed_libretro.dll.zip -O "%rkdir%\Temp\cores\76.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/picodrive_libretro.dll.zip -O "%rkdir%\Temp\cores\77.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/ppsspp_libretro.dll.zip -O "%rkdir%\Temp\cores\80.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/prosystem_libretro.dll.zip -O "%rkdir%\Temp\cores\82.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/puae_libretro.dll.zip -O "%rkdir%\Temp\cores\83.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/px68k_libretro.dll.zip -O "%rkdir%\Temp\cores\84.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/redream_libretro.dll.zip -O "%rkdir%\Temp\cores\86.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/reicast_libretro.dll.zip -O "%rkdir%\Temp\cores\87.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/snes9x2010_libretro.dll.zip -O "%rkdir%\Temp\cores\94.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/stella_libretro.dll.zip -O "%rkdir%\Temp\cores\96.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/vecx_libretro.dll.zip -O "%rkdir%\Temp\cores\102.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86_64/latest/virtualjaguar_libretro.dll.zip -O "%rkdir%\Temp\cores\106.zip"
 mkdir %rkdir%\RetroArch\cores
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -4488,58 +4448,51 @@ goto completed
 :x86core
 ::Installed all RetroArch cores needed by RetroCake. 32 bit
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =     Downloading RetroArch cores. This will take some time     =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/2048_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\1.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/4do_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\3.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/atari800_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\5.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/bluemsx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\6.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/bnes_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\7.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/cap32_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\15.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/fbalpha_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\31.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/fceumm_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\32.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/fuse_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\35.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/genesis_plus_gx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\37.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/gpsp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\39.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/handy_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\41.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mame2003_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\47.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mame2010_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\48.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mame2014_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\49.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mame_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\50.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_gba_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\51.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_ngp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\53.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_pce_fast_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\54.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_psx_hw_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\56.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_psx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\57.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_saturn_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\58.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_supergrafx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\60.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/melonds_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\63.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/mupen64plus_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\68.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/nestopia_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\70.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/pcsx_rearmed_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\76.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/picodrive_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\77.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/ppsspp_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\80.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/prosystem_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\82.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/puae_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\83.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/px68k_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\84.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/redream_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\86.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/reicast_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\87.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/snes9x2010_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\94.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/stella_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\96.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/vecx_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\102.zip"
-powershell -command "Invoke-WebRequest -Uri http://buildbot.libretro.com/nightly/windows/x86/latest/virtualjaguar_libretro.dll.zip -OutFile "%rkdir%\Temp\cores\106.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/2048_libretro.dll.zip -O "%rkdir%\Temp\cores\1.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/4do_libretro.dll.zip -O "%rkdir%\Temp\cores\3.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/atari800_libretro.dll.zip -O "%rkdir%\Temp\cores\5.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/bluemsx_libretro.dll.zip -O "%rkdir%\Temp\cores\6.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/bnes_libretro.dll.zip -O "%rkdir%\Temp\cores\7.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/cap32_libretro.dll.zip -O "%rkdir%\Temp\cores\15.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/fbalpha_libretro.dll.zip -O "%rkdir%\Temp\cores\31.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/fceumm_libretro.dll.zip -O "%rkdir%\Temp\cores\32.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/fuse_libretro.dll.zip -O "%rkdir%\Temp\cores\35.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/genesis_plus_gx_libretro.dll.zip -O "%rkdir%\Temp\cores\37.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/gpsp_libretro.dll.zip -O "%rkdir%\Temp\cores\39.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/handy_libretro.dll.zip -O "%rkdir%\Temp\cores\41.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mame2003_libretro.dll.zip -O "%rkdir%\Temp\cores\47.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mame2010_libretro.dll.zip -O "%rkdir%\Temp\cores\48.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mame2014_libretro.dll.zip -O "%rkdir%\Temp\cores\49.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mame_libretro.dll.zip -O "%rkdir%\Temp\cores\50.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_gba_libretro.dll.zip -O "%rkdir%\Temp\cores\51.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_ngp_libretro.dll.zip -O "%rkdir%\Temp\cores\53.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_pce_fast_libretro.dll.zip -O "%rkdir%\Temp\cores\54.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_psx_hw_libretro.dll.zip -O "%rkdir%\Temp\cores\56.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_psx_libretro.dll.zip -O "%rkdir%\Temp\cores\57.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_saturn_libretro.dll.zip -O "%rkdir%\Temp\cores\58.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mednafen_supergrafx_libretro.dll.zip -O "%rkdir%\Temp\cores\60.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/melonds_libretro.dll.zip -O "%rkdir%\Temp\cores\63.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/mupen64plus_libretro.dll.zip -O "%rkdir%\Temp\cores\68.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/nestopia_libretro.dll.zip -O "%rkdir%\Temp\cores\70.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/pcsx_rearmed_libretro.dll.zip -O "%rkdir%\Temp\cores\76.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/picodrive_libretro.dll.zip -O "%rkdir%\Temp\cores\77.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/ppsspp_libretro.dll.zip -O "%rkdir%\Temp\cores\80.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/prosystem_libretro.dll.zip -O "%rkdir%\Temp\cores\82.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/puae_libretro.dll.zip -O "%rkdir%\Temp\cores\83.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/px68k_libretro.dll.zip -O "%rkdir%\Temp\cores\84.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/redream_libretro.dll.zip -O "%rkdir%\Temp\cores\86.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/reicast_libretro.dll.zip -O "%rkdir%\Temp\cores\87.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/snes9x2010_libretro.dll.zip -O "%rkdir%\Temp\cores\94.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/stella_libretro.dll.zip -O "%rkdir%\Temp\cores\96.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/vecx_libretro.dll.zip -O "%rkdir%\Temp\cores\102.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://buildbot.libretro.com/nightly/windows/x86/latest/virtualjaguar_libretro.dll.zip -O "%rkdir%\Temp\cores\106.zip"
 mkdir %rkdir%\RetroArch\cores
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -4587,7 +4540,7 @@ IF ERRORLEVEL ==1 GOTO CleanAll
 :CleanAll
 ::Prompts confirmation before wiping out all files.
 cls
-echo(
+
 set /P c=Are you sure you want to delete ALL RetroCake Files (Moves roms from REtroCake\ROMS to C:\ROMS[Y/N]?
 if /I "%c%" EQU "Y" goto delall
 if /I "%c%" EQU "N" goto menu
@@ -4611,7 +4564,7 @@ goto CleanAllExit
 :CleanES
 ::Prompts for the deletion of all EmulationStation and related files
 cls
-echo(
+
 set /P c=Are you sure you want to delete ALL EmulationStation Files (Includes Settings)[Y/N]?
 if /I "%c%" EQU "Y" goto delES
 if /I "%c%" EQU "N" goto menu
@@ -4632,7 +4585,7 @@ goto CleanAllExit
 :CleanRA
 ::Prompts for the deletion of all RetroArch and related files
 cls
-echo(
+
 set /P c=Are you sure you want to delete ALL RetroArch Files (Includes Settings)[Y/N]?
 if /I "%c%" EQU "Y" goto delRA
 if /I "%c%" EQU "N" goto menu
@@ -4651,7 +4604,7 @@ goto CleanAllExit
 :CleanEmu
 ::Prompts for the deletion of all additional emulators and related files
 cls
-echo(
+
 set /P c=Are you sure you want to delete ALL Additional Emulators (Includes Settings)[Y/N]?
 if /I "%c%" EQU "Y" goto delEmu
 if /I "%c%" EQU "N" goto menu
@@ -4670,7 +4623,7 @@ goto CleanAllExit
 :CleanTools
 ::Prompts for the deletion of RetroCake's support tools (7za, git, etc)
 cls
-echo(
+
 set /P c=Are you sure you want to delete ALL RetroCake tools (Includes Settings)[Y/N]?
 if /I "%c%" EQU "Y" goto delTools
 if /I "%c%" EQU "N" goto menu
@@ -5668,21 +5621,21 @@ goto ThemeManager
 :AppleWin
 ::Installs AppleWin (Apple II Emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
+
+
+
+
+
+
+
 echo =================================================================
 echo =                                                               =
 echo =                     DOWNLOADING APPLEWIN                      =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://github.com/AppleWin/AppleWin/releases/download/v1.26.3.4/AppleWin1.26.3.4.zip -OutFile "%rkdir%\Temp\AppleWin.zip""
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/AppleWin/AppleWin/releases/download/v1.26.3.4/AppleWin1.26.3.4.zip -O "%rkdir%\Temp\AppleWin.zip"
 mkdir %rkdir%\Emulators\AppleWin
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\AppleWin.zip" -o"%rkdir%\Emulators\AppleWin" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\AppleWin.zip" -o"%rkdir%\Emulators\AppleWin" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5705,20 +5658,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :hatari32
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                      DOWNLOADING HATARI                       =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows.zip -OutFile "%rkdir%\Temp\Hatari32.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari32.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows.zip -O "%rkdir%\Temp\Hatari32.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5731,20 +5677,13 @@ goto completed
 	
 :hatari64
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                      DOWNLOADING HATARI                       =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows64.zip -OutFile "%rkdir%\Temp\Hatari64.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari64.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://download.tuxfamily.org/hatari/2.0.0/hatari-2.0.0_windows64.zip -O "%rkdir%\Temp\Hatari64.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5762,20 +5701,13 @@ goto completed
 :BeebEm
 ::Installs the Beebem emulator (BBMicro Emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                       DOWNLOADING BEEBEM                      =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://www.mkw.me.uk/beebem/BeebEm414.zip -OutFile "%rkdir%\Temp\BeebEm.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\BeebEm.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://www.mkw.me.uk/beebem/BeebEm414.zip -O "%rkdir%\Temp\BeebEm.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\BeebEm.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5798,20 +5730,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :xroar32
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                        DOWNLOADING XROAR                      =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w32.zip -OutFile "%rkdir%\Temp\XRoar32.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar32.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w32.zip -O "%rkdir%\Temp\XRoar32.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5826,20 +5751,13 @@ goto completed
 
 :xroar64
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                        DOWNLOADING XROAR                      =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w64.zip -OutFile "%rkdir%\Temp\XRoar64.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar64.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://www.6809.org.uk/xroar/dl/xroar-0.34.8-w64.zip -O "%rkdir%\Temp\XRoar64.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5857,21 +5775,14 @@ goto completed
 :Daphne
 ::Installs Daphne (Laserdisc emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                      DOWNLOADING DAPHNE                       =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://www.daphne-emu.com/download/daphne-1.0v-win32.zip -OutFile "%rkdir%\Temp\Daphne.zip""
+%rkdir%\Tools\Wget\wget.exe -q http://www.daphne-emu.com/download/daphne-1.0v-win32.zip -O "%rkdir%\Temp\Daphne.zip"
 mkdir %rkdir%\Emulators\Daphne
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Daphne.zip" -o"%rkdir%\Emulators\Daphne" -aoa
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Daphne.zip" -o"%rkdir%\Emulators\Daphne" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5886,20 +5797,13 @@ goto completed
 :jzIntv
 ::Installs jzIntv (Intellivision emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                       DOWNLOADING JZINTV                      =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://spatula-city.org/~im14u2c/intv/dl/jzintv-20171120-win32.zip -OutFile "%rkdir%\Temp\jzintv.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\jzintv.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://spatula-city.org/~im14u2c/intv/dl/jzintv-20171120-win32.zip -O "%rkdir%\Temp\jzintv.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\jzintv.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5917,20 +5821,13 @@ goto completed
 :PCSX2
 ::Installs PCSX2 (PS2 Emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                       DOWNLOADING PCSX2                       =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri http://www.emulator-zone.com/download.php/emulators/ps2/pcsx2/pcsx2-1.4.0-binaries.7z -OutFile "%rkdir%\Temp\PCSX2.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\PCSX2.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q http://www.emulator-zone.com/download.php/emulators/ps2/pcsx2/pcsx2-1.4.0-binaries.7z -O "%rkdir%\Temp\PCSX2.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\PCSX2.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5948,21 +5845,14 @@ goto completed
 :DolphinEmu
 ::Installs Dolphin (Gamecube and Wii emulator)
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                     DOWNLOADING DOLPHIN                       =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -OutFile "%rkdir%\Temp\VC_Redist_2017.exe""
-powershell -command "Invoke-WebRequest -Uri https://dl.dolphin-emu.org/builds/dolphin-master-5.0-5938-x64.7z -OutFile "%rkdir%\Temp\Dolphin.7z""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2017.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-5938-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -5990,20 +5880,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :VICE32
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                       DOWNLOADING VICE                        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://superb-sea2.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x86.7z -OutFile "%rkdir%\Temp\VICE32.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE32.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q https://superb-sea2.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x86.7z -O "%rkdir%\Temp\VICE32.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
@@ -6018,20 +5901,13 @@ goto completed
 
 :VICE64
 cls
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
-echo(
 echo =================================================================
 echo =                                                               =
 echo =                       DOWNLOADING VICE                        =
 echo =                                                               =
 echo =================================================================
-powershell -command "Invoke-WebRequest -Uri https://iweb.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x64.7z -OutFile "%rkdir%\Temp\VICE64.zip""
-%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE64.zip" -o"%rkdir%\Emulators" -aoa
+%rkdir%\Tools\Wget\wget.exe -q https://iweb.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x64.7z -O "%rkdir%\Temp\VICE64.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
 echo =         Cleaning up downloaded files         =
