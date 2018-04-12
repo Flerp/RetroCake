@@ -153,7 +153,7 @@ echo =                                                               =
 echo =                      SETTING UP GIT...                        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://github.com/Flerp/RetroCake/releases/download/N%2FA/PortableGit-2.16.2-32-bit.7z.exe -O "%rkdir%\Temp\git.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/PortableGit-2.16.2-32-bit.7z.exe -O "%rkdir%\Temp\git.zip"
 mkdir %rkdir%\Tools\git
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa > nul
 cls
