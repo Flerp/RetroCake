@@ -90,13 +90,6 @@ goto install7z
 :install7z
 ::Installs 7z with pretty information.
 cls
-
-
-
-
-
-
-
 echo =================================================================
 echo =                                                               =
 echo =                      SETTING UP 7ZA...                        =
@@ -118,13 +111,6 @@ goto WGETSetup
 :WGETSetup
 ::Installs wget binaries with pretty information.
 cls
-
-
-
-
-
-
-
 echo =================================================================
 echo =                                                               =
 echo =                     SETTING UP WGET...                        =
@@ -162,13 +148,6 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 :sgit32
 ::Installs git the same way as 7za
 cls
-
-
-
-
-
-
-
 echo =================================================================
 echo =                                                               =
 echo =                      SETTING UP GIT...                        =
@@ -213,7 +192,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo RetroCake v1.4.0
+echo RetroCake v1.4.1
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -789,7 +768,40 @@ del "%rkdir%\Temp\CreateShortcut.vbs"
 
 ::Cleans up Downlaoded zip
 del "%rkdir%\Temp\ES.zip"
+if EXIST "%rkdir%\EmulationStation\emulationstation.exe" goto ESNewSucceed
+goto ESNewFailed
 
+:ESNewFailed
+cls
+echo ====================================================
+echo =                                                  =
+echo =  Current Builds of EmulationStation are Failing  =
+echo =           Falling Back to Version 2.8.0          =
+echo =                                                  =
+echo ====================================================
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/Flerp/RetroCake/releases/download/ES_2.8.0/EmulationStation.zip -O "%rkdir%\Temp\ES.zip"
+ping 127.0.0.1 -n 3 > nul
+::Extracts to the RetroCake\Emulationstation directory
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ES.zip" -o"%rkdir%\EmulationStation" > nul
+cls
+echo ================================================
+echo =         Cleaning up downloaded files         =
+echo ================================================
+::Makes a shortcut on the desktop to Emulationstation called RetroCake (EmulationStation icon)
+echo Set oWS = WScript.CreateObject("WScript.Shell") > "%rkdir%\Temp\CreateShortcut.vbs"
+echo sLinkFile = "%USERPROFILE%\Desktop\RetroCake.lnk" >> "%rkdir%\Temp\CreateShortcut.vbs"
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "%rkdir%\Temp\CreateShortcut.vbs"
+echo oLink.TargetPath = "%rkdir%\EmulationStation\emulationstation.exe" >> "%rkdir%\Temp\CreateShortcut.vbs"
+echo oLink.Save >> "%rkdir%\Temp\CreateShortcut.vbs"
+cscript "%rkdir%\Temp\CreateShortcut.vbs"
+del "%rkdir%\Temp\CreateShortcut.vbs"
+
+::Cleans up Downlaoded zip
+del "%rkdir%\Temp\ES.zip"
+if EXIST "%rkdir%\EmulationStation\emulationstation.exe" goto ESNewSucceed
+goto ESInstallTotalFailure
+
+:ESNewSucceed
 ::Installs default Carbon theme
 mkdir "%USERPROFILE%\.emulationstation\themes"
 cd "%USERPROFILE%\.emulationstation\themes"
@@ -5937,6 +5949,20 @@ goto completed
 ::=================================================================================================================================================================================================================================================================================================================
 
 ::Informational Echoes
+
+:ESInstallTotalFailure
+cls
+echo =====================================================
+echo =                                                   =
+echo = Unable to install any version of Emulationstation =
+echo = Please create an issue on github with your OS,    =
+echo = 64/32 bit, and script version.
+echo =                                                   =
+echo =====================================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
 :erroorr
 ::yells at you if there is an error
 cls
