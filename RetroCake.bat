@@ -84,7 +84,7 @@ goto check7z
 
 :check7z
 ::Checks for 7z Installation for use with the bat file.
-IF EXIST %rkdir%\Tools\7za\7za.exe goto 
+IF EXIST %rkdir%\Tools\7za\7za.exe goto WGETSetupCheck
 
 goto install7z
 
