@@ -212,9 +212,13 @@ echo =================================================================
 %rkdir%\Tools\Wget\wget.exe -q https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2017.exe"
 %rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2015_64.exe"
 %rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe -O "%rkdir%\Temp\VC_Redist_2015_32.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/5/B/C/5BC5DBB3-652D-4DCE-B14A-475AB85EEF6E/vcredist_x86.exe -O "%rkdir%\Temp\VC_Redist_2010_32.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/3/2/2/3224B87F-CFA0-4E70-BDA3-3DE650EFEBA5/vcredist_x64.exe -O "%rkdir%\Temp\VC_Redist_2010_64.exe"
 %rkdir%\Temp\VC_Redist_2017.exe /install /quiet
 %rkdir%\Temp\VC_Redist_2015_64.exe /install /quiet
 %rkdir%\Temp\VC_Redist_2015_32.exe /install /quiet
+%rkdir%\Temp\VC_Redist_2010_32.exe /install /quiet
+%rkdir%\Temp\VC_Redist_2010_64.exe /install /quiet
 echo VCRedistInstalled > "%rkdir%\Tools\VC"
 cls
 echo ================================================
@@ -234,7 +238,9 @@ echo =                    SETTING UP VC REDIST                       =
 echo =                                                               =
 echo =================================================================
 %rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe -O "%rkdir%\Temp\VC_Redist_2015_32.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/5/B/C/5BC5DBB3-652D-4DCE-B14A-475AB85EEF6E/vcredist_x86.exe -O "%rkdir%\Temp\VC_Redist_2010_32.exe"
 %rkdir%\Temp\VC_Redist_2015_32.exe /install /quiet
+%rkdir%\Temp\VC_Redist_2010_32.exe /install /quiet
 echo VCRedistInstalled > "%rkdir%\Tools\VC"
 cls
 echo ================================================
