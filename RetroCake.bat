@@ -84,7 +84,8 @@ goto check7z
 
 :check7z
 ::Checks for 7z Installation for use with the bat file.
-IF EXIST %rkdir%\Tools\7za\7za.exe goto SGitCheck
+IF EXIST %rkdir%\Tools\7za\7za.exe goto 
+
 goto install7z
 
 :install7z
@@ -100,13 +101,17 @@ mkdir %rkdir%\Tools\7za
 powershell -command (New-Object Net.WebClient).DownloadFile('http://www.7-zip.org/a/7za920.zip','%rkdir%\Tools\7za\7za.zip');(new-object -com shell.application).namespace('%rkdir%\Tools\7za').CopyHere((new-object -com shell.application).namespace('%rkdir%\Tools\7za\7za.zip').Items(),16)
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ::Waits for the zip to be fully closed
 ping 127.0.0.1 -n 2 >nul
 ::Deletes downloaded zip
 del %rkdir%\Tools\7za\7za.zip
-goto WGETSetup
+goto WGETSetupCheck
+
+:WGETSetupCheck
+IF EXIST "%rkdir%\Tools\Wget\wget.exe" goto SGitCheck
+goto SGitCheck
 
 :WGETSetup
 ::Installs wget binaries with pretty information.
@@ -123,7 +128,7 @@ ping 127.0.0.1 -n 3 > nul
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Tools\Wget\Wget.zip" -o"%rkdir%\Tools\Wget" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ::Waits for the zip to be fully closed
 ping 127.0.0.1 -n 2 >nul
@@ -133,7 +138,7 @@ goto SGitCheck
 
 :SGitCheck
 ::Checks if git is installed (Used for various functions in the bat file)
-IF EXIST %rkdir%\Tools\git\bin\git.exe goto menu
+IF EXIST %rkdir%\Tools\git\bin\git.exe goto VCREDISTCheck
 goto sGitArchCheck
 
 :sGitArchCheck
@@ -158,11 +163,11 @@ mkdir %rkdir%\Tools\git
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del "%rkdir%\Temp\git.zip"
-goto menu
+goto VCREDISTCheck
 
 :sgit64
 ::Installs git the same way as 7za
@@ -177,10 +182,88 @@ mkdir %rkdir%\Tools\git
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\git.zip" -o"%rkdir%\Tools\git" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del "%rkdir%\Temp\git.zip"
+goto VCREDISTCheck
+
+:VCREDISTCheck
+::Checks if RetroCake has installed the Visual Studio Redistributables
+IF EXIST "%rkdir%\Tools\VC" goto DirectXSetupCheck
+goto VCRedistArchCheck
+
+:VCRedistArchCheck
+cls
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+		goto VCRedistInstall64
+	)
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+		goto VCRedistInstall32
+	)
+	
+:VCRedistInstall64
+cls
+echo =================================================================
+echo =                                                               =
+echo =                    SETTING UP VC REDIST                       =
+echo =                                                               =
+echo =================================================================
+%rkdir%\Tools\Wget\wget.exe -q https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2017.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2015_64.exe"
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe -O "%rkdir%\Temp\VC_Redist_2015_32.exe"
+%rkdir%\Temp\VC_Redist_2017.exe /install /quiet
+%rkdir%\Temp\VC_Redist_2015_64.exe /install /quiet
+%rkdir%\Temp\VC_Redist_2015_32.exe /install /quiet
+echo VCRedistInstalled > "%rkdir%\Tools\VC"
+cls
+echo ================================================
+echo =        Cleaning up downloaded file(s)        =
+echo ================================================
+ping 127.0.0.1 -n 3 > nul
+del "%rkdir%\Temp\VC_Redist_2017.exe"
+del "%rkdir%\Temp\VC_Redist_2015_64.exe"
+del "%rkdir%\Temp\VC_Redist_2015_32.exe"
+goto DirectXSetupCheck
+
+:VCRedistInstall32
+cls
+echo =================================================================
+echo =                                                               =
+echo =                    SETTING UP VC REDIST                       =
+echo =                                                               =
+echo =================================================================
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe -O "%rkdir%\Temp\VC_Redist_2015_32.exe"
+%rkdir%\Temp\VC_Redist_2015_32.exe /install /quiet
+echo VCRedistInstalled > "%rkdir%\Tools\VC"
+cls
+echo ================================================
+echo =        Cleaning up downloaded file(s)        =
+echo ================================================
+ping 127.0.0.1 -n 3 > nul
+del "%rkdir%\Temp\VC_Redist_2015_32.exe"
+goto DirectXSetupCheck
+
+:DirectXSetupCheck
+IF EXIST "%rkdir%\Tools\DX" goto menu
+goto DirectXSetup
+
+:DirectXSetup
+cls
+echo =================================================================
+echo =                                                               =
+echo =                     SETTING UP DIRECT X                       =
+echo =                                                               =
+echo =================================================================
+%rkdir%\Tools\Wget\wget.exe -q https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe  -O "%rkdir%\Temp\dxwebsetup.exe"
+%rkdir%\Temp\dxwebsetup.exe /Q
+echo DXInstalled > "%rkdir%\Tools\DX"
+cls
+echo ================================================
+echo =        Cleaning up downloaded file(s)        =
+echo ================================================
+ping 127.0.0.1 -n 3 > nul
+del "%rkdir%\Temp\dxwebsetup.exe"
 goto menu
 
 ::=================================================================================================================================================================================================================================================================================================================
@@ -734,6 +817,7 @@ if /I "%c%" EQU "N" goto cancelled
 ::Backs up old installation
 %rkdir%\Tools\7za\7za.exe a "%rkdir%\Backup\ES_Backup_%gooddayte%_%goodthyme%.zip" "%rkdir%\EmulationStation\"
 
+
 ::Removes old emulationstation files
 rmdir "%rkdir%\EmulationStation" /s /q
 mkdir "%rkdir%\EmulationStation"
@@ -755,7 +839,7 @@ ping 127.0.0.1 -n 3 > nul
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ES.zip" -o"%rkdir%\EmulationStation" > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ::Makes a shortcut on the desktop to Emulationstation called RetroCake (EmulationStation icon)
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%rkdir%\Temp\CreateShortcut.vbs"
@@ -785,7 +869,7 @@ ping 127.0.0.1 -n 3 > nul
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\ES.zip" -o"%rkdir%\EmulationStation" > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ::Makes a shortcut on the desktop to Emulationstation called RetroCake (EmulationStation icon)
 echo Set oWS = WScript.CreateObject("WScript.Shell") > "%rkdir%\Temp\CreateShortcut.vbs"
@@ -2599,7 +2683,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 del "%rkdir%\Temp\RetroArch_x64.zip" /q
@@ -2617,7 +2701,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 del "%rkdir%\Temp\RetroArch_x86.zip" /q
@@ -2655,7 +2739,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 del "%rkdir%\Temp\RetroArch_x64.zip" /q
@@ -2672,7 +2756,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 del "%rkdir%\Temp\RetroArch_x86.zip" /q
@@ -4448,7 +4532,7 @@ mkdir %rkdir%\RetroArch\cores
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 rmdir "%rkdir%\Temp\cores" /s /q
@@ -4507,7 +4591,7 @@ mkdir %rkdir%\RetroArch\cores
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cores\*.zip" -o"%rkdir%\RetroArch\cores" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 4 >nul
 rmdir "%rkdir%\Temp\cores" /s /q
@@ -5650,7 +5734,7 @@ mkdir %rkdir%\Emulators\AppleWin
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\AppleWin.zip" -o"%rkdir%\Emulators\AppleWin" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del %rkdir%\Temp\AppleWin.zip
@@ -5679,7 +5763,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ren %rkdir%\Emulators\hatari-2.0.0_windows Hatari
 ping 127.0.0.1 -n 2 > nul
@@ -5698,7 +5782,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Hatari64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5722,7 +5806,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\BeebEm.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\BeebEm.zip
@@ -5751,7 +5835,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5772,7 +5856,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\XRoar64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5797,7 +5881,7 @@ mkdir %rkdir%\Emulators\Daphne
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Daphne.zip" -o"%rkdir%\Emulators\Daphne" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\Daphne.zip
@@ -5818,7 +5902,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\jzintv.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5842,7 +5926,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\PCSX2.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5862,14 +5946,12 @@ echo =                                                               =
 echo =                     DOWNLOADING DOLPHIN                       =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://download.visualstudio.microsoft.com/download/pr/11100230/15ccb3f02745c7b206ad10373cbca89b/VC_redist.x64.exe -O "%rkdir%\Temp\VC_Redist_2017.exe"
 %rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-5938-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
-%rkdir%\Temp\VC_Redist_2017.exe /install /quiet
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
 ren %rkdir%\Emulators\Dolphin-x64 Dolphin
@@ -5901,7 +5983,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
@@ -5922,7 +6004,7 @@ echo =================================================================
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
-echo =         Cleaning up downloaded files         =
+echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd %rkdir%\Emulators
