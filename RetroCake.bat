@@ -111,7 +111,7 @@ goto WGETSetupCheck
 
 :WGETSetupCheck
 IF EXIST "%rkdir%\Tools\Wget\wget.exe" goto SGitCheck
-goto SGitCheck
+goto WGETSetup
 
 :WGETSetup
 ::Installs wget binaries with pretty information.
