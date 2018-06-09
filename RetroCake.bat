@@ -281,7 +281,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo RetroCake v1.4.1
+echo RetroCake v1.4.2
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -300,9 +300,7 @@ echo =    6.) MANAGE DEDICATED EMUBOX SETTINGS                                 =
 echo =                                                                         =
 echo =    7.) SYSTEM CLEANUP                                                   =
 echo =                                                                         =
-echo ===========================================================================
-echo =                                                                         =
-echo =    8.) EXIT                                                             =
+echo =    8.) ROM SCRAPER                                                      =
 echo =                                                                         =
 echo ===========================================================================
 echo =                                                                         =
@@ -311,7 +309,7 @@ echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
 IF ERRORLEVEL ==9 GOTO RetroCakeUpdate
-IF ERRORLEVEL ==8 exit
+IF ERRORLEVEL ==8 GOTO ScraperSetup
 IF ERRORLEVEL ==7 GOTO SysClean
 IF ERRORLEVEL ==6 GOTO DediMenu
 IF ERRORLEVEL ==5 GOTO RomMenu
@@ -6031,6 +6029,53 @@ IF EXIST %rkdir%\Temp\BrandNewCus goto DediAsk
 goto completed
 
 ::=================================================================================================================================================================================================================================================================================================================
+::Rom Scraper
+
+:ScraperSetup
+IF EXIST %rkdir%\Tools\scraper.exe goto ScraperMenu
+
+:ScraperArch
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+		goto ScraperDL64
+	)
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+		goto ScraperDL86
+	)
+	
+:ScraperDL86
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.5/scraper_windows_386.zip -O "%rkdir%\Temp\scraperx86.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\scraperx86.zip" -o"%rkdir%\Tools" -aoa > nul
+goto ScraperMenu
+
+:ScraperDL64
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.5/scraper_windows_amd64.zip -O "%rkdir%\Temp\scraperx64.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\scraperx64.zip" -o"%rkdir%\Tools" -aoa > nul
+goto ScraperMenu
+
+:ScraperMenu
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) SCRAPE ALL ROMS                                                  =
+echo =                                                                         =
+echo =    2.) SCRAPE INDIVIDUAL SYSTEMS                                        =
+echo =                                                                         =
+echo =    3.) RETURN TO MAIN MENU                                              =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+IF ERRORLEVEL ==3 GOTO menu
+IF ERRORLEVEL ==2 GOTO ScraperSysMenu
+IF ERRORLEVEL ==1 GOTO ScrapeAll
+
+:ScrapeAll
+%rkdir%\Tools\scraper.exe -scrape_all
+goto completed
+
+:ScraperSysMenu
+goto NoFeat
+
+::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -6044,7 +6089,7 @@ echo =====================================================
 echo =                                                   =
 echo = Unable to install any version of Emulationstation =
 echo = Please create an issue on github with your OS,    =
-echo = 64/32 bit, and script version.
+echo =        64/32 bit, and script version.             =
 echo =                                                   =
 echo =====================================================
 echo      Press any key to return to main menu
