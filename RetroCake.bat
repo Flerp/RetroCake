@@ -281,7 +281,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo RetroCake v1.4.2
+echo RetroCake v1.4.3
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -529,16 +529,13 @@ goto completed
 ::Creates a batch file to pull the latest retrocake.bat. Launches the new batch file that launches the new RetroCake.bat. Needed this separation as launching from inside this retrocake.bat caused crashing issues.
 cls
 ping 127.0.0.1 -n 2 >nul
-echo @echo off > %rkdir%\Tools\Updater.bat
-echo rmdir %rkdir%\Tools\Script /S /Q >> %rkdir%\Tools\Updater.bat
-echo rmdir %rkdir%\Tools\RetroCake /S /Q >> %rkdir%\Tools\Updater.bat
-echo cd %rkdir%\Tools >> %rkdir%\Tools\Updater.bat
-echo %rkdir%\Tools\git\bin\git.exe clone --depth=1 https://github.com/Flerp/RetroCake.git >> %rkdir%\Tools\Updater.bat
-echo rmdir %rkdir%\Tools\RetroCake\.git /S /Q >> %rkdir%\Tools\Updater.bat
-echo del %rkdir%\Tools\RetroCake\.gitattributes /S /Q >> %rkdir%\Tools\Updater.bat
-echo Ren RetroCake Script >> %rkdir%\Tools\Updater.bat
-echo start %rkdir%\Tools\Script\RetroCake.bat >> %rkdir%\Tools\Updater.bat
-echo exit >> %rkdir%\Tools\Updater.bat
+echo @echo off
+echo del %rkdir%\Tools\RetroCake.bat /S /Q > "%rkdir%\Tools\Updater.bat"
+echo %rkdir%\Tools\git\bin\git.exe clone --depth=1 https://github.com/Flerp/RetroCake.git %rkdir%\Temp\Script >> "%rkdir%\Tools\Updater.bat"
+echo xcopy %rkdir%\Temp\Script\RetroCake.bat %rkdir%\Tools\ >> "%rkdir%\Tools\Updater.bat"
+echo rmdir %rkdir%\Temp\Script\ /S /Q >> "%rkdir%\Tools\Updater.bat"
+echo start %rkdir%\Tools\RetroCake.bat >> "%rkdir%\Tools\Updater.bat"
+echo exit >> %rkdir%\Tools\Updater.bat 
 start %rkdir%\Tools\Updater.bat
 exit
 
