@@ -281,7 +281,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo RetroCake v1.4.3
+echo RetroCake v1.4.4
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
@@ -467,12 +467,15 @@ Echo =    1.) INSTALL APPLE II EMULATOR (AppleWin)                             =
 echo =                                                                         =
 Echo =    2.) INSTALL COMMODORE 64 EMULATOR (WinVICE)                          =
 echo =                                                                         =
+Echo =    3.) INSTALL WII U EMULATOR (Cemu)                                    =
 echo =                                                                         =
-echo =    3.) RETURN TO MAIN MENU                                              =
+echo =                                                                         =
+echo =    4.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
 CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
-IF ERRORLEVEL ==3 GOTO menu
+IF ERRORLEVEL ==4 GOTO menu
+IF ERRORLEVEL ==3 GOTO CemuEmu
 IF ERRORLEVEL ==2 GOTO VICE
 IF ERRORLEVEL ==1 GOTO AppleWin
 
@@ -1006,6 +1009,16 @@ echo 	^<theme^>wii^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 
 echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<name^>wiiu^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<fullname^>Nintendo Wiiu^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<path^>C:\PATH\TO\ROM\FOLDER\wiiu^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<extension^>.rpx .RPX .iso .ISO .wud .WUD .wux .WUX^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>%rkdir%\Emulators\Cemu\Cemu.exe -f -g "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<platform^>wiiu^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<theme^>wiiu^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+
+echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<name^>gameandwatch^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<fullname^>Game & Watch^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>C:\PATH\TO\ROM\FOLDER\gameandwatch^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -1536,6 +1549,16 @@ echo 	^<theme^>wii^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 
 echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<name^>wiiu^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<fullname^>Nintendo Wiiu^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<path^>%rkdir%\ROMS\wiiu^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<extension^>.rpx .RPX .iso .ISO .wud .WUD .wux .WUX^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>%rkdir%\Emulators\Cemu\Cemu.exe -f -g "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<platform^>wiiu^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<theme^>wiiu^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+
+echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<name^>gameandwatch^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<fullname^>Game & Watch^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>%rkdir%\ROMS\gameandwatch^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -2061,6 +2084,16 @@ echo 	^<theme^>wii^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 
 echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<name^>wiiu^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<fullname^>Nintendo Wiiu^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<path^>%cusromdir%\wiiu^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<extension^>.rpx .RPX .iso .ISO .wud .WUD .wux .WUX^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<command^>%rkdir%\Emulators\Cemu\Cemu.exe -f -g "%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<platform^>wiiu^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<theme^>wiiu^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo    ^</system^>  >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+
+echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<name^>gameandwatch^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<fullname^>Game & Watch^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo     ^<path^>%cusromdir%\gameandwatch^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -2582,6 +2615,7 @@ mkdir %rkdir%\ROMS\snes
 mkdir %rkdir%\ROMS\vectrex
 mkdir %rkdir%\ROMS\virtualboy
 mkdir %rkdir%\ROMS\wii
+mkdir %rkdir%\ROMS\wiiu
 mkdir %rkdir%\ROMS\zxspectrum
 start %rkdir%\ROMS
 IF EXIST %rkdir%\Temp\BrandNewDef goto updateRA
@@ -2649,6 +2683,7 @@ mkdir %cusromdir%\snes
 mkdir %cusromdir%\vectrex
 mkdir %cusromdir%\virtualboy
 mkdir %cusromdir%\wii
+mkdir %cusromdir%\wiiu
 mkdir %cusromdir%\zxspectrum
 start %cusromdir%
 IF EXIST %rkdir%\Temp\BrandNewCus goto updateRA
@@ -5718,13 +5753,6 @@ goto ThemeManager
 :AppleWin
 ::Installs AppleWin (Apple II Emulator)
 cls
-
-
-
-
-
-
-
 echo =================================================================
 echo =                                                               =
 echo =                     DOWNLOADING APPLEWIN                      =
@@ -5959,6 +5987,30 @@ ren %rkdir%\Emulators\Dolphin-x64 Dolphin
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\Dolphin.7z
 del %rkdir%\Temp\VC_Redist_2017.exe
+if EXIST %rkdir%\Emulators\tmp.txt goto CemuEmu
+goto completed
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:CemuEmu
+::Installs Cemu (WiiU emulator)
+cls
+echo =================================================================
+echo =                                                               =
+echo =                      DOWNLOADING CEMU                         =
+echo =                                                               =
+echo =================================================================
+%rkdir%\Tools\Wget\wget.exe -q http://cemu.info/releases/cemu_1.12.2.zip -O "%rkdir%\Temp\cemu.zip"
+%rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cemu.zip" -o"%rkdir%\Emulators" -aoa > nul
+cls
+echo ================================================
+echo =        Cleaning up downloaded file(s)        =
+echo ================================================
+ping 127.0.0.1 -n 2 > nul
+cd %rkdir%\Emulators
+ren %rkdir%\Emulators\cemu_1.12.2 cemu
+ping 127.0.0.1 -n 2 > nul
+del %rkdir%\Temp\cemu.zip
 if EXIST %rkdir%\Emulators\tmp.txt goto VICE
 goto completed
 
