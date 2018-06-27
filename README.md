@@ -5,7 +5,7 @@ If you like my project and would like to donate click the button below.\
 # What Is This?
 
 RetroCake is a tool used to setup a RetroPie-like environment on Windows Operating Systems.\
-You can use EmulationStation as a desktop application, or you can setup a Windows machine to be a dedicated Emulator Machine.\
+You can use EmulationStation as a desktop application, or you can setup a Windows machine to be a dedicated Emulator Machine.
 
 This tool does not include ROM or BIOS files, they need to be supplied.
 
@@ -69,6 +69,7 @@ If you find a bug, or have a feature request please use the github issue tracker
 	vectrex
 	virtualboy
 	wii
+	wiiu
 	zxspectrum
 
 ## Some Systems Require BIOS files
