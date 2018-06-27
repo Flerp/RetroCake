@@ -894,7 +894,7 @@ goto ESInstallTotalFailure
 mkdir "%USERPROFILE%\.emulationstation\themes"
 cd "%USERPROFILE%\.emulationstation\themes"
 rmdir carbon /S /Q
-%rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/RetroPie/es-theme-carbon.git %theme%
+%rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/Flerp/es-theme-carbon.git %theme%
 
 ::Checks for temporary files created during automated installer selection
 IF EXIST %rkdir%\Temp\BrandNewBlank goto blankESCFG
