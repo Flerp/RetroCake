@@ -3,6 +3,7 @@
 ::I have commented as much as I think is needed, but if there is any confusion just message me through github!::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @echo off
+if not "%1" == "max" start /MAX cmd /c %0 max & exit/b
 ::Checks if the batch file was run as admin. If not it yells at you and will exit.
 :check_Permissions
     net session >nul 2>&1
@@ -6132,6 +6133,18 @@ goto NoFeat
 
 ::Informational Echoes
 
+:erroorr
+::yells at you if there is an error, should only show if the script totally failed and ran through to the end somehow
+cls
+echo =============================================
+echo =                                           =
+echo =          SOMETHING WENT WRONG D:          =
+echo =                                           =
+echo =============================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
 :ESInstallTotalFailure
 cls
 echo =====================================================
@@ -6141,18 +6154,6 @@ echo = Please create an issue on github with your OS,    =
 echo =        64/32 bit, and script version.             =
 echo =                                                   =
 echo =====================================================
-echo      Press any key to return to main menu
-pause >nul
-goto menu
-
-:erroorr
-::yells at you if there is an error
-cls
-echo =============================================
-echo =                                           =
-echo =          SOMETHING WENT WRONG D:          =
-echo =                                           =
-echo =============================================
 echo      Press any key to return to main menu
 pause >nul
 goto menu
