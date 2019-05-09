@@ -108,7 +108,8 @@ echo ================================================
 ping 127.0.0.1 -n 2 >nul
 ::Deletes downloaded zip
 del %rkdir%\Tools\7za\7za.zip
-goto WGETSetupCheck
+IF EXIST %rkdir%\Tools\7za\7za.exe goto WGETSetupCheck
+goto 7zerror
 
 :WGETSetupCheck
 IF EXIST "%rkdir%\Tools\Wget\wget.exe" goto SGitCheck
@@ -135,7 +136,8 @@ echo ================================================
 ping 127.0.0.1 -n 2 >nul
 ::Deletes downloaded zip
 del %rkdir%\Tools\Wget\Wget.zip
-goto SGitCheck
+IF EXIST "%rkdir%\Tools\Wget\wget.exe" goto SGitCheck
+goto WGETerror
 
 :SGitCheck
 ::Checks if git is installed (Used for various functions in the bat file)
@@ -168,7 +170,8 @@ echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del "%rkdir%\Temp\git.zip"
-goto VCREDISTCheck
+IF EXIST %rkdir%\Tools\git\bin\git.exe goto VCREDISTCheck
+goto GITerror
 
 :sgit64
 ::Installs git the same way as 7za
@@ -187,7 +190,8 @@ echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 3 > nul
 del "%rkdir%\Temp\git.zip"
-goto VCREDISTCheck
+IF EXIST %rkdir%\Tools\git\bin\git.exe goto VCREDISTCheck
+goto GITerror
 
 :VCREDISTCheck
 ::Checks if RetroCake has installed the Visual Studio Redistributables
@@ -6226,6 +6230,51 @@ echo =  IF YOU HAD ANYTHING IN %rkdir%\ROMS THEY  =
 echo =                ARE NOW IN C:\ROMS               =
 echo =                                                 =
 echo ===================================================
+echo            Press Any Key to Exit
+pause >nul
+exit
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:WGETerror
+::Throws error if wget fails to download
+cls
+echo =============================================
+echo =                                           =
+echo =           WGET DOWNLOAD FAILED            =
+echo =      YELL AT FLERP TO UPDATE THE URL      =
+echo =                                           =
+echo =============================================
+echo            Press Any Key to Exit
+pause >nul
+exit
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:7zerror
+::Throws error if wget fails to download
+cls
+echo =============================================
+echo =                                           =
+echo =            7Z DOWNLOAD FAILED             =
+echo =      YELL AT FLERP TO UPDATE THE URL      =
+echo =                                           =
+echo =============================================
+echo            Press Any Key to Exit
+pause >nul
+exit
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:GITerror
+::Throws error if wget fails to download
+cls
+echo =============================================
+echo =                                           =
+echo =           GIT DOWNLOAD FAILED             =
+echo =      YELL AT FLERP TO UPDATE THE URL      =
+echo =                                           =
+echo =============================================
 echo            Press Any Key to Exit
 pause >nul
 exit
