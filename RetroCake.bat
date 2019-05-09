@@ -124,7 +124,7 @@ echo =                                                               =
 echo =================================================================
 mkdir %rkdir%\Tools\Wget
 ::Pulls wget binaries and unzips via powershell. (All future unzipping is done with 7za, as it is faster and cleaner.
-powershell -command "(New-Object Net.WebClient).DownloadFile('https://eternallybored.org/misc/wget/releases/wget-1.19.4-win32.zip','%rkdir%\Tools\Wget\Wget.zip')
+powershell -command "(New-Object Net.WebClient).DownloadFile('https://eternallybored.org/misc/wget/releases/wget-1.20.3-win32.zip','%rkdir%\Tools\Wget\Wget.zip')
 ping 127.0.0.1 -n 3 > nul
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Tools\Wget\Wget.zip" -o"%rkdir%\Tools\Wget" -aoa > nul
 cls
