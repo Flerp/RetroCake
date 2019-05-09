@@ -4672,7 +4672,7 @@ IF ERRORLEVEL ==1 GOTO CleanAll
 ::Prompts confirmation before wiping out all files.
 cls
 
-set /P c=Are you sure you want to delete ALL RetroCake Files (Moves roms from RetroCake\ROMS to C:\ROMS[Y/N]?
+set /P c=Are you sure you want to delete ALL RetroCake Files (Tries to move roms from RetroCake\ROMS to C:\users\(username)\ROMS, but backup roms just to be safe[Y/N]?
 if /I "%c%" EQU "Y" goto delall
 if /I "%c%" EQU "N" goto menu
 
@@ -4685,7 +4685,7 @@ Echo = DELETING ALL RETROARCH AND EMULATIONSTATION FILES =
 echo =                                                   =
 echo =====================================================
 cd /D C:\
-IF EXIST %rkdir%\ROMS\ move %rkdir%\ROMS C:\ROMS
+IF EXIST "%rkdir%\ROMS\" move "%rkdir%\ROMS" "%USERPROFILE%\ROMS"
 del "%USERPROFILE%\Desktop\RetroCake.lnk"
 del "%APPDATA%\RetroCake\CusInstallDir.txt"
 rmdir "%rkdir%" /s /q
