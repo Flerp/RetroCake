@@ -623,7 +623,7 @@ echo =                                                  =
 echo =      ADDING RETROCAKE TO AUTOSTART ON LOGIN      =
 echo =                                                  =
 echo ====================================================
-cd "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+cd /D "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 echo taskkill /im explorer.exe /f > "%rkdir%\Tools\startES.bat"
 echo "%rkdir%\EmulationStation\emulationstation.exe" >> "%rkdir%\Tools\startES.bat"
 
@@ -796,8 +796,8 @@ cls
 ::wmic datafile where name="C:\\RetroCake\\EmulationStation\\emulationstation.exe" get Version /value > %rkdir%\Temp\ESCheck\currentES.txt
 ::wmic datafile where name="C:\\RetroCake\\Temp\\ESCheck\\emulationstation.exe" get Version /value > %rkdir%\Temp\ESCheck\newES.txt
 for %%I in (%rkdir%\EmulationStation\emulationstation.exe) do echo %%~zI > %rkdir%\Temp\ESCheck\currentES.txt
-for %%I in (C:\\RetroCake\Temp\ESCheck\emulationstation.exe) do echo %%~zI > %rkdir%\Temp\ESCheck\newES.txt
-cd %rkdir%\Temp\ESCheck
+for %%I in (%rkdir%\Temp\ESCheck\emulationstation.exe) do echo %%~zI > %rkdir%\Temp\ESCheck\newES.txt
+cd /D %rkdir%\Temp\ESCheck
 set /p currentES=<currentES.txt
 set /p newES=<newES.txt
 ping 127.0.0.1 -n 2 >nul
@@ -897,7 +897,7 @@ goto ESInstallTotalFailure
 :ESNewSucceed
 ::Installs default Carbon theme
 mkdir "%USERPROFILE%\.emulationstation\themes"
-cd "%USERPROFILE%\.emulationstation\themes"
+cd /D "%USERPROFILE%\.emulationstation\themes"
 rmdir carbon /S /Q
 %rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/Flerp/es-theme-carbon.git %theme%
 
@@ -4684,7 +4684,7 @@ echo =                                                   =
 Echo = DELETING ALL RETROARCH AND EMULATIONSTATION FILES =
 echo =                                                   =
 echo =====================================================
-cd C:\
+cd /D C:\
 IF EXIST %rkdir%\ROMS\ move %rkdir%\ROMS C:\ROMS
 del "%USERPROFILE%\Desktop\RetroCake.lnk"
 del "%APPDATA%\RetroCake\CusInstallDir.txt"
@@ -4804,13 +4804,13 @@ goto ThemeGallerySetup
 
 :ThemeGallerySetup
 ::Clones the "theme gallery" into the emulationstation settings folder
-cd "%USERPROFILE%\.emulationstation"
+cd /D "%USERPROFILE%\.emulationstation"
 %rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/wetriner/es-theme-gallery.git
 goto ThemeGallery
 
 :ThemeGallery
 ::Creates a basic HTML file with the images in the theme gallery. Prompts the user on how to interact. Once closed deletes the html file.
-cd "%USERPROFILE%\.emulationstation\es-theme-gallery"
+cd /D "%USERPROFILE%\.emulationstation\es-theme-gallery"
 for %%i in (*.png) do echo ^<img src="%%i" title="%%~ni" height="400" width="600" /^> >> Gallery.html
 start Gallery.html
 cls
@@ -4826,7 +4826,7 @@ goto ThemeManager
 
 :AllThemes
 ::Using git clones all available themes into the theme folder for emulationstation.
-cd "%USERPROFILE%\.emulationstation\themes"
+cd /D "%USERPROFILE%\.emulationstation\themes"
 
 set repo=RetroPie
 set theme=carbon
@@ -5738,7 +5738,7 @@ goto insttheme
 
 :insttheme
 ::Uses the variable set in the selection for git cloning.
-cd %USERPROFILE%\.emulationstation\themes
+cd /D %USERPROFILE%\.emulationstation\themes
 rmdir %theme% /S /Q
 %rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
 goto ThemeManager
@@ -5813,7 +5813,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\hatari-2.0.0_windows64 Hatari
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\Hatari64.zip
@@ -5866,7 +5866,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\xroar-0.34.8-w32 XRoar
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\XRoar32.zip
@@ -5887,7 +5887,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\xroar-0.34.8-w64 XRoar
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\XRoar64.zip
@@ -5933,7 +5933,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\jzintv-20171120-win32 jzIntv
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\jzIntv.zip
@@ -5957,7 +5957,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren "%rkdir%\Emulators\PCSX2 1.4.0" PCSX2
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\PCSX2.zip
@@ -5981,7 +5981,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\Dolphin-x64 Dolphin
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\Dolphin.7z
@@ -6006,7 +6006,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\cemu_1.12.2 cemu
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\cemu.zip
@@ -6038,7 +6038,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\WinVICE-3.1-x86 WinVICE
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\VICE32.zip
@@ -6059,7 +6059,7 @@ echo ================================================
 echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
-cd %rkdir%\Emulators
+cd /D %rkdir%\Emulators
 ren %rkdir%\Emulators\WinVICE-3.1-x64 WinVICE
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\VICE64.zip
