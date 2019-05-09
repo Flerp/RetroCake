@@ -312,7 +312,7 @@ echo =                                                                         =
 echo =    9.) UPDATE RETROCAKE SCRIPT                                          =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO RetroCakeUpdate
 IF ERRORLEVEL ==8 GOTO ScraperSetup
 IF ERRORLEVEL ==7 GOTO SysClean
@@ -340,7 +340,7 @@ echo =                                                                          
 echo =    4.) RETURN TO MAIN MENU                                                    =
 echo =                                                                               =
 echo =================================================================================
-CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO BrandNewCus
 IF ERRORLEVEL ==2 GOTO BrandNewDef
@@ -363,7 +363,7 @@ echo =                                                                         =
 echo =    4.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"%1
+CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO ThemeManager
 IF ERRORLEVEL ==2 GOTO ManESCFG
@@ -388,7 +388,7 @@ echo =                                                                         =
 echo =    5.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"%1
+CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"
 IF ERRORLEVEL ==5 GOTO menu
 IF ERRORLEVEL ==4 GOTO updatecores
 IF ERRORLEVEL ==3 GOTO racfg
@@ -412,7 +412,7 @@ echo =                                                                         =
 echo =    4.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO DediShare
 IF ERRORLEVEL ==2 GOTO CusRomDirSet
@@ -452,7 +452,7 @@ echo =                                                                         =
 echo =    9.) Page 2                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO EmuPage2
 IF ERRORLEVEL ==8 GOTO DolphinEmu
 IF ERRORLEVEL ==7 GOTO PCSX2
@@ -478,7 +478,7 @@ echo =                                                                         =
 echo =    4.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO CemuEmu
 IF ERRORLEVEL ==2 GOTO VICE
@@ -573,7 +573,7 @@ echo =                                                                         =
 echo =    6.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6)"%1
+CHOICE /N /C:123456 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6)"
 IF ERRORLEVEL ==6 GOTO menu
 IF ERRORLEVEL ==5 GOTO DediHostnameMenu
 IF ERRORLEVEL ==4 GOTO DediShareMenu
@@ -610,7 +610,7 @@ echo =                                                                         =
 echo =    3.) RETURN TO DEDICATED EMUBOX MENU                                  =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"
 IF ERRORLEVEL ==3 GOTO DediMenu
 IF ERRORLEVEL ==2 GOTO DediAutoStartRemove
 IF ERRORLEVEL ==1 GOTO DediAutoStartSetup
@@ -686,7 +686,7 @@ echo =                                                                         =
 echo =    4.) RETURN TO DEDICATED EMUBOX MENU                                  =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"
 IF ERRORLEVEL ==4 GOTO DediMenu
 IF ERRORLEVEL ==3 GOTO DediRemoveShares
 IF ERRORLEVEL ==2 GOTO DediShare
@@ -738,7 +738,7 @@ echo =                                                                         =
 echo =    3.) RETURN TO DEDICATED EMUBOX MENU                                  =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"
 IF ERRORLEVEL ==3 GOTO DediMenu
 IF ERRORLEVEL ==2 GOTO DediHostnameCus
 IF ERRORLEVEL ==1 GOTO DediHostnameDef
@@ -930,7 +930,7 @@ echo =                                                                          
 echo =    5.) RETURN TO EMULATIONSTATION MANAGER                                       =
 echo =                                                                                 =
 echo ===================================================================================
-CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"%1
+CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"
 IF ERRORLEVEL ==5 GOTO esmenu
 IF ERRORLEVEL ==4 GOTO editES
 IF ERRORLEVEL ==3 GOTO customESCFG
@@ -2764,12 +2764,6 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 :x64RAn
 ::Installs RetroArch to RetroCake\RetroArch. Cleans up all downloaded files when done. x64 version of latest nightly
-
-
-
-
-
-
 
 echo =================================================================
 echo =                                                               =
@@ -4666,7 +4660,7 @@ echo =                                                                         =
 echo =    6.) EXIT                                                             =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"%1
+CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"
 IF ERRORLEVEL ==6 GOTO menu
 IF ERRORLEVEL ==5 GOTO CleanTools
 IF ERRORLEVEL ==4 GOTO CleanEmu
@@ -4678,7 +4672,7 @@ IF ERRORLEVEL ==1 GOTO CleanAll
 ::Prompts confirmation before wiping out all files.
 cls
 
-set /P c=Are you sure you want to delete ALL RetroCake Files (Moves roms from REtroCake\ROMS to C:\ROMS[Y/N]?
+set /P c=Are you sure you want to delete ALL RetroCake Files (Moves roms from RetroCake\ROMS to C:\ROMS[Y/N]?
 if /I "%c%" EQU "Y" goto delall
 if /I "%c%" EQU "N" goto menu
 
@@ -4797,7 +4791,7 @@ echo =                                                                         =
 echo =    4.) EXIT THEME MANAGER                                               =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"%1
+CHOICE /N /C:1234 /M "Enter Corresponding Menu choice (1, 2, 3, 4)"
 IF ERRORLEVEL ==4 GOTO menu
 IF ERRORLEVEL ==3 GOTO ThemeGallerySetupCheck
 IF ERRORLEVEL ==2 GOTO IndThemes
@@ -5171,7 +5165,7 @@ echo =                                                                         =
 echo =    9.) Page 2                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page2
 IF ERRORLEVEL ==8 goto nbba 
 IF ERRORLEVEL ==7 goto color-pi 
@@ -5198,7 +5192,7 @@ echo =                                                                         =
 echo =    9.) Page 3                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page3
 IF ERRORLEVEL ==8 goto minilumi
 IF ERRORLEVEL ==7 goto luminous
@@ -5225,7 +5219,7 @@ echo =                                                                         =
 echo =    9.) Page 4                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page4
 IF ERRORLEVEL ==8 goto simpler-turtlepi
 IF ERRORLEVEL ==7 goto retroplay-clean-detail-canela
@@ -5252,7 +5246,7 @@ echo =                                                                         =
 echo =    9.) Page 5                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page5
 IF ERRORLEVEL ==8 goto simplebigart
 IF ERRORLEVEL ==7 goto space
@@ -5279,7 +5273,7 @@ echo =                                                                         =
 echo =    9.) Page 6                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page6
 IF ERRORLEVEL ==8 goto futura-V
 IF ERRORLEVEL ==7 goto switch-dark
@@ -5306,7 +5300,7 @@ echo =                                                                         =
 echo =    9.) Page 7                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page7
 IF ERRORLEVEL ==8 goto art-book
 IF ERRORLEVEL ==7 goto crt-centered
@@ -5333,7 +5327,7 @@ echo =                                                                         =
 echo =    9.) Page 8                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page8
 IF ERRORLEVEL ==8 goto cygnus
 IF ERRORLEVEL ==7 goto ComicBook_4-3_SE-Wheelart
@@ -5360,7 +5354,7 @@ echo =                                                                         =
 echo =    9.) Page 9                                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page9
 IF ERRORLEVEL ==8 goto gbz35
 IF ERRORLEVEL ==7 goto SpaceOddity
@@ -5387,7 +5381,7 @@ echo =                                                                         =
 echo =    9.) Page 10                                                          =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"%1
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
 IF ERRORLEVEL ==9 GOTO page10
 IF ERRORLEVEL ==8 goto superdisplay
 IF ERRORLEVEL ==7 goto playstation
@@ -5413,7 +5407,7 @@ echo =                                                                         =
 echo =    8.) Return to ThemeManager                                           =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:12345678 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8)"%1
+CHOICE /N /C:12345678 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8)"
 IF ERRORLEVEL ==8 goto ThemeManager
 IF ERRORLEVEL ==7 goto synthwave
 IF ERRORLEVEL ==6 goto boxalloyred
@@ -6117,7 +6111,7 @@ echo =                                                                         =
 echo =    3.) RETURN TO MAIN MENU                                              =
 echo =                                                                         =
 echo ===========================================================================
-CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"%1
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"
 IF ERRORLEVEL ==3 GOTO menu
 IF ERRORLEVEL ==2 GOTO ScraperSysMenu
 IF ERRORLEVEL ==1 GOTO ScrapeAll
@@ -6252,7 +6246,7 @@ exit
 ::=================================================================================================================================================================================================================================================================================================================
 
 :7zerror
-::Throws error if wget fails to download
+::Throws error if 7z fails to download
 cls
 echo =============================================
 echo =                                           =
@@ -6267,7 +6261,7 @@ exit
 ::=================================================================================================================================================================================================================================================================================================================
 
 :GITerror
-::Throws error if wget fails to download
+::Throws error if GIT fails to download
 cls
 echo =============================================
 echo =                                           =
