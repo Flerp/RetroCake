@@ -6091,16 +6091,18 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	)
 	
 :ScraperDL86
-%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.5/scraper_windows_386.zip -O "%rkdir%\Temp\scraperx86.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.6/scraper_windows_386.zip -O "%rkdir%\Temp\scraperx86.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\scraperx86.zip" -o"%rkdir%\Tools" -aoa > nul
 goto ScraperMenu
 
 :ScraperDL64
-%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.5/scraper_windows_amd64.zip -O "%rkdir%\Temp\scraperx64.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://github.com/sselph/scraper/releases/download/v1.4.6/scraper_windows_amd64.zip -O "%rkdir%\Temp\scraperx64.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\scraperx64.zip" -o"%rkdir%\Tools" -aoa > nul
 goto ScraperMenu
 
 :ScraperMenu
+::Currently Disabling as SSelph's scraper no longer works.
+goto Disabled
 cls
 echo ===========================================================================
 echo =                                                                         =
@@ -6121,7 +6123,110 @@ IF ERRORLEVEL ==1 GOTO ScrapeAll
 goto completed
 
 :ScraperSysMenu
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) NINTENDO                                                         =
+echo =                                                                         =
+echo =    2.) SEGA                                                             =
+echo =                                                                         =
+echo =    3.) SONY                                                             =
+echo =                                                                         =
+echo =    4.) OTHER                                                            =
+echo =                                                                         =
+echo =                                                                         =
+echo =    5.) RETURN TO PREVIOUS MENU                                          =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:12345 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5)"
+IF ERRORLEVEL ==5 GOTO ScraperMenu
+IF ERRORLEVEL ==4 GOTO OtherScrapeList
+IF ERRORLEVEL ==3 GOTO SonyScrapeList
+IF ERRORLEVEL ==2 GOTO SegaScrapeList
+IF ERRORLEVEL ==1 GOTO NintendoScrapeList
+
+:NintendoScrapeList
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) CONSOLE                                                          =
+echo =                                                                         =
+echo =    2.) PORTABLE                                                         =
+echo =                                                                         =
+echo =                                                                         =
+echo =    3.) RETURN TO PREVIOUS MENU                                          =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123 /M "Enter Corresponding Menu choice (1, 2, 3)"
+IF ERRORLEVEL ==3 GOTO ScraperSysMenu
+IF ERRORLEVEL ==2 GOTO NintendoScrapeListPortable
+IF ERRORLEVEL ==1 GOTO NintendoScrapeListConsole
+
+:NintendoScrapeListConsole
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) NES                                                              =
+Echo =    2.) FAMICOM DISK SYSTEM                                              =
+echo =    3.) SNES                                                             =
+echo =    4.) VIRTUAL BOY                                                      =
+echo =    5.) NINTENDO 64                                                      =
+echo =    6.) GAMECUBE                                                         =
+echo =    7.) WII                                                              =
+echo =    8.) WII U                                                            =
+echo =                                                                         =
+echo =    9.) RETURN TO PREVIOUS MENU                                          =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:123456789 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7, 8, 9)"
+IF ERRORLEVEL ==9 GOTO NintendoScrapeList
+IF ERRORLEVEL ==8 goto NoFeat
+IF ERRORLEVEL ==7 goto NoFeat
+IF ERRORLEVEL ==6 goto GCScrape
+IF ERRORLEVEL ==5 goto N64Scrape
+IF ERRORLEVEL ==4 goto VBOYScrape
+IF ERRORLEVEL ==3 goto SNESScrape
+IF ERRORLEVEL ==2 goto FDSScrape
+IF ERRORLEVEL ==1 goto NesScrape
+
+
+:NintendoScrapeListPortable
+cls
+echo ===========================================================================
+echo =                                                                         =
+Echo =    1.) GAMEBOY                                                          =
+Echo =    2.) GAMEBOY COLOR                                                    =
+echo =    3.) GAMEBOY ADVANCE                                                  =
+echo =    4.) NINTENDO DS                                                      =
+echo =    5.) NINTENDO 3DS                                                     =
+echo =    6.) NINTENDO Switch                                                  =
+echo =                                                                         =
+echo =    7.) RETURN TO PREVIOUS MENU                                          =
+echo =                                                                         =
+echo ===========================================================================
+CHOICE /N /C:1234567 /M "Enter Corresponding Menu choice (1, 2, 3, 4, 5, 6, 7)"
+IF ERRORLEVEL ==7 goto NintendoScrapeList
+IF ERRORLEVEL ==6 goto NoFeat
+IF ERRORLEVEL ==5 goto 3DSScrape
+IF ERRORLEVEL ==4 goto DSScrape
+IF ERRORLEVEL ==3 goto GBAScrape
+IF ERRORLEVEL ==2 goto GBCScrape
+IF ERRORLEVEL ==1 goto GBScrape
+
+
+:SegaScrapeList
+goto NoFeat 
+
+
+:SonyScrapeList
 goto NoFeat
+
+
+:OtherScrapeList
+goto NoFeat
+
+
+
 
 ::=================================================================================================================================================================================================================================================================================================================
 ::=================================================================================================================================================================================================================================================================================================================
@@ -6194,6 +6299,20 @@ echo =                                           =
 echo =    THIS FEATURE IS NOT YET IMPLEMENTED    =
 echo =                                           =
 echo =============================================
+echo      Press any key to return to main menu
+pause >nul
+goto menu
+
+::=================================================================================================================================================================================================================================================================================================================
+
+:Disabled
+::Used for a feature that is temporarily disabled
+cls
+echo ==============================================
+echo =                                            =
+echo = Currently Disabled due to dependency issue =
+echo =                                            =
+echo ==============================================
 echo      Press any key to return to main menu
 pause >nul
 goto menu
