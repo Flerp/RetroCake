@@ -5926,7 +5926,7 @@ echo =                                                               =
 echo =                       DOWNLOADING JZINTV                      =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q http://spatula-city.org/~im14u2c/intv/dl/jzintv-20171120-win32.zip -O "%rkdir%\Temp\jzintv.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://spatula-city.org/~im14u2c/intv/dl/jzintv-20181225-win32.zip -O "%rkdir%\Temp\jzintv.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\jzintv.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -5974,7 +5974,7 @@ echo =                                                               =
 echo =                     DOWNLOADING DOLPHIN                       =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-8201-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
+%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-10231-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -5999,7 +5999,7 @@ echo =                                                               =
 echo =                      DOWNLOADING CEMU                         =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q http://cemu.info/releases/cemu_1.12.2.zip -O "%rkdir%\Temp\cemu.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://cemu.info/releases/cemu_1.15.6.zip -O "%rkdir%\Temp\cemu.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cemu.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
