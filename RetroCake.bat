@@ -6337,11 +6337,11 @@ goto menu
 ::Lets you know all files are removed. exits the bat file.
 cls
 echo ===================================================
-echo =                                                 =
-echo = CLEANUP COMPLETED, PLEASE RESTART RETROCAKE.BAT =
-echo =  IF YOU HAD ANYTHING IN %rkdir%\ROMS THEY  =
-echo =                ARE NOW IN C:\ROMS               =
-echo =                                                 =
+echo                                                  
+echo   CLEANUP COMPLETED, PLEASE RESTART RETROCAKE.BAT 
+echo    IF YOU HAD ANYTHING IN %rkdir%\ROMS THEY  
+echo     ARE NOW IN %USERPROFILE%\ROMS               
+echo                                                   
 echo ===================================================
 echo            Press Any Key to Exit
 pause >nul
