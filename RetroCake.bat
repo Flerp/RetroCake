@@ -4908,10 +4908,10 @@ set repo=AmadhiX
 set theme=eudora-concise
 rmdir %theme% /S /Q
 %rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
-set repo=ChoccyHobNob
-set theme=eudora-updated
-rmdir %theme% /S /Q
-%rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
+::set repo=ChoccyHobNob
+::set theme=eudora-updated
+::rmdir %theme% /S /Q
+::%rkdir%\Tools\git\bin\git.exe clone --recursive https://github.com/%repo%/es-theme-%theme%.git %theme%
 set repo=InsecureSpike
 set theme=retroplay-clean-canela
 rmdir %theme% /S /Q
@@ -5211,7 +5211,7 @@ Echo =    1.) WORKBENCH                                                        =
 echo =    2.) EUDORA                                                           =
 echo =    3.) EUDORA-BIGSHOT                                                   =
 echo =    4.) EUDORA-CONCISE                                                   =
-echo =    5.) EUDORA-UPDATED                                                   =
+echo =    5.) EUDORA-UPDATED (Currently Unavailable)                           =
 echo =    6.) RETROPLAY-CLEAN-CANELA                                           =
 echo =    7.) RETROPLAY-CLEAN-DETAIL-CANELA                                    =
 echo =    8.) SIMPLER-TURTLEPI                                                 =
@@ -5224,7 +5224,7 @@ IF ERRORLEVEL ==9 GOTO page4
 IF ERRORLEVEL ==8 goto simpler-turtlepi
 IF ERRORLEVEL ==7 goto retroplay-clean-detail-canela
 IF ERRORLEVEL ==6 goto retroplay-clean-canela
-IF ERRORLEVEL ==5 goto eudora-updated
+IF ERRORLEVEL ==5 goto page3
 IF ERRORLEVEL ==4 goto eudora-concise
 IF ERRORLEVEL ==3 goto eudora-bigshot
 IF ERRORLEVEL ==2 goto eudora
@@ -5499,10 +5499,10 @@ goto insttheme
 set repo=AmadhiX
 set theme=eudora-concise
 goto insttheme
-:eudora-updated
-set repo=ChoccyHobNob
-set theme=eudora-updated
-goto insttheme
+:::eudora-updated
+::set repo=ChoccyHobNob
+::set theme=eudora-updated
+::goto insttheme
 :retroplay-clean-canela
 set repo=InsecureSpike
 set theme=retroplay-clean-canela
