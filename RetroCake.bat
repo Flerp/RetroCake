@@ -125,7 +125,7 @@ echo =                                                               =
 echo =================================================================
 mkdir %rkdir%\Tools\Wget
 ::Pulls wget binaries and unzips via powershell. (All future unzipping is done with 7za, as it is faster and cleaner.
-powershell -command "(New-Object Net.WebClient).DownloadFile('https://eternallybored.org/misc/wget/releases/wget-1.20.3-win32.zip','%rkdir%\Tools\Wget\Wget.zip')
+powershell -command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Flerp/RetroCake/master/wget/wget-1.20.3-win32.zip','%rkdir%\Tools\Wget\Wget.zip')
 ping 127.0.0.1 -n 3 > nul
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Tools\Wget\Wget.zip" -o"%rkdir%\Tools\Wget" -aoa > nul
 cls
@@ -376,7 +376,7 @@ IF ERRORLEVEL ==1 GOTO StartESVerCheck
 cls
 echo ===========================================================================
 echo =                                                                         =
-Echo =    1.) INSTALL RETROARCH 1.6.7                                          =
+Echo =    1.) INSTALL RETROARCH 1.8.1                                          =
 echo =                                                                         =
 echo =    2.) UPDATE/INSTALL RETROARCH TO THE LATEST NIGHTLY BUILD             =
 echo =                                                                         =
@@ -2713,13 +2713,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	)
 
 :x64RA
-::Installs RetroArch 1.6.7 to RetroCake\RetroArch. Cleans up all downloaded files when done. 64 bit
+::Installs RetroArch 1.8.1 to RetroCake\RetroArch. Cleans up all downloaded files when done. 64 bit
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.6.7/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.1/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
@@ -2731,13 +2731,13 @@ del "%rkdir%\Temp\RetroArch_x64.zip" /q
 goto RACFG
 
 :x86RA
-::Installs RetroArch 1.6.7 to RetroCake\RetroArch. Cleans up all downloaded files when done. 32 bit
+::Installs RetroArch 1.8.1 to RetroCake\RetroArch. Cleans up all downloaded files when done. 32 bit
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.6.7/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.1/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
