@@ -286,7 +286,7 @@ goto menu
 :menu
 ::Main menu selection. Uses keys 1-9
 cls
-echo RetroCake v1.4.5
+echo RetroCake v1.4.6
 echo ===========================================================================
 echo =                                                                         =
 Echo =    1.) AUTOMATED INSTALLERS                                             =
