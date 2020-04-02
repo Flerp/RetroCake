@@ -2719,7 +2719,7 @@ echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.1/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.5/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
@@ -2737,7 +2737,7 @@ echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.1/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.5/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
@@ -5934,7 +5934,7 @@ echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd /D %rkdir%\Emulators
-ren %rkdir%\Emulators\jzintv-20171120-win32 jzIntv
+ren %rkdir%\Emulators\jzintv-20181225-win32 jzIntv
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\jzIntv.zip
 if EXIST %rkdir%\Emulators\tmp.txt goto PCSX2
