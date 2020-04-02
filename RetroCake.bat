@@ -233,6 +233,8 @@ ping 127.0.0.1 -n 3 > nul
 del "%rkdir%\Temp\VC_Redist_2017.exe"
 del "%rkdir%\Temp\VC_Redist_2015_64.exe"
 del "%rkdir%\Temp\VC_Redist_2015_32.exe"
+del "%rkdir%\Temp\VC_Redist_2010_32.exe"
+del "%rkdir%\Temp\VC_Redist_2010_64.exe"
 goto DirectXSetupCheck
 
 :VCRedistInstall32
