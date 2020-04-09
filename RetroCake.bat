@@ -1549,7 +1549,7 @@ echo   ^<system^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<name^>wii^</name^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<fullname^>Nintendo Wii^</fullname^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<path^>%rkdir%\ROMS\wii^</path^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
-echo 	^<extension^>.iso .ISO^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
+echo 	^<extension^>.iso .ISO .wbfs .WBFS^</extension^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<command^>%rkdir%\Emulators\Dolphin\Dolphin.exe --exec="%%ROM_RAW%%"^</command^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<platform^>wii^</platform^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
 echo 	^<theme^>wii^</theme^> >> "%USERPROFILE%\.emulationstation\es_systems.cfg"
@@ -5976,7 +5976,7 @@ echo =                                                               =
 echo =                     DOWNLOADING DOLPHIN                       =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-10231-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
+%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/d3/65/dolphin-master-5.0-11819-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
