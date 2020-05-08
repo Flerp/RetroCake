@@ -5976,7 +5976,7 @@ echo =                                                               =
 echo =                     DOWNLOADING DOLPHIN                       =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/dolphin-master-5.0-10231-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
+%rkdir%\Tools\Wget\wget.exe -q https://dl.dolphin-emu.org/builds/07/ef/dolphin-master-5.0-11991-x64.7z -O "%rkdir%\Temp\Dolphin.7z"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\Dolphin.7z" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -6001,7 +6001,7 @@ echo =                                                               =
 echo =                      DOWNLOADING CEMU                         =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q http://cemu.info/releases/cemu_1.15.6.zip -O "%rkdir%\Temp\cemu.zip"
+%rkdir%\Tools\Wget\wget.exe -q http://cemu.info/releases/cemu_1.18.2.zip -O "%rkdir%\Temp\cemu.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\cemu.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -6033,7 +6033,7 @@ echo =                                                               =
 echo =                       DOWNLOADING VICE                        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://superb-sea2.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x86.7z -O "%rkdir%\Temp\VICE32.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://iweb.dl.sourceforge.net/project/vice-emu/releases/vice-3.4.tar.gz -O "%rkdir%\Temp\VICE32.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -6054,7 +6054,7 @@ echo =                                                               =
 echo =                       DOWNLOADING VICE                        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://iweb.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/WinVICE-3.1-x64.7z -O "%rkdir%\Temp\VICE64.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://managedway.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/GTK3VICE-3.4-win64.7z -O "%rkdir%\Temp\VICE64.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE64.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
