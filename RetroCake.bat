@@ -2715,13 +2715,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	)
 
 :x64RA
-::Installs RetroArch 1.8.1 to RetroCake\RetroArch. Cleans up all downloaded files when done. 64 bit
+::Installs RetroArch 1.9.0 to RetroCake\RetroArch. Cleans up all downloaded files when done. 64 bit
 echo =================================================================
 echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.5/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.9.0/windows/x86_64/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x64.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x64.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
@@ -2739,7 +2739,7 @@ echo =                                                               =
 echo =        Downloading RetroArch. This will take some time        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.8.5/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://buildbot.libretro.com/stable/1.9.0/windows/x86/RetroArch.7z -O "%rkdir%\Temp\RetroArch_x86.zip"
 
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\RetroArch_x86.zip" -o"%rkdir%\RetroArch" -aoa > nul
 cls
@@ -4445,7 +4445,7 @@ echo keymapper_port = "0">> %rkdir%\RetroArch\retroarch.cfg
 echo video_msg_bgcolor_red = "0">> %rkdir%\RetroArch\retroarch.cfg
 echo video_msg_bgcolor_green = "0">> %rkdir%\RetroArch\retroarch.cfg
 echo video_msg_bgcolor_blue = "0">> %rkdir%\RetroArch\retroarch.cfg
-echo framecount_show = "true">> %rkdir%\RetroArch\retroarch.cfg
+echo framecount_show = "false">> %rkdir%\RetroArch\retroarch.cfg
 echo quick_menu_show_take_screenshot = "true">> %rkdir%\RetroArch\retroarch.cfg
 echo quick_menu_show_save_load_state = "true">> %rkdir%\RetroArch\retroarch.cfg
 echo quick_menu_show_undo_save_load_state = "true">> %rkdir%\RetroArch\retroarch.cfg
@@ -6033,7 +6033,7 @@ echo =                                                               =
 echo =                       DOWNLOADING VICE                        =
 echo =                                                               =
 echo =================================================================
-%rkdir%\Tools\Wget\wget.exe -q https://iweb.dl.sourceforge.net/project/vice-emu/releases/vice-3.4.tar.gz -O "%rkdir%\Temp\VICE32.zip"
+%rkdir%\Tools\Wget\wget.exe -q https://newcontinuum.dl.sourceforge.net/project/vice-emu/releases/binaries/windows/GTK3VICE-3.3-win32.7z -O "%rkdir%\Temp\VICE32.zip"
 %rkdir%\Tools\7za\7za.exe x "%rkdir%\Temp\VICE32.zip" -o"%rkdir%\Emulators" -aoa > nul
 cls
 echo ================================================
@@ -6041,7 +6041,7 @@ echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd /D %rkdir%\Emulators
-ren %rkdir%\Emulators\WinVICE-3.1-x86 WinVICE
+ren %rkdir%\Emulators\GTK3VICE-3.3-win32-r35872 WinVICE
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\VICE32.zip
 if EXIST %rkdir%\Emulators\tmp.txt goto tmpClean
@@ -6062,7 +6062,7 @@ echo =        Cleaning up downloaded file(s)        =
 echo ================================================
 ping 127.0.0.1 -n 2 > nul
 cd /D %rkdir%\Emulators
-ren %rkdir%\Emulators\WinVICE-3.1-x64 WinVICE
+ren %rkdir%\Emulators\GTK3VICE-3.4-win64-r37296 WinVICE
 ping 127.0.0.1 -n 2 > nul
 del %rkdir%\Temp\VICE64.zip
 if EXIST %rkdir%\Emulators\tmp.txt goto tmpClean
